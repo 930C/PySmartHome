@@ -1,0 +1,16 @@
+devices:
+  - id: 1
+    name: Living Room Light
+    type: light
+
+  - id: 2
+    name: Bedroom Thermostat
+    type: thermostat
+
+  - id: 3
+    name: Kitchen Temperature Sensor
+    type: temperature_sensor
+
+  - id: 4
+    name: Hallway Motion Sensor
+    type: motion_sensor

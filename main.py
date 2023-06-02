@@ -1,27 +1,20 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow
+from PyQt6.QtWidgets import QApplication
 
-import gui
-import config
-import control
+from smart_home.config.config_loader import load_config
+from smart_home.gui.main_gui import MainGui
+
 
 def main():
-    # Erstellen die Anwendung
+    smart_home = load_config('resources/config.yaml')
+
     app = QApplication(sys.argv)
 
-    # Lade Config
-    config_data = config.load_config("config.json")
+    gui = MainGui(smart_home)
+    gui.show()
 
-    # Initialisiere Control-Modul
-    controller = control.Controller(config_data)
-
-    # erstelle das GUI und gebe controller weiter
-    main_gui = gui.MainGui(controller)
-
-    # Zeige das GUI
-    main_gui.show()
     sys.exit(app.exec())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

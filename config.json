@@ -1,0 +1,22 @@
+{
+  "initial_device_status": true,
+  "devices": [
+      {
+          "type": "Light",
+          "name": "Living Room Light"
+      },
+      {
+          "type": "Thermostat",
+          "name": "Home Thermostat",
+          "temperature": 20
+      },
+      {
+          "type": "SecuritySystem",
+          "name": "Home Security"
+      },
+      {
+          "type": "MusicPlayer",
+          "name": "Home Music Player"
+      }
+  ]
+}

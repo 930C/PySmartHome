@@ -1,5 +1,5 @@
 # PySmartHome
-Smart Hone Automation Python App
+Smart Home Automation Python App
 
 ## Gruppe 5
 - Lisa Ress-Park

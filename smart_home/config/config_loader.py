@@ -13,7 +13,7 @@ from smart_home.controllers.light_controller import LightController
 from smart_home.controllers.thermostat_controller import ThermostatController
 from smart_home.smart_home import SmartHome
 
-
+#Open-Closed Principle (OCP) -> einfaches Hinzufügen von devices
 class DeviceFactory:
     device_classes = {
         'device': Device,

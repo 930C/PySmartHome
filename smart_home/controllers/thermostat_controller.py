@@ -1,7 +1,7 @@
 from smart_home.controllers.device_controller import DeviceController
 from smart_home.devices.thermostat import Thermostat
 
-
+#Interface Segregation Principle (ISP) -> jeder Controller nutzt nur benötigten Methoden (schmales Interface)
 class ThermostatController(DeviceController):
     def __init__(self, thermostat):
         if not isinstance(thermostat, Thermostat):

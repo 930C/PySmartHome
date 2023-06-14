@@ -1,7 +1,7 @@
 from smart_home.devices.light import Light
 from smart_home.controllers.device_controller import DeviceController
 
-
+#Interface Segregation Principle (ISP) -> jeder Controller nutzt nur benötigten Methoden (schmales Interface)
 class LightController(DeviceController):
     def __init__(self, light):
         if not isinstance(light, Light):

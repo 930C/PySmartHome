@@ -6,6 +6,7 @@ from smart_home.gui.main_gui import MainGui
 
 
 def main():
+    #Single Responsibility Principle (SRP) -> alle Konfigurationsdaten aus einer config file
     smart_home = load_config('resources/config.yaml')
 
     app = QApplication(sys.argv)

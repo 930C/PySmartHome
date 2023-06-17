@@ -1,16 +1,21 @@
-devices:
-  - id: 1
-    name: Living Room Light
-    type: light
-
-  - id: 2
-    name: Bedroom Thermostat
-    type: thermostat
-
-  - id: 3
-    name: Kitchen Temperature Sensor
-    type: temperature_sensor
-
-  - id: 4
-    name: Hallway Motion Sensor
-    type: motion_sensor
+rooms:
+  - name: Living Room
+    type: liveable
+    zones:
+      - name: Zone 1
+        devices:
+          - name: Heater 1
+            type: heater
+          - name: Temperature Sensor 1
+            type: temperature_sensor
+      - name: Zone 2
+        devices:
+          - name: LED Light 1
+            type: led_light
+  - name: Greenhouse
+    type: greenhouse
+    zones:
+      - name: Zone 1
+        devices:
+          - name: Irrigation System 1
+            type: irrigation_system

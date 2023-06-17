@@ -1,4 +1,4 @@
-from smart_home.devices.sensor import Sensor
+from smart_home.sensors.sensor import Sensor
 
 #Liskov Substitution Principle (LSP) -> Subklasse kann Funktionalität von Superklasse überschreiben
 class TemperatureSensor(Sensor):

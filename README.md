@@ -13,6 +13,7 @@ Smart Home Automation Python App
 
 ### Single Responsibility Principle (SRP)
 Jede Klasse hat eine einzelne Verantwortung. Zum Beispiel ist das `config_loader` Modul nur für das Laden der Konfiguration zuständig, und jede Device-Unterklasse implementiert das spezifische Verhalten eines bestimmten Gerätetyps.
+
 ### Open-Closed Principle (OCP)
 Der Code ist für Erweiterungen offen und für Modifikationen geschlossen. Neue Gerätetypen können leicht hinzugefügt werden, indem eine neue Klasse erstellt und im `device_classes` Wörterbuch von `DeviceFactory` registriert wird, ohne Änderungen an der DeviceFactory-Klasse oder dem `config_loader` Modul.
 
@@ -25,7 +26,9 @@ Keine unnötigen Abhängigkeiten durch breite Interfaces. Jeder Controller inter
 ### Dependency Inversion Principle (DIP)
 Hohe Modulniveaus und niedrige Modulniveaus hängen von Abstraktionen ab. Es gibt keine direkten Abhängigkeiten zwischen den Modulen in diesem Projekt. Beispielsweise ist die DeviceController-Klasse nur von der abstrakten Device-Klasse abhängig und nicht von spezifischen Geräteklassen.
 
+
 ## Angewendete Entwurfsmuster
+
 ### Factory Pattern
 Das Factory Pattern wird verwendet, um die Erzeugung von Geräten und Controllern zu steuern. Die DeviceFactory-Klasse verwaltet die Registrierung und Erzeugung von spezifischen Gerätetypen und den zugehörigen Controllern, wodurch die Erzeugungslogik zentralisiert und vereinfacht wird.
 

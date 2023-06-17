@@ -19,3 +19,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# TODO: Erstelle ein Zustandsmanagement für die Geräte

@@ -27,4 +27,3 @@ class SmartHome:
 
     def add_controller(self, controller):
         self.device_controllers.append(controller)
-

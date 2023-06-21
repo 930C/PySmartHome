@@ -1,7 +1,7 @@
 # PySmartHome
 Smart Home Automation Python App
 
-## Gruppe 5
+## Gruppe 5 (Fünf)
 - Lisa Ress-Park
 - Johanna Deike
 - Aidan Zimmer

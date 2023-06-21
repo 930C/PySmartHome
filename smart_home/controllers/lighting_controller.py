@@ -3,6 +3,7 @@ from smart_home.controllers.controller import Controller
 
 class LightingController(Controller):
     name = 'LightingController'
+
     def __init__(self):
         super().__init__()
 

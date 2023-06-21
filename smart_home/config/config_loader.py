@@ -12,6 +12,7 @@ from smart_home.devices.fertilization.fertilizer import Fertilizer
 from smart_home.devices.irrigation.irrigation_system import IrrigationSystem
 from smart_home.devices.irrigation.rainwater_harvesting_system import RainwaterHarvestingSystem
 from smart_home.devices.lights.led_light import LEDLight
+from smart_home.sensors.fertilization_sensor import FertilizationSensor
 from smart_home.sensors.temperature_sensor import TemperatureSensor
 
 
@@ -29,11 +30,13 @@ class DeviceFactory:
     }
 
     sensor_classes = {
-        'temperature_sensor': TemperatureSensor
+        'temperature_sensor': TemperatureSensor,
+        'fertilization_sensor': FertilizationSensor
     }
 
     sensor_controller_classes = {
-        TemperatureSensor: ClimateController
+        TemperatureSensor: ClimateController,
+        FertilizationSensor: FertilizationController
     }
 
     controller_classes = {

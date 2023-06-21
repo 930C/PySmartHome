@@ -17,17 +17,17 @@ class SmartHomeController:
         for room_info in config_data.get('rooms', []):
             room = Room(room_info['name'], room_info['type'])
             for zone_info in room_info.get('zones', []):
-                controllerManager = ControllerManager({})
+                controller_manager = ControllerManager({})
                 for device_info in zone_info.get('devices', []):
                     device = DeviceFactory.create_device(device_info)
 
                     controller_class = DeviceFactory.controller_classes.get(type(device), Controller)
-                    if controllerManager.controllers.get(controller_class.name) is None:
+                    if controller_manager.controllers.get(controller_class.name) is None:
                         controller = controller_class()
                         controller.add_device(device)
-                        controllerManager.add_controller(controller)
+                        controller_manager.add_controller(controller)
                     else:
-                        controller = controllerManager.controllers.get(controller_class.name)
+                        controller = controller_manager.controllers.get(controller_class.name)
                         controller.add_device(device)
 
                 # TODO: Eigene Sensor Factory?
@@ -35,20 +35,24 @@ class SmartHomeController:
                     sensor = DeviceFactory.create_sensor(sensor_info)
 
                     controller_class = DeviceFactory.sensor_controller_classes.get(type(sensor), Controller)
-                    if controllerManager.controllers.get(controller_class.name) is None:
+                    if controller_manager.controllers.get(controller_class.name) is None:
                         controller = controller_class()
                         controller.add_sensor(sensor)
-                        controllerManager.add_controller(controller)
+                        controller_manager.add_controller(controller)
                     else:
-                        controller = controllerManager.controllers.get(controller_class.name)
+                        controller = controller_manager.controllers.get(controller_class.name)
                         controller.add_sensor(sensor)
 
-                zone = Zone(zone_info['name'], controllerManager)
+                zone = Zone(zone_info['name'], controller_manager)
 
                 room.append_zone(zone)
             self.rooms.append(room)
 
     def update(self):
-        for room in self.rooms:
-            for zone in room.zones:
-                zone.update()
+        while True:
+            for room in self.rooms:
+                for zone in room.zones:
+                    for controller in zone.controllerManager.get_controllers():
+                        if controller.name == "FertilizationController":
+                            controller.update()
+

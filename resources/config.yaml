@@ -1,24 +1,12 @@
 rooms:
-  - name: Living Room
-    type: liveable
-    zones:
-      - name: Zone 1
-        devices:
-          - name: Heater 1
-            type: heater
-          - name: Heater 2
-            type: heater
-        sensors:
-          - name: Temperature Sensor 1
-            type: temperature_sensor
-      - name: Zone 2
-        devices:
-          - name: LED Light 1
-            type: led_light
   - name: Greenhouse
     type: greenhouse
     zones:
       - name: Zone 1
         devices:
-          - name: Irrigation System 1
-            type: irrigation_system
+          - name: Fertilizer 1
+            type: fertilizer
+        sensors:
+          - name: Fertilizer Sensor 1
+            type: fertilization_sensor
+

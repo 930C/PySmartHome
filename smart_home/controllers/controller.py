@@ -3,6 +3,7 @@ from abc import ABC
 
 class Controller(ABC):
     name = 'Controller'
+
     def __init__(self):
         self.devices = []
         self.sensors = []
@@ -24,3 +25,6 @@ class Controller(ABC):
 
     def remove_sensor(self, sensor):
         self.sensors.remove(sensor)
+
+    def update(self):
+        pass

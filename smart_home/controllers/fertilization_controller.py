@@ -3,15 +3,21 @@ from smart_home.controllers.controller import Controller
 
 class FertilizationController(Controller):
     name = "FertilizationController"
+    desired_nutrient_content: float = 1.0
 
     def __init__(self):
         super().__init__()
 
-    def control_fertilization(self, desired_moisture: float):
+    def control_fertilization(self):
         for sensor in self.sensors:
-            if sensor.read() < desired_moisture:
+            if sensor.get_value() < self.desired_nutrient_content:
+                # TODO: Wenn KI-Daten da je nach dessen Ansage düngen
                 for device in self.devices:
-                    device.switch_on()
-            elif sensor.read() > desired_moisture:
+                    device.fertilize(1)
+            elif sensor.get_value() >= self.desired_nutrient_content:
                 for device in self.devices:
-                    device.switch_off()
+                    if device.get_state():
+                        device.stop_fertilizing()
+
+    def update(self):
+        self.control_fertilization()

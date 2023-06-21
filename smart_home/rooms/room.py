@@ -1,5 +1,3 @@
-from typing import List
-
 from smart_home.rooms.zone import Zone
 
 

@@ -11,3 +11,6 @@ class Room:
 
     def add_zone(self, zone: Zone):
         self.zones.append(zone)
+
+    def append_zone(self, zone):
+        self.zones.append(zone)

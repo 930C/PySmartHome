@@ -1,11 +1,10 @@
 from typing import List
-
 from smart_home.controllers.controller import Controller
 
 
 class ControllerManager:    # Solid Principle: Single Responsibility
-    def __init__(self):
-        self.controllers = {}
+    def __init__(self, controllerTypes: dict):
+        self.controllers = controllerTypes
 
     def add_controller(self, controller: Controller):
         self.controllers[controller.name] = controller

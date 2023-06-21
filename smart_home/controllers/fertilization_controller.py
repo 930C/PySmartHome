@@ -2,8 +2,10 @@ from smart_home.controllers.controller import Controller
 
 
 class FertilizationController(Controller):
-    def __init__(self, devices: list, sensors: list):
-        super().__init__(devices, sensors)
+    name = "FertilizationController"
+
+    def __init__(self):
+        super().__init__()
 
     def control_fertilization(self, desired_moisture: float):
         for sensor in self.sensors:

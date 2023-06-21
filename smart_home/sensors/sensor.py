@@ -1,13 +1,15 @@
+from abc import ABC
+
 from smart_home.interfaces.sensor_interface import SensorInterface
 
 
-class Sensor(SensorInterface):
-    def __init__(self, name):
+class Sensor(SensorInterface, ABC):
+    def __init__(self, name: str, value: float = 0.0):
         self.name = name
-        self.data = None
+        self.value = value
 
-    def get_data(self):
-        return self.data
+    def get_value(self):
+        return self.value
 
-    def set_data(self, data):
-        self.data = data
+    def set_value(self, value):
+        self.value = value

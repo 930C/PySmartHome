@@ -3,8 +3,10 @@ from smart_home.interfaces.temperature_control_interface import TemperatureContr
 
 
 class ClimateController(Controller):
-    def __init__(self, devices: list, sensors: list):
-        super().__init__(devices, sensors)
+    name = 'ClimateController'
+
+    def __init__(self):
+        super().__init__()
 
     def control_climate(self, desired_temperature: float, desired_humidity: float):
         for sensor in self.sensors:

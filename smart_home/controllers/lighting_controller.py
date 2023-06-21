@@ -2,8 +2,9 @@ from smart_home.controllers.controller import Controller
 
 
 class LightingController(Controller):
-    def __init__(self, devices: list, sensors: list):
-        super().__init__(devices, sensors)
+    name = 'LightingController'
+    def __init__(self):
+        super().__init__()
 
     def control_lighting(self, desired_brightness: float):
         for sensor in self.sensors:

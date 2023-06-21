@@ -2,10 +2,10 @@ from abc import ABC
 
 
 class Controller(ABC):
-    def __init__(self, name: str, devices: list, sensors: list):
-        self.name = name
-        self.devices = devices
-        self.sensors = sensors
+    name = 'Controller'
+    def __init__(self):
+        self.devices = []
+        self.sensors = []
 
     def get_devices(self):
         return self.devices

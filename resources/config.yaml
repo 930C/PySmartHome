@@ -6,6 +6,9 @@ rooms:
         devices:
           - name: Heater 1
             type: heater
+          - name: Heater 2
+            type: heater
+        sensors:
           - name: Temperature Sensor 1
             type: temperature_sensor
       - name: Zone 2

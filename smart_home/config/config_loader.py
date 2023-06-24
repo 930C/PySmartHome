@@ -2,21 +2,25 @@ import yaml
 from smart_home.controllers.controller import Controller
 from smart_home.controllers.fertilization_controller import FertilizationController
 from smart_home.controllers.climate_controller import ClimateController
+from smart_home.controllers.humidity_controller import HumidityController
 from smart_home.controllers.irrigation_controller import IrrigationController
 from smart_home.controllers.lighting_controller import LightingController
 from smart_home.devices.climate.fan import Fan
 from smart_home.devices.climate.heater import Heater
-from smart_home.devices.climate.humidifier import Humidifier
+from smart_home.devices.humidity.humidifier import Humidifier
 from smart_home.devices.climate.roller_blind import RollerBlind
 from smart_home.devices.fertilization.fertilizer import Fertilizer
 from smart_home.devices.irrigation.irrigation_system import IrrigationSystem
 from smart_home.devices.irrigation.rainwater_harvesting_system import RainwaterHarvestingSystem
 from smart_home.devices.lights.led_light import LEDLight
 from smart_home.sensors.fertilization_sensor import FertilizationSensor
+from smart_home.sensors.humidity_sensor import HumiditySensor
 from smart_home.sensors.temperature_sensor import TemperatureSensor
+from smart_home.sensors.irrigation_sensor import IrrigationSensor
 
 
-# Open-Closed Principle (OCP) -> einfaches Hinzufügen von devices
+# Open-Closed Principle (OCP) -> einfaches Hinzufügen von devices und sensors
+
 class DeviceFactory:
     device_classes = {
         'led_light': LEDLight,
@@ -31,19 +35,23 @@ class DeviceFactory:
 
     sensor_classes = {
         'temperature_sensor': TemperatureSensor,
-        'fertilization_sensor': FertilizationSensor
+        'fertilization_sensor': FertilizationSensor,
+        "humidity_sensor": HumiditySensor,
+        "irrigation_sensor": IrrigationSensor,
     }
 
     sensor_controller_classes = {
         TemperatureSensor: ClimateController,
-        FertilizationSensor: FertilizationController
+        FertilizationSensor: FertilizationController,
+        HumiditySensor: HumidityController,
+        IrrigationSensor: IrrigationController,
     }
 
     controller_classes = {
         Fan: ClimateController,
         LEDLight: LightingController,
         Heater: ClimateController,
-        Humidifier: ClimateController,
+        Humidifier: HumidityController,
         RollerBlind: ClimateController,
         Fertilizer: FertilizationController,
         IrrigationSystem: IrrigationController,

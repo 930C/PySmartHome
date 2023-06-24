@@ -3,6 +3,7 @@ from smart_home.controllers.controller import Controller
 from smart_home.managers.controller_manager import ControllerManager
 from smart_home.rooms.room import Room
 from smart_home.rooms.zone import Zone
+import time
 
 
 class SmartHomeController:
@@ -53,6 +54,7 @@ class SmartHomeController:
             for room in self.rooms:
                 for zone in room.zones:
                     for controller in zone.controllerManager.get_controllers():
-                        if controller.name == "FertilizationController":
-                            controller.update()
+                        controller.update()
+            time.sleep(5)
+            print(" ")
 

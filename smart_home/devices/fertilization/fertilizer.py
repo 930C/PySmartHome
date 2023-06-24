@@ -1,5 +1,4 @@
 from smart_home.devices.adjustable_device import AdjustableDevice
-import schedule
 
 
 class Fertilizer(AdjustableDevice):
@@ -23,4 +22,4 @@ class Fertilizer(AdjustableDevice):
 
     def fertilizing(self):
         print("Fertilizing ", self.name, " with ", self.value, " amount")
-        self.value -= 0.1
+

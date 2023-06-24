@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 
 
 class Controller(ABC):
@@ -26,5 +26,6 @@ class Controller(ABC):
     def remove_sensor(self, sensor):
         self.sensors.remove(sensor)
 
+    @abstractmethod
     def update(self):
         pass

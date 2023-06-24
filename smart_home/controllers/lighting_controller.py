@@ -15,3 +15,6 @@ class LightingController(Controller):
             elif sensor.read() > desired_brightness:
                 for device in self.devices:
                     device.switch_off()
+
+    def update(self):
+        print("LightingController update")

@@ -8,7 +8,7 @@ class ClimateController(Controller):
     def __init__(self):
         super().__init__()
 
-    def control_climate(self, desired_temperature: float, desired_humidity: float):
+    def control_climate(self, desired_temperature: float):
         for sensor in self.sensors:
             if sensor.get_value() < desired_temperature:
                 for device in self.devices:

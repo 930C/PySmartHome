@@ -11,6 +11,8 @@ class TestController(Controller):
         super().update()
         pass
 
+    __test__ = False
+
 def test_get_devices():
     controller = TestController()
     device = AdjustableDevice("test_device")

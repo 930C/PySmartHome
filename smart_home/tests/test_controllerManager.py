@@ -11,6 +11,8 @@ class TestController(Controller):
     def update(self):
         pass
 
+    __test__ = False
+
 def test_add_controller():
     controllerManager = ControllerManager({})
     controller = TestController()

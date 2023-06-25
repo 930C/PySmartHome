@@ -17,7 +17,8 @@ class AdjustableDevice(SwitchableDevice, AdjustableDeviceInterface, ABC):
             self.value = self.min_level
         elif value > self.max_level:
             self.value = self.max_level
-        self.value = value
+        else:
+            self.value = value
 
     def get_level(self):
         return self.value

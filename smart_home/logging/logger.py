@@ -8,7 +8,7 @@ def setup_logger(name):
     logger.setLevel(logging.DEBUG)
 
     # Create a formatter
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(name)s - %(message)s')
 
     # Create a console handler and set the level to DEBUG
     console_handler = logging.StreamHandler(sys.stdout)

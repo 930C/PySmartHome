@@ -1,16 +1,19 @@
 from smart_home.controllers.controller import Controller
+from smart_home.logging.logger import setup_logger
 
 
 class IrrigationController(Controller):
+    logger = setup_logger('IrrigationController')
     name = 'IrrigationController'
 
     def __init__(self, desired_moisture: float = 40):
         super().__init__()
         self.desired_moisture = desired_moisture
+        self.logger.info(f'Created controller {self.name} with desired moisture {self.desired_moisture}')
 
     def control_irrigation(self):
+        self.logger.info(f'Controlling irrigation with desired moisture {self.desired_moisture}')
         for sensor in self.sensors:
-            print(sensor.name, " value: ", sensor.get_value())
             if sensor.get_value() < self.desired_moisture:
                 for device in self.devices:
                     if not device.get_state():
@@ -23,5 +26,5 @@ class IrrigationController(Controller):
                     sensor.update(device)
 
     def update(self):
-        print("IrrigationController update")
+        self.logger.info(f'Updating {self.name}..')
         self.control_irrigation()

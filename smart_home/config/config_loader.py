@@ -23,7 +23,7 @@ from smart_home.sensors.irrigation_sensor import IrrigationSensor
 # Open-Closed Principle (OCP) -> einfaches Hinzufügen von devices und sensors
 
 class DeviceFactory:
-    logger = setup_logger(__name__)
+    logger = setup_logger('DeviceFactory')
 
     device_classes = {
         'led_light': LEDLight,
@@ -74,6 +74,7 @@ class DeviceFactory:
         if device_class is not None:
             return device_class(device_info['name'])
 
+        ConfigLoader.logger.info(f'Invalid device type: {yaml_device_type}')
         raise ValueError(f'Invalid device type: {yaml_device_type}')
 
     @classmethod
@@ -85,6 +86,7 @@ class DeviceFactory:
         if sensor_class is not None:
             return sensor_class(sensor_info['name'])
 
+        ConfigLoader.logger.info(f'Invalid device type: {yaml_sensor_type}')
         raise ValueError(f'Invalid device type: {yaml_sensor_type}')
 
     # In dieser Methode wird die Klasse des Controllers für das jeweilige Gerät ermittelt.
@@ -99,11 +101,13 @@ class DeviceFactory:
 
 # Single Responsibility Principle (SRP) -> alle Konfigurationsdaten aus einer config file
 class ConfigLoader:
-    logger = setup_logger(__name__)
+    logger = setup_logger('ConfigLoader')
 
     @staticmethod
     def load_config(config_file: str):
         ConfigLoader.logger.info(f'Loading config from {config_file}')
         with open(config_file, 'r') as f:
             config_data = yaml.safe_load(f)
+
+        ConfigLoader.logger.info(f'Config loaded: {config_data}')
         return config_data

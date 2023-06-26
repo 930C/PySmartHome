@@ -1,16 +1,19 @@
 from smart_home.controllers.controller import Controller
+from smart_home.logging.logger import setup_logger
 
 
 class HumidityController(Controller):
+    logger = setup_logger('HumidityController')
     name = 'HumidityController'
 
     def __init__(self, desired_moisture: float = 60):
         super().__init__()
         self.desired_moisture = desired_moisture
+        self.logger.info(f'Created controller {self.name} with desired moisture {self.desired_moisture}')
 
     def control_humidity(self):
+        self.logger.info(f'Controlling humidity with desired moisture {self.desired_moisture}')
         for sensor in self.sensors:
-            print(sensor.name, " value: ", sensor.get_value())
             if sensor.get_value() < self.desired_moisture:
                 for device in self.devices:
                     device.humidify()
@@ -26,5 +29,5 @@ class HumidityController(Controller):
                     sensor.update(device)
 
     def update(self):
-        print("HumidityController update")
+        self.logger.info(f'Updating {self.name}..')
         self.control_humidity()

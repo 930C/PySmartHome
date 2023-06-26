@@ -1,9 +1,7 @@
 from smart_home.controllers.controller import Controller
-from smart_home.logging.logger import setup_logger
 
 
 class FertilizationController(Controller):
-    logger = setup_logger("FertilizationController")
     name = "FertilizationController"
 
     def __init__(self, desired_nutrient_content: float = 70):

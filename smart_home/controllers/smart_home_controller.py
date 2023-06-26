@@ -1,6 +1,6 @@
 from smart_home.config.config_loader import ConfigLoader, DeviceFactory
 from smart_home.controllers.controller import Controller
-from smart_home.logging.logger import setup_logger
+from smart_home.logging.logger import LoggerFactory
 from smart_home.managers.controller_manager import ControllerManager
 from smart_home.rooms.room import Room
 from smart_home.rooms.zone import Zone
@@ -8,10 +8,9 @@ import time
 
 
 class SmartHomeController:
-    logger = setup_logger('SmartHomeController')
-
     def __init__(self, config_file_path: str):
         self.rooms = []
+        self.logger = LoggerFactory.setup_logger('SmartHomeController')
         self.load_rooms(config_file_path)
         self.logger.info(f'Created SmartHomeController with config file {config_file_path}')
 
@@ -65,6 +64,8 @@ class SmartHomeController:
 
     def update(self):
         while True:
+            time.sleep(5)
+            self.logger.info('-' * 100)
             self.logger.info('Updating SmartHomeController..')
 
             for room in self.rooms:
@@ -74,6 +75,5 @@ class SmartHomeController:
                     for controller in zone.controllerManager.get_controllers():
                         self.logger.info('Updating controller: ' + controller.name)
                         controller.update()
-            time.sleep(5)
             self.logger.info('Updated SmartHomeController..')
 

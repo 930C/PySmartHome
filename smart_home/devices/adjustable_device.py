@@ -2,12 +2,9 @@ from abc import ABC
 
 from smart_home.devices.switchable_device import SwitchableDevice
 from smart_home.interfaces.adjustable_device_interface import AdjustableDeviceInterface
-from smart_home.logging.logger import setup_logger
 
 
 class AdjustableDevice(SwitchableDevice, AdjustableDeviceInterface, ABC):
-    logger = setup_logger('AdjustableDevice')
-
     def __init__(self, name: str, initial_level: float = 1.0, min_level: float = 0.0, max_level: float = 1.0):
         super().__init__(name)
         self.min_level = min_level

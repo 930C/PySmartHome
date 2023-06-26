@@ -1,12 +1,12 @@
 from typing import List
 from smart_home.controllers.controller import Controller
-from smart_home.logging.logger import setup_logger
+from smart_home.logging.logger import LoggerFactory
 
 
-class ControllerManager:    # Solid Principle: Single Responsibility
-    logger = setup_logger('ControllerManager')
-
+# Single Responsibility: This class is responsible for managing all controllers
+class ControllerManager:
     def __init__(self, controller_types: dict):
+        self.logger = LoggerFactory.setup_logger(ControllerManager.__name__)    # ControllerManager needs a name
         self.controllers = controller_types
         self.logger.info(f'Created controller manager with controllers: {self.controllers}')
 

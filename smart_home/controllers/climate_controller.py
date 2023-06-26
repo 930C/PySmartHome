@@ -1,15 +1,13 @@
 from smart_home.controllers.controller import Controller
 from smart_home.interfaces.temperature_control_interface import TemperatureControlInterface
-from smart_home.logging.logger import setup_logger
 
 
 class ClimateController(Controller):
-    logger = setup_logger('ClimateController')
     name = 'ClimateController'
 
     def __init__(self):
         super().__init__()
-        self.logger.info(f'Created controller {self.name}')
+        self.logger.info(f'ClimateController {self.name} created')
 
     def control_climate(self, desired_temperature: float):
         self.logger.info(f'Controlling climate with desired temperature {desired_temperature}')

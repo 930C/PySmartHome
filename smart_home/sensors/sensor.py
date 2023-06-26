@@ -4,18 +4,17 @@ from abc import ABC
 from smart_home.devices.adjustable_device import AdjustableDevice
 from smart_home.devices.switchable_device import SwitchableDevice
 from smart_home.interfaces.sensor_interface import SensorInterface
-from smart_home.logging.logger import setup_logger
+from smart_home.logging.logger import LoggerFactory
 
 
 class Sensor(SensorInterface, ABC):
-    logger = setup_logger('Sensor')
-
     def __init__(self, name: str, value: float = 0.0, naturally_decrease: bool = True, min_value: float = 0.0, max_value: float = 100.0):
         self.name = name
         self.value = value
         self.min_value = min_value
         self.max_value = max_value
         self.naturally_decrease = naturally_decrease
+        self.logger = LoggerFactory.setup_logger(self.name)
         self.logger.info(f'Created sensor {self.name} with value {self.value}, naturally decrease set to '
                          f'{self.naturally_decrease}, min value {self.min_value} and max value {self.max_value}')
 

@@ -1,9 +1,7 @@
 from smart_home.controllers.controller import Controller
-from smart_home.logging.logger import setup_logger
 
 
 class HumidityController(Controller):
-    logger = setup_logger('HumidityController')
     name = 'HumidityController'
 
     def __init__(self, desired_moisture: float = 60):

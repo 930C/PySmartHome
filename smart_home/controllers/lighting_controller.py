@@ -1,9 +1,7 @@
 from smart_home.controllers.controller import Controller
-from smart_home.logging.logger import setup_logger
 
 
 class LightingController(Controller):
-    logger = setup_logger('LightingController')
     name = 'LightingController'
 
     def __init__(self):

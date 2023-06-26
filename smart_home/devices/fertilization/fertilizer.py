@@ -1,10 +1,7 @@
 from smart_home.devices.adjustable_device import AdjustableDevice
-from smart_home.logging.logger import setup_logger
 
 
 class Fertilizer(AdjustableDevice):
-    logger = setup_logger('Fertilizer')
-
     def __init__(self, name: str):
         super().__init__(name)
         self.logger.info(f'Fertilizer {name} created')

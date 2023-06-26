@@ -13,7 +13,7 @@ from smart_home.devices.fertilization.fertilizer import Fertilizer
 from smart_home.devices.irrigation.irrigation_system import IrrigationSystem
 from smart_home.devices.irrigation.rainwater_harvesting_system import RainwaterHarvestingSystem
 from smart_home.devices.lights.led_light import LEDLight
-from smart_home.logging.logger import setup_logger
+from smart_home.logging.logger import LoggerFactory
 from smart_home.sensors.fertilization_sensor import FertilizationSensor
 from smart_home.sensors.humidity_sensor import HumiditySensor
 from smart_home.sensors.temperature_sensor import TemperatureSensor
@@ -23,7 +23,7 @@ from smart_home.sensors.irrigation_sensor import IrrigationSensor
 # Open-Closed Principle (OCP) -> einfaches Hinzufügen von devices und sensors
 
 class DeviceFactory:
-    logger = setup_logger('DeviceFactory')
+    logger = LoggerFactory.setup_logger('DeviceFactory')
 
     device_classes = {
         'led_light': LEDLight,
@@ -101,7 +101,7 @@ class DeviceFactory:
 
 # Single Responsibility Principle (SRP) -> alle Konfigurationsdaten aus einer config file
 class ConfigLoader:
-    logger = setup_logger('ConfigLoader')
+    logger = LoggerFactory.setup_logger('ConfigLoader')
 
     @staticmethod
     def load_config(config_file: str):

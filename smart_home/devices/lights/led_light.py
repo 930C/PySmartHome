@@ -1,12 +1,9 @@
 from smart_home.devices.adjustable_device import AdjustableDevice
-from smart_home.logging.logger import setup_logger
 
 
 # Liskov Substitution Principle (LSP) -> Subklasse kann Funktionalität von Superklasse überschreiben
 # Single Responsibility Principle (SRP) -> Unterklasse definiert spezifisches Verhalten des devices
 class LEDLight(AdjustableDevice):
-    logger = setup_logger('LEDLight')
-
     def __init__(self, name):
         super().__init__(name)
         self.color = 0xFFFFFF

@@ -1,15 +1,14 @@
 from abc import ABC
 
 from smart_home.interfaces.switchable_device_interface import SwitchableDeviceInterface
-from smart_home.logging.logger import setup_logger
+from smart_home.logging.logger import LoggerFactory
 
 
 class SwitchableDevice(SwitchableDeviceInterface, ABC):
-    logger = setup_logger('SwitchableDevice')
-
     def __init__(self, name: str):
         self.name = name
         self.state = False
+        self.logger = LoggerFactory.setup_logger(name)
         self.logger.info(f'SwitchableDevice {name} created')
 
     def turn_on(self):

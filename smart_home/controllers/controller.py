@@ -1,15 +1,15 @@
 from abc import ABC, abstractmethod
 
-from smart_home.logging.logger import setup_logger
+from smart_home.logging.logger import LoggerFactory
 
 
 class Controller(ABC):
-    logger = setup_logger('Controller')
     name = 'Controller'
 
     def __init__(self):
         self.devices = []
         self.sensors = []
+        self.logger = LoggerFactory.setup_logger(self.name)
         self.logger.info(f'Created controller {self.name}')
 
     def get_devices(self):

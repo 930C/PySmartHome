@@ -13,6 +13,7 @@ from smart_home.devices.fertilization.fertilizer import Fertilizer
 from smart_home.devices.irrigation.irrigation_system import IrrigationSystem
 from smart_home.devices.irrigation.rainwater_harvesting_system import RainwaterHarvestingSystem
 from smart_home.devices.lights.led_light import LEDLight
+from smart_home.logging.logger import LoggerFactory
 from smart_home.sensors.fertilization_sensor import FertilizationSensor
 from smart_home.sensors.humidity_sensor import HumiditySensor
 from smart_home.sensors.temperature_sensor import TemperatureSensor
@@ -22,6 +23,8 @@ from smart_home.sensors.irrigation_sensor import IrrigationSensor
 # Open-Closed Principle (OCP) -> einfaches Hinzufügen von devices und sensors
 
 class DeviceFactory:
+    logger = LoggerFactory.setup_logger('DeviceFactory')
+
     device_classes = {
         'led_light': LEDLight,
         'fan': Fan,
@@ -63,6 +66,7 @@ class DeviceFactory:
     # In dieser Methode wird die Klasse des Geräts für das jeweilige Gerät ermittelt.
     @classmethod
     def create_device(cls, device_info):
+        DeviceFactory.logger.info(f'Creating device {device_info["name"]}')
         yaml_device_type = device_info.get('type')
         # Hier wird die Klasse des Geräts für das jeweilige Gerät ermittelt.
         device_class = cls.device_classes.get(yaml_device_type)
@@ -70,21 +74,25 @@ class DeviceFactory:
         if device_class is not None:
             return device_class(device_info['name'])
 
+        ConfigLoader.logger.info(f'Invalid device type: {yaml_device_type}')
         raise ValueError(f'Invalid device type: {yaml_device_type}')
 
     @classmethod
     def create_sensor(cls, sensor_info):
+        DeviceFactory.logger.info(f'Creating sensor {sensor_info["name"]}')
         yaml_sensor_type = sensor_info.get('type')
         sensor_class = cls.sensor_classes.get(yaml_sensor_type)
 
         if sensor_class is not None:
             return sensor_class(sensor_info['name'])
 
+        ConfigLoader.logger.info(f'Invalid device type: {yaml_sensor_type}')
         raise ValueError(f'Invalid device type: {yaml_sensor_type}')
 
     # In dieser Methode wird die Klasse des Controllers für das jeweilige Gerät ermittelt.
     @classmethod
     def create_controller(cls, device):
+        DeviceFactory.logger.info(f'Creating controller for {device.name}')
         # Hier wird die Klasse des Controllers für das jeweilige Gerät ermittelt.
         controller_class = cls.controller_classes.get(type(device), Controller)
         # Hier wird eine Instanz des Controllers für das jeweilige Gerät erstellt.
@@ -93,9 +101,13 @@ class DeviceFactory:
 
 # Single Responsibility Principle (SRP) -> alle Konfigurationsdaten aus einer config file
 class ConfigLoader:
+    logger = LoggerFactory.setup_logger('ConfigLoader')
 
     @staticmethod
     def load_config(config_file: str):
+        ConfigLoader.logger.info(f'Loading config from {config_file}')
         with open(config_file, 'r') as f:
             config_data = yaml.safe_load(f)
+
+        ConfigLoader.logger.info(f'Config loaded: {config_data}')
         return config_data

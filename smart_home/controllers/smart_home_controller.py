@@ -1,5 +1,6 @@
 from smart_home.config.config_loader import ConfigLoader, DeviceFactory
 from smart_home.controllers.controller import Controller
+from smart_home.logging.logger import LoggerFactory
 from smart_home.managers.controller_manager import ControllerManager
 from smart_home.rooms.room import Room
 from smart_home.rooms.zone import Zone
@@ -9,17 +10,23 @@ import time
 class SmartHomeController:
     def __init__(self, config_file_path: str):
         self.rooms = []
+        self.logger = LoggerFactory.setup_logger('SmartHomeController')
         self.load_rooms(config_file_path)
+        self.logger.info(f'Created SmartHomeController with config file {config_file_path}')
 
     # TODO: Auslagern
     def load_rooms(self, config_file_path: str) -> None:
+        self.logger.info('Loading rooms..')
         config_data = ConfigLoader.load_config(config_file_path)
 
         for room_info in config_data.get('rooms', []):
+            self.logger.info(f'Loading room: {room_info["name"]}, type: {room_info["type"]}')
             room = Room(room_info['name'], room_info['type'])
             for zone_info in room_info.get('zones', []):
                 controller_manager = ControllerManager({})
+                self.logger.info(f'Loading zone: {zone_info["name"]}')
                 for device_info in zone_info.get('devices', []):
+                    self.logger.info(f'Loading device: {device_info["name"]}. Type: {device_info["type"]}')
                     device = DeviceFactory.create_device(device_info)
 
                     controller_class = DeviceFactory.controller_classes.get(type(device), Controller)
@@ -31,8 +38,10 @@ class SmartHomeController:
                         controller = controller_manager.controllers.get(controller_class.name)
                         controller.add_device(device)
 
+                    self.logger.info('Added device: ' + device.name + ' to controller: ' + controller.name)
                 # TODO: Eigene Sensor Factory?
                 for sensor_info in zone_info.get('sensors', []):
+                    self.logger.debug(f'Loading sensor: {sensor_info["name"]}. Type: {sensor_info["type"]}')
                     sensor = DeviceFactory.create_sensor(sensor_info)
 
                     controller_class = DeviceFactory.sensor_controller_classes.get(type(sensor), Controller)
@@ -44,17 +53,27 @@ class SmartHomeController:
                         controller = controller_manager.controllers.get(controller_class.name)
                         controller.add_sensor(sensor)
 
+                    self.logger.info('Added sensor: ' + sensor.name + ' to controller: ' + controller.name)
+
                 zone = Zone(zone_info['name'], controller_manager)
 
                 room.append_zone(zone)
+                self.logger.info('Added zone: ' + zone.name + ' to room: ' + room.name)
             self.rooms.append(room)
+            self.logger.info(f'Added room: {room.name} to SmartHomeController')
 
     def update(self):
         while True:
-            for room in self.rooms:
-                for zone in room.zones:
-                    for controller in zone.controllerManager.get_controllers():
-                        controller.update()
             time.sleep(5)
-            print(" ")
+            self.logger.info('-' * 100)
+            self.logger.info('Updating SmartHomeController..')
+
+            for room in self.rooms:
+                self.logger.info('Updating room: ' + room.name)
+                for zone in room.zones:
+                    self.logger.info('Updating zone: ' + zone.name)
+                    for controller in zone.controllerManager.get_controllers():
+                        self.logger.info('Updating controller: ' + controller.name)
+                        controller.update()
+            self.logger.info('Updated SmartHomeController..')
 

@@ -1,4 +1,5 @@
 import logging
+from datetime import datetime
 from logging.handlers import RotatingFileHandler
 import sys
 
@@ -21,8 +22,11 @@ class LoggerFactory:
         console_handler.setLevel(logging.DEBUG)
         console_handler.setFormatter(formatter)
 
+        current_date = datetime.now().strftime("%Y-%m-%d")
+        filename = f"smart_home_{current_date}.log"
+
         # Create a file handler and set the level to DEBUG
-        file_handler = RotatingFileHandler('logs.log', maxBytes=10 * 1024 * 1024, backupCount=5)
+        file_handler = RotatingFileHandler(f'logs/{filename}', maxBytes=10 * 1024 * 1024, backupCount=5)
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(formatter)
 

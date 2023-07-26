@@ -42,41 +42,12 @@ OO
 ### Factory Pattern
 Wir haben das Factory Pattern verwendet, um die Erzeugung von Geräten, Sensoren und Controllern in einem Smart-Home-System zu zentralisieren und zu abstrahieren. Dies führte zu einem sauberen und wartbaren Code, der die Verantwortlichkeiten klar trennt und den Clientcode von den Details der Objekterzeugung entkoppelt. Darüber hinaus ermöglichte das Factory Pattern eine einfache Erweiterung des Systems, da neue Geräte- und Sensortypen problemlos hinzugefügt werden konnten, ohne den bestehenden Code zu beeinträchtigen (Open-Closed-Principle).
 
-**Umsetzung**  
-In der `SmartHomeController`-Klasse wird die Erzeugung von Geräten, Sensoren und Controllern mithilfe der `DeviceFactory` zentralisiert. Die `DeviceFactory` stellt dafür zwei Factory-Methoden bereit: `create_device` und `create_sensor`.
+In dem `SmartHomeController` wird die Erzeugung von Geräten, Sensoren und Controllern mithilfe der `DeviceFactory` zentralisiert. Die `DeviceFactory` stellt dafür drei Factory-Methoden bereit: `create_device`, `create_sensor` und `create_controller`. Bei der Erstellung von Geräten iteriert die Methode `load_rooms` über die Konfigurationsdaten und verwendet die `create_device`-Methode der `DeviceFactory`, um für jedes Gerät in der Konfiguration den passenden Gerätetyp (z. B. LEDLight) zu erstellen und eine entsprechende Instanz zurückzugeben. Gleiches gilt für die Erstellung von Sensoren und Controllern, bei denen die `create_sensor` bzw. `create_controller`-Methode verwendet wird.
 
-  - **Erstellung von Geräten**:
-     Wenn die Methode `load_rooms` in der `SmartHomeController` aufgerufen wird, iteriert sie über die Konfigurationsdaten und stößt die Erzeugung der Geräte für jede Zone an. Für jedes Gerät in der Konfiguration ruft die Methode `create_device` der `DeviceFactory` auf und übergibt die Informationen über das zu erstellende Gerät, wie den Gerätetyp und den Namen.
+Durch die Implementierung des Factory Patterns ergeben sich mehrere Vorteile. Erstens ermöglicht die zentrale Objekterzeugung durch die `DeviceFactory`, dass der Code übersichtlicher wird und die Logik zur Erzeugung der Komponenten leicht zugänglich ist. Zweitens kennt der `SmartHomeController` nicht die konkreten Geräte- und Sensorklassen, sondern greift über die Factory-Methode auf sie zu, was die Abhängigkeit von konkreten Implementierungen reduziert und die Flexibilität erhöht. Drittens fördert die Wiederverwendbarkeit der Factory die Code-Wiederverwendung, da neue Geräte- und Sensortypen einfach durch Hinzufügen von Einträgen in die entsprechenden Dictionaries der Factory unterstützt werden können, ohne dass der Hauptcode geändert werden muss. Viertens entkoppelt die Factory den Clientcode, in diesem Fall die `SmartHomeController`, von den Details der Objekterzeugung, wodurch der Code robuster und leichter wartbar wird.
 
-     Zum Beispiel:
-     ```
-     device_info = {'type': 'led_light', 'name': 'Living Room Light'}
-     device = DeviceFactory.create_device(device_info)
-     ```
+Insgesamt ermöglicht das Factory Pattern eine klare Trennung der Verantwortlichkeiten, erhöht die Lesbarkeit des Codes und macht das System besser erweiterbar. Der `SmartHomeController` kann sich so auf seine Hauptaufgaben konzentrieren und bleibt übersichtlich, während die Erzeugung und Konfiguration der Geräte und Sensoren elegant und flexibel von der `DeviceFactory` gehandhabt wird. Diese Implementierung verbessert die Wartbarkeit und Skalierbarkeit des Smart-Home-Systems erheblich und bietet eine solide Grundlage für zukünftige Erweiterungen und Weiterentwicklungen.
 
-     Die `create_device`-Methode der `DeviceFactory` verwendet das `device_classes`-Dictionary, um den passenden Gerätetyp basierend auf dem übergebenen `type`-Schlüsselwort zu ermitteln. Anschließend wird eine Instanz des entsprechenden Gerätes (z. B. LEDLight) erstellt und zurückgegeben.
-  - **Erstellung von Sensoren**:
-     Analog zur Erzeugung von Geräten werden auch die Sensoren in der `SmartHomeController` erstellt. Wenn die Methode `load_rooms` auf die Sensoren-Konfigurationsdaten stößt, wird die `create_sensor`-Methode der `DeviceFactory` aufgerufen, um den passenden Sensor zu erstellen.
-
-     Zum Beispiel:
-     ```
-     sensor_info = {'type': 'temperature_sensor', 'name': 'Living Room Temperature Sensor'}
-     sensor = DeviceFactory.create_sensor(sensor_info)
-     ```
-
-     Die `create_sensor`-Methode der `DeviceFactory` verwendet das `sensor_classes`-Dictionary, um den passenden Sensortyp basierend auf dem übergebenen `type`-Schlüsselwort zu ermitteln. Anschließend wird eine Instanz des entsprechenden Sensors (z. B. TemperatureSensor) erstellt und zurückgegeben.
-
-  - **Erstellung von Controllern**:
-     Analog zur Erstellung von Geräten und Sensoren. Diese Methode wird aufgerufen, wenn es zu einem Gerät oder Sensor noch keinen passenden Controller gibt. Auch hier gibt es ein Dicitonary zur Zuordnung von Geräten bzw. Sensoren zum zugehörigen Controller.
-
-**Vorteile:**   
-Durch die Implementierung des Factory Patterns ergeben sich folgende Vorteile:
-- Zentrale Objekterzeugung: Die `DeviceFactory` zentralisiert die Erzeugung von Geräten und Sensoren, wodurch der Code übersichtlicher wird und die Logik zur Erzeugung der Komponenten leicht zugänglich ist.
-- Abstraktion und Flexibilität: Der `SmartHomeController` kennt nicht die konkreten Geräte- und Sensorklassen, sondern greift über die Factory-Methode auf sie zu. Dadurch wird die Abhängigkeit von konkreten Implementierungen reduziert und die Flexibilität erhöht.
-- Code-Wiederverwendung: Die Factory kann für die Erzeugung von verschiedenen Geräten und Sensoren wiederverwendet werden. Neue Geräte- und Sensortypen können einfach durch Hinzufügen von Einträgen in die entsprechenden Dictionaries der Factory unterstützt werden, ohne dass der Hauptcode geändert werden muss.
-- Entkoppelung des Clientcodes: Der Clientcode (in diesem Fall der `SmartHomeController`) ist nicht mit den Details der Objekterzeugung belastet. Stattdessen greift er einfach auf die Factory zu, um die benötigten Komponenten zu erhalten. Dadurch wird der Code robuster und leichter wartbar.
-
-Insgesamt ermöglicht das Factory Pattern eine klare Trennung der Verantwortlichkeiten, erhöht die Lesbarkeit des Codes und macht das System besser erweiterbar. Es fördert eine saubere Architektur und ist eine effektive Lösung, um die Komplexität der Objekterzeugung zu verwalten und den Code sauber zu strukturieren.
 
 ### Template Method Pattern
 Das Template Method Pattern wird hier verwendet, um eine abstrakte Struktur für die Implementierung von SwitchableDevice und AdjustableDevice-Klassen bereitzustellen. Das Ziel ist es, den Code für das Schalten von Geräten zu standardisieren, während gleichzeitig spezifische Implementierungsdetails für die Anpassung der Geräte ermöglicht werden.

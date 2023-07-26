@@ -60,6 +60,16 @@ Die Geräte-Klasse "Humidifier" ist beispielsweise eine Unterklassen-Implementie
 
 Durch die Verwendung des Template Method Patterns werden also die allgemeinen Schritte zum Ein- und Ausschalten von Geräten sowie zum Einstellen des Pegels in den Basisklassen definiert und in den Unterklassen die spezifischen Details der jeweiligen Geräte implementiert. Dadurch wird der Code wiederverwendbar, reduziert Duplizierung und fördert eine klare Trennung zwischen allgemeiner Struktur und spezifischer Implementierung.
 
+### Strategy Pattern
+
+Das Strategy Pattern ermöglicht die Trennung von Algorithmen und deren Verwendung, was den Code flexibler und leichter erweiterbar macht.
+
+Die abstrakte Klasse `Strategy` bildet die die Grundlage für verschiedene Strategien. Diese Klasse definiert eine abstrakte Methode namens `calculate_value`, die von den konkreten Strategien implementiert werden muss. Die konkreten Strategien `Average`, `Maximal` und `Minimal` erben von dieser abstrakten Klasse und berechnen jeweils den Durchschnitt, das Maximum und das Minimum der übergebenen Sensordaten.
+
+Die abstrakte Klasse `Controller` dient als Kontext und enthält eine Referenz auf eine konkrete Strategie. Sie ermöglicht es, die aktuelle Strategie abzurufen. Die Klasse `HumidityController` erbt neben vielen weiteren Controllern von `Controller` und stellt eine konkrete Implementierung dar. Hier wird das Strategy Pattern verwendet, um die Strategie für die Feuchtigkeitsregelung auszuwählen (z. B. Average, Maximal oder Minimal). Die Methode `control_humidity` nutzt beispielsweise die ausgewählte Strategie, um den gewünschten Feuchtigkeitswert zu berechnen und die entsprechenden Geräte entsprechend zu steuern.
+
+Durch die Verwendung des Strategy Patterns bleibt die `Controller`-Klasse unabhängig von den Details der verwendeten Strategie. Dadurch wird der Code besser strukturiert und erleichtert die Implementierung neuer Strategien in der Zukunft, ohne den Kerncode der `Controller`-Klasse ändern zu müssen. Dadurch wird das Smart Home System flexibler und anpassungsfähiger für verschiedene Anwendungsanforderungen.
+
 ## Logging
 
 In unserem Smart-Home-Projekt verwenden wir das Logging-Konzept, um wichtige Informationen über den Betrieb und den aktuellen Zustand des Systems zu erfassen und zu protokollieren. Dabei nutzen wir verschiedene Log-Level wie DEBUG, INFO, WARNING und ERROR, um die Bedeutung der Protokollmeldungen zu kennzeichnen. Jede Protokollmeldung enthält relevante Informationen über den aktuellen Zustand der Geräte, Sensoren und Controller im Smart Home.

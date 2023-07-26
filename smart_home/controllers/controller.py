@@ -1,14 +1,18 @@
 from abc import ABC, abstractmethod
 
 from smart_home.logging.logger import LoggerFactory
+from smart_home.strategies.average import Average
+from smart_home.strategies.maximal import Maximal
+from smart_home.strategies.minimal import Minimal
 
 
 class Controller(ABC):
     name = 'Controller'
 
-    def __init__(self):
+    def __init__(self, strategy: Average|Maximal|Minimal = Average() ):
         self.devices = []
         self.sensors = []
+        self.strategy = strategy
         self.logger = LoggerFactory.setup_logger(self.name)
         self.logger.info(f'Created controller {self.name}')
 
@@ -35,6 +39,12 @@ class Controller(ABC):
     def remove_sensor(self, sensor):
         self.logger.info(f'Removing sensor: {sensor.name} from {self.name}')
         self.sensors.remove(sensor)
+
+    def getStrategy(self):
+        return self.strategy
+
+    def setStrategy(self, strategy):
+        self.strategy = strategy
 
     @abstractmethod
     def update(self):

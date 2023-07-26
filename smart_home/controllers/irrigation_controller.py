@@ -10,16 +10,19 @@ class IrrigationController(Controller):
 
     def control_irrigation(self):
         self.logger.info(f'Controlling irrigation with desired moisture {self.desired_moisture}')
-        for sensor in self.sensors:
-            if sensor.get_value() < self.desired_moisture:
-                for device in self.devices:
-                    if not device.get_state():
-                        device.turn_on()
+        sensor_value = self.getStrategy().calculate_value(self.sensors)
+
+        if sensor_value < self.desired_moisture:
+            for device in self.devices:
+                if not device.get_state():
+                    device.turn_on()
+                for sensor in self.sensors:
                     sensor.update(device)
-            elif sensor.get_value() >= self.desired_moisture:
-                for device in self.devices:
-                    if device.get_state():
-                        device.turn_off()
+        elif sensor_value >= self.desired_moisture:
+            for device in self.devices:
+                if device.get_state():
+                    device.turn_off()
+                for sensor in self.sensors:
                     sensor.update(device)
 
     def update(self):

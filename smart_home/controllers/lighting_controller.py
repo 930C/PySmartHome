@@ -10,13 +10,13 @@ class LightingController(Controller):
 
     def control_lighting(self, desired_brightness: float):
         self.logger.info(f'Controlling lighting with desired brightness {desired_brightness}')
-        for sensor in self.sensors:
-            if sensor.read() < desired_brightness:
-                for device in self.devices:
-                    device.switch_on()
-            elif sensor.read() > desired_brightness:
-                for device in self.devices:
-                    device.switch_off()
+        sensor_value = self.getStrategy().calculate_value(self.sensors)
+        if sensor_value < desired_brightness:
+            for device in self.devices:
+                device.switch_on()
+        elif sensor_value > desired_brightness:
+            for device in self.devices:
+                device.switch_off()
 
     def update(self):
         self.logger.info(f'Updating {self.name}..')

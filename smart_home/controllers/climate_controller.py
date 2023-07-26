@@ -11,18 +11,17 @@ class ClimateController(Controller):
 
     def control_climate(self, desired_temperature: float):
         self.logger.info(f'Controlling climate with desired temperature {desired_temperature}')
-
-        for sensor in self.sensors:
-            if sensor.get_value() < desired_temperature:
-                for device in self.devices:
-                    device.switch_on()
-                    if isinstance(device, TemperatureControlInterface):
-                        device.heat()
-            elif sensor.get_value() > desired_temperature:
-                for device in self.devices:
-                    device.switch_on()  # TODO: Li muss überprüfen welche devices an oder aus gehen soll
-                    if isinstance(device, TemperatureControlInterface):
-                        device.cool()
+        sensor_value = self.getStrategy().calculate_value(self.sensors)
+        if sensor_value < desired_temperature:
+            for device in self.devices:
+                device.switch_on()
+                if isinstance(device, TemperatureControlInterface):
+                    device.heat()
+        elif sensor_value > desired_temperature:
+            for device in self.devices:
+                device.switch_on()  # TODO: Li muss überprüfen welche devices an oder aus gehen soll
+                if isinstance(device, TemperatureControlInterface):
+                    device.cool()
 
     def update(self):
         self.logger.info(f'Updating {self.name}..')

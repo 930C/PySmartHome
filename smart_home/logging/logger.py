@@ -2,6 +2,7 @@ import logging
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 import sys
+import os
 
 from smart_home.logging.custom_log_record import CustomLogRecord
 
@@ -24,9 +25,14 @@ class LoggerFactory:
 
         current_date = datetime.now().strftime("%Y-%m-%d")
         filename = f"smart_home_{current_date}.log"
+        directory_path = f'logs/'
+
+        # Create directory if it does not exist
+        if not os.path.exists(directory_path):
+            os.makedirs(directory_path)
 
         # Create a file handler and set the level to DEBUG
-        file_handler = RotatingFileHandler(f'logs/{filename}', maxBytes=10 * 1024 * 1024, backupCount=5)
+        file_handler = RotatingFileHandler(f'{directory_path}{filename}', maxBytes=10 * 1024 * 1024, backupCount=5)
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(formatter)
 

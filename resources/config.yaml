@@ -29,6 +29,10 @@ rooms:
         sensors:
           - name: Fertilizer Sensor 1
             type: fertilization_sensor
+          - name: Fertilizer Sensor 2
+            type: fertilization_sensor
+          - name: Fertilizer Sensor 3
+            type: fertilization_sensor
           - name: Humidity Sensor 1
             type: humidity_sensor
           - name: Irrigation Sensor 1

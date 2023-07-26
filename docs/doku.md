@@ -34,9 +34,95 @@ Bsp: Sensoren als Mikrocontroller und eine zentrale Python-Controller-Umgebung (
 + Aidan
 
 # 8 Querschnittliche Konzepte {#section-concepts}
-Patterns
-Package-Struktur
-OO-Design
+## Package-Struktur
+## Domänenmodell
+![img.png](arc42Images/img.png)
+OO
+## Architektur-/ Entwurfsmuster
+### Factory Pattern
+Wir haben das Factory Pattern verwendet, um die Erzeugung von Geräten, Sensoren und Controllern in einem Smart-Home-System zu zentralisieren und zu abstrahieren. Dies führte zu einem sauberen und wartbaren Code, der die Verantwortlichkeiten klar trennt und den Clientcode von den Details der Objekterzeugung entkoppelt. Darüber hinaus ermöglichte das Factory Pattern eine einfache Erweiterung des Systems, da neue Geräte- und Sensortypen problemlos hinzugefügt werden konnten, ohne den bestehenden Code zu beeinträchtigen (Open-Closed-Principle).
+
+**Umsetzung**  
+In der `SmartHomeController`-Klasse wird die Erzeugung von Geräten, Sensoren und Controllern mithilfe der `DeviceFactory` zentralisiert. Die `DeviceFactory` stellt dafür zwei Factory-Methoden bereit: `create_device` und `create_sensor`.
+
+  - **Erstellung von Geräten**:
+     Wenn die Methode `load_rooms` in der `SmartHomeController` aufgerufen wird, iteriert sie über die Konfigurationsdaten und stößt die Erzeugung der Geräte für jede Zone an. Für jedes Gerät in der Konfiguration ruft die Methode `create_device` der `DeviceFactory` auf und übergibt die Informationen über das zu erstellende Gerät, wie den Gerätetyp und den Namen.
+
+     Zum Beispiel:
+     ```
+     device_info = {'type': 'led_light', 'name': 'Living Room Light'}
+     device = DeviceFactory.create_device(device_info)
+     ```
+
+     Die `create_device`-Methode der `DeviceFactory` verwendet das `device_classes`-Dictionary, um den passenden Gerätetyp basierend auf dem übergebenen `type`-Schlüsselwort zu ermitteln. Anschließend wird eine Instanz des entsprechenden Gerätes (z. B. LEDLight) erstellt und zurückgegeben.
+  - **Erstellung von Sensoren**:
+     Analog zur Erzeugung von Geräten werden auch die Sensoren in der `SmartHomeController` erstellt. Wenn die Methode `load_rooms` auf die Sensoren-Konfigurationsdaten stößt, wird die `create_sensor`-Methode der `DeviceFactory` aufgerufen, um den passenden Sensor zu erstellen.
+
+     Zum Beispiel:
+     ```
+     sensor_info = {'type': 'temperature_sensor', 'name': 'Living Room Temperature Sensor'}
+     sensor = DeviceFactory.create_sensor(sensor_info)
+     ```
+
+     Die `create_sensor`-Methode der `DeviceFactory` verwendet das `sensor_classes`-Dictionary, um den passenden Sensortyp basierend auf dem übergebenen `type`-Schlüsselwort zu ermitteln. Anschließend wird eine Instanz des entsprechenden Sensors (z. B. TemperatureSensor) erstellt und zurückgegeben.
+
+  - **Erstellung von Controllern**:
+     Analog zur Erstellung von Geräten und Sensoren. Diese Methode wird aufgerufen, wenn es zu einem Gerät oder Sensor noch keinen passenden Controller gibt. Auch hier gibt es ein Dicitonary zur Zuordnung von Geräten bzw. Sensoren zum zugehörigen Controller.
+
+**Vorteile:**   
+Durch die Implementierung des Factory Patterns ergeben sich folgende Vorteile:
+- Zentrale Objekterzeugung: Die `DeviceFactory` zentralisiert die Erzeugung von Geräten und Sensoren, wodurch der Code übersichtlicher wird und die Logik zur Erzeugung der Komponenten leicht zugänglich ist.
+- Abstraktion und Flexibilität: Der `SmartHomeController` kennt nicht die konkreten Geräte- und Sensorklassen, sondern greift über die Factory-Methode auf sie zu. Dadurch wird die Abhängigkeit von konkreten Implementierungen reduziert und die Flexibilität erhöht.
+- Code-Wiederverwendung: Die Factory kann für die Erzeugung von verschiedenen Geräten und Sensoren wiederverwendet werden. Neue Geräte- und Sensortypen können einfach durch Hinzufügen von Einträgen in die entsprechenden Dictionaries der Factory unterstützt werden, ohne dass der Hauptcode geändert werden muss.
+- Entkoppelung des Clientcodes: Der Clientcode (in diesem Fall der `SmartHomeController`) ist nicht mit den Details der Objekterzeugung belastet. Stattdessen greift er einfach auf die Factory zu, um die benötigten Komponenten zu erhalten. Dadurch wird der Code robuster und leichter wartbar.
+
+Insgesamt ermöglicht das Factory Pattern eine klare Trennung der Verantwortlichkeiten, erhöht die Lesbarkeit des Codes und macht das System besser erweiterbar. Es fördert eine saubere Architektur und ist eine effektive Lösung, um die Komplexität der Objekterzeugung zu verwalten und den Code sauber zu strukturieren.
+
+### Template Method Pattern
+Das Template Method Pattern wird hier verwendet, um eine abstrakte Struktur für die Implementierung von SwitchableDevice und AdjustableDevice-Klassen bereitzustellen. Das Ziel ist es, den Code für das Schalten von Geräten zu standardisieren, während gleichzeitig spezifische Implementierungsdetails für die Anpassung der Geräte ermöglicht werden.
+
+Die Klasse "SwitchableDevice" enthält die grundlegende Logik für das Ein- und Ausschalten von Geräten. Sie definiert eine Template-Methode (eine Methode, die den allgemeinen Ablauf festlegt, aber einige Schritte den Unterklassen überlässt), die die Abfolge der Aktionen zum Ein- und Ausschalten eines Geräts beschreibt. 
+
+Die Klasse "AdjustableDevice" erbt von "SwitchableDevice" und fügt die Funktionalität hinzu, um den Gerätepegel anzupassen. Auch hier wird das Template Method Pattern verwendet, um den allgemeinen Ablauf des Pegelsetzungsprozesses (bspw. Ober- und Untergenzen der Intensität) vorzugeben, aber die spezifische Implementierung des Pegelsetzens wird den Unterklassen überlassen.
+
+Die Geräte-Klasse "Humidifier" ist beispielsweise eine Unterklassen-Implementierung von "AdjustableDevice". Sie erbt den Mechanismus zum Ein- und Ausschalten von Geräten und das Grundgerüst zum Setzen des Pegels. "Humidifier" implementiert dann die spezifischen Methoden "humidify" und "dehumidify", um den Feuchtigkeitspegel des Luftbefeuchters anzupassen. So hat jede Unterklasse eine gewisse Basisfunktionalität und kann eigene Methoden und Logik ergänzen.
+
+Durch die Verwendung des Template Method Patterns werden also die allgemeinen Schritte zum Ein- und Ausschalten von Geräten sowie zum Einstellen des Pegels in den Basisklassen definiert und in den Unterklassen die spezifischen Details der jeweiligen Geräte implementiert. Dadurch wird der Code wiederverwendbar, reduziert Duplizierung und fördert eine klare Trennung zwischen allgemeiner Struktur und spezifischer Implementierung.
+
+### Logging
+
+In unserem Smart-Home-Projekt verwenden wir das Logging-Konzept, um wichtige Informationen über den Betrieb und den aktuellen Zustand des Systems zu erfassen und zu protokollieren. Dabei nutzen wir verschiedene Log-Level wie DEBUG, INFO, WARNING und ERROR, um die Bedeutung der Protokollmeldungen zu kennzeichnen. Jede Protokollmeldung enthält relevante Informationen über den aktuellen Zustand der Geräte, Sensoren und Controller im Smart Home.
+
+Um die Protokolle zu verwalten, erstellen wir Logger-Objekte mithilfe des `logging`-Moduls in Python. Jeder Logger ist mit einem eindeutigen Namen versehen und dient dazu, Protokollmeldungen für einen bestimmten Bereich oder ein spezifisches Modul zu erfassen. Dadurch behalten wir die Übersichtlichkeit und können die Meldungen entsprechend kategorisieren.
+
+Für die Ausgabe der Protokollmeldungen nutzen wir verschiedene Handler-Typen. Einerseits haben wir den `console_handler`, der die Protokollmeldungen während der Entwicklung auf der Konsole ausgibt. Dadurch können Entwickler die Informationen direkt während der Arbeit sehen. Andererseits verwenden wir den `file_handler`, um die Protokolle in rotierende Dateien zu schreiben. Dies ermöglicht uns, die Protokolle über einen längeren Zeitraum aufzuzeichnen und auf potenzielle Probleme oder Ereignisse zurückzublicken.
+
+Um das Format der Protokollmeldungen zu definieren, haben wir einen benutzerdefinierten Formatter namens `CustomLogRecord` erstellt. In diesem Format werden das Datum, das Log-Level, der Modulname, der Logger-Name und die eigentliche Protokollnachricht enthalten. Dadurch haben wir eine klare Strukturierung der Protokollmeldungen und können relevante Informationen schnell erfassen.
+
+Die Konfiguration des Logging-Systems wird von der `LoggerFactory` durchgeführt. Hier werden die Logger erstellt und mit den passenden Handlern und Formattern ausgestattet. Dank dieser Konfiguration können wir die Protokollierungsstufe und die Ausgabeziele flexibel anpassen, je nachdem, was in einem bestimmten Entwicklungs- oder Testabschnitt am wichtigsten ist.
+
+Insgesamt nutzt unser Smart-Home-Projekt das Logging-Konzept, um den Zustand und die Aktivitäten der Geräte, Sensoren und Controller im Smart Home zu protokollieren. Dies ermöglicht uns, das Verhalten des Systems zu überwachen, potenzielle Probleme zu erkennen und Fehler zu diagnostizieren. Die Protokolle dienen als wertvolle Werkzeuge für das Debugging und das Monitoring des Systems und unterstützen uns dabei, die Effizienz und Zuverlässigkeit unseres Smart Homes zu verbessern.
+
+### Tests
+
+Das Testkonzept wurde entwickelt, um die Funktionalität und Zuverlässigkeit unseres Smart-Home-Systems sicherzustellen. Die Tests sind in Python mithilfe des `pytest`-Frameworks implementiert und decken verschiedene Aspekte des Systems ab.
+
+Zunächst gibt es spezifische Tests für die Devices, die im Smart-Home verwendet werden. Dazu gehören einstellbare Geräte wie AdjustableDevice und schaltbare Geräte wie SwitchableDevice. Diese Tests prüfen, ob die Geräte ihre Funktionen ordnungsgemäß ausführen. Beispielsweise wird getestet, ob die Einstellungen innerhalb des erlaubten Wertebereichs liegen, ob die Geräte ein- und ausgeschaltet werden können und ob die Werte entsprechend den Erwartungen geändert werden.
+
+Der Controller ist ein entscheidendes Element im System, der die Verwaltung von Devices und Sensoren übernimmt. Es gibt Tests, um sicherzustellen, dass der Controller Geräte und Sensoren korrekt hinzufügen, entfernen und verwalten kann. Die Interaktion zwischen dem Controller und den Geräten/Sensoren wird ebenfalls überprüft, um sicherzustellen, dass die Devices und Sensoren reibungslos mit dem Controller zusammenarbeiten.
+
+Ein weiterer wichtiger Aspekt sind die Tests für den Controller Manager. Dieser ist verantwortlich für das Verwalten mehrerer Controller. Die Tests gewährleisten, dass der Manager in der Lage ist, neue Controller hinzuzufügen, sie zu identifizieren und Informationen über vorhandene Controller zurückzugeben.
+
+Zusätzlich werden Raum- und Zonentests durchgeführt. Hier wird beispielsweise überprüft, ob Räume Zonen hinzufügen und wie gut sie diese verwalten können.
+
+Da Sensoren im System eine zentrale Rolle spielen, gibt es umfangreiche Sensortests. Diese gewährleisten, dass die Sensoren korrekte Werte liefern und angemessen auf Änderungen in den Devices reagieren.
+
+????  
+Schließlich werden Integrations- und Systemtests durchgeführt. Diese Tests überprüfen die Interaktion zwischen den verschiedenen Komponenten des Smart-Home-Systems. Ziel ist es, sicherzustellen, dass alle Teile des Systems nahtlos zusammenarbeiten und sich im Zusammenspiel korrekt verhalten.
+
+Das Testkonzept sorgt dafür, dass jede Komponente des Smart-Home-Systems einzeln und in Kombination mit anderen Komponenten zuverlässig funktioniert. Es stellt sicher, dass das System frei von unerwarteten Fehlern ist und den gestellten Anforderungen entspricht. Durch die automatisierten Tests können auch Änderungen und Erweiterungen im Code effizient überprüft werden, um potenzielle Probleme frühzeitig zu erkennen und zu beheben. Das führt zu einer stabilen und verlässlichen Smart-Home-Anwendung.
+
+### Development Concepts?
 + Johanna
 
 # 9 Architekturentscheidungen {#section-design-decisions}
@@ -51,6 +137,8 @@ Am Ende: was wurde noch nicht beschrieben?
 # 11 Risiken und technische Schulden {#section-technical-risks}
 Observer Pattern für Sensoren wäre besser gewesen
 Sicherheitskonzept fehlend
+Input Validation für Config File und error handling -> Beim Einlesen wird davon ausgegangen, dass die Config-File richtig ist
+Kapselung der turn_on-/turn_off-/...-Befehle in ein Objekt
 O
 
 

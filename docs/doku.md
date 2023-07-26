@@ -88,10 +88,8 @@ Zusätzlich werden Raum- und Zonentests durchgeführt. Hier wird beispielsweise 
 
 Da Sensoren im System eine zentrale Rolle spielen, gibt es umfangreiche Sensortests. Diese gewährleisten, dass die Sensoren korrekte Werte liefern und angemessen auf Änderungen in den Devices reagieren.
 
-????  
-Schließlich werden Integrations- und Systemtests durchgeführt. Diese Tests überprüfen die Interaktion zwischen den verschiedenen Komponenten des Smart-Home-Systems. Ziel ist es, sicherzustellen, dass alle Teile des Systems nahtlos zusammenarbeiten und sich im Zusammenspiel korrekt verhalten.
 
-Das Testkonzept sorgt dafür, dass jede Komponente des Smart-Home-Systems einzeln und in Kombination mit anderen Komponenten zuverlässig funktioniert. Es stellt sicher, dass das System frei von unerwarteten Fehlern ist und den gestellten Anforderungen entspricht. Durch die automatisierten Tests können auch Änderungen und Erweiterungen im Code effizient überprüft werden, um potenzielle Probleme frühzeitig zu erkennen und zu beheben. Das führt zu einer stabilen und verlässlichen Smart-Home-Anwendung.
+Das Testkonzept sorgt dafür, dass jede Komponente des Smart-Home-Systems zuverlässig funktioniert. Es stellt sicher, dass das System frei von unerwarteten Fehlern ist und den gestellten Anforderungen entspricht. Durch die automatisierten Tests können auch Änderungen und Erweiterungen im Code effizient überprüft werden, um potenzielle Probleme frühzeitig zu erkennen und zu beheben. Das führt zu einer stabilen und verlässlichen Smart-Home-Anwendung.
 
 ## Development Concepts?
 + Johanna

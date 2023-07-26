@@ -100,8 +100,6 @@ Da Sensoren im System eine zentrale Rolle spielen, gibt es umfangreiche Sensorte
 
 
 Das Testkonzept sorgt dafür, dass jede Komponente des Smart-Home-Systems zuverlässig funktioniert. Es stellt sicher, dass das System frei von unerwarteten Fehlern ist und den gestellten Anforderungen entspricht. Durch die automatisierten Tests können auch Änderungen und Erweiterungen im Code effizient überprüft werden, um potenzielle Probleme frühzeitig zu erkennen und zu beheben. Das führt zu einer stabilen und verlässlichen Smart-Home-Anwendung.
-
-## Development Concepts?
 + Johanna
 
 # 9 Architekturentscheidungen {#section-design-decisions}
@@ -123,3 +121,30 @@ O
 
 # 12 Glossar {#section-glossary}
 jeder ein bisschen wenn notwendig
+
+# Aufgabenverteilung
+**Implementierung und Architektur**  
+Config -> Luca
+Aufbau des Smart-Homes mit Räumen/Zonen/Controllern/etc -> Luca, Lisa, Johanna
+Konzept für Logik der Geräte, Controller, Sensoren im Zusammenspiel (Veränderung der Werte je nach Sensor-Wert und Stärke der Geräte) -> Aidan, Johanna
+Implementierung der Geräte, Controller, Sensoren -> Lisa, Johanna  
+Strategie-Pattern -> Johanna  
+KI-Anbindung -> Johanna  
+Logging -> Kevin, Luca  
+Tests -> Dennis  
+
+
+
+**Dokumentation**  
+1 -> Lisa  
+2 -> Lisa  
+3  
+4 -> Luca  
+5 -> Luca  
+6 -> Aidan  
+7 -> Aidan  
+8 -> Johanna  
+9 -> Johanna  
+10  
+11  
+12 -> Alle  

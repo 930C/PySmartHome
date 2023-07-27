@@ -118,7 +118,7 @@ sequenceDiagram
 Das Sequenzdiagramm beschreibt beispielhaft den Prozess, wie sich der `FertilizationController` in unserem "smarten Gewächshaus" verhält, um die Düngung (Fertilization) steuern:
 - Der Prozess beginnt, wenn die Main-Funktion den `SmartHomeController` aufruft, um die Methode `update()` auszuführen. Der `SmartHomeController` ist verantwortlich für die Gesamtsteuerung und Verwaltung des Smart Home Systems.
 
-- In einem wiederholten Schleifenablauf, der alle 5 Sekunden stattfindet, ruft der `SmartHomeController` den `FertilizationController` auf, um die Düngungssteuerung durchzuführen.
+- In einem wiederholten Schleifenablauf, der alle 5 Sekunden stattfindet, iteriert der `SmartHomeController` über alle Räume, Zonen der Räume und Controller der Zonen und ruft somit auch den `FertilizationController` auf, um die Düngungssteuerung durchzuführen.
 Das Sequenzdiagramm beschreibt den Prozess, wie der "SmartHomeController" und der "FertilizationController" in regelmäßigen Abständen miteinander interagieren, um die Düngung (Fertilization) einer Pflanze zu steuern. Hier ist eine Beschreibung des Prozesses:
 
 - Der `FertilizationController` beginnt, indem er den `FertilizationSensor` aufruft, um den aktuellen Düngungswert zu berechnen. Dieser berechnet den Wert und gibt ihn an den `FertilizationController` zurück.

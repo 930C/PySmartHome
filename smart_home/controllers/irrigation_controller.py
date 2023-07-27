@@ -16,14 +16,12 @@ class IrrigationController(Controller):
             for device in self.devices:
                 if not device.get_state():
                     device.turn_on()
-                for sensor in self.sensors:
-                    sensor.update(device)
         elif sensor_value >= self.desired_moisture:
             for device in self.devices:
                 if device.get_state():
                     device.turn_off()
-                for sensor in self.sensors:
-                    sensor.update(device)
+        for sensor in self.sensors:
+            sensor.update(device)
 
     def update(self):
         self.logger.info(f'Updating {self.name}..')

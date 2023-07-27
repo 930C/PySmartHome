@@ -1,3 +1,5 @@
+import time
+
 from smart_home.KI.floraGPT_adapter import PlantCareAdapter
 from smart_home.commands.plant_care_command import PlantCareCommand
 from smart_home.config.config_loader import ConfigLoader, DeviceFactory
@@ -6,7 +8,6 @@ from smart_home.logging.logger import LoggerFactory
 from smart_home.managers.controller_manager import ControllerManager
 from smart_home.rooms.room import Room
 from smart_home.rooms.zone import Zone
-import time
 
 
 class SmartHomeController:
@@ -80,6 +81,3 @@ class SmartHomeController:
                     care_instruction: PlantCareCommand = self.adapter.getPlantCareInstructions("kein Bild")
                     care_instruction.execute(zone.controllerManager)
             self.logger.info('Updated SmartHomeController..')
-
-
-

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from smart_home.controllers.fertilization_controller import FertilizationController
 from smart_home.controllers.humidity_controller import HumidityController
 from smart_home.controllers.irrigation_controller import IrrigationController
@@ -53,7 +55,7 @@ class PlantCareCommand(CommandInterface):
         self.device_type = self.error_Codes_to_device_types.get(error_code)
         self.needs_device = self.error_Codes_to_need_Device.get(error_code)
         self.controller_type = self.error_Codes_to_controller_type.get(error_code)
-        self.logger = LoggerFactory.setup_logger('PlantCareCommand')
+        self.logger = LoggerFactory.setup_logger(f'PlantCareCommand{datetime.now()}')
         self.logger.info(
             f'Created PlantCareCommand with error code {error_code}. Affected device type: {self.device_type}. Zone needs device: {self.needs_device}. Controller type: {self.controller_type}')
 

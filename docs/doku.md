@@ -125,7 +125,7 @@ Das Sequenzdiagramm beschreibt den Prozess, wie der "SmartHomeController" und de
 - Nachdem der Düngungswert ermittelt wurde, wird eine Bedingung geprüft, ob der aktuelle Wert unter einem vorgegebenen Schwellenwert liegt oder nicht.
    - Wenn der Wert unter dem Schwellenwert liegt, ist es notwendig, zu düngen. Der `FertilizationController` ruft die Methode `fertilize(value: float)` des `Fertilizer` auf, um die Düngung mit dem berechneten Wert durchzuführen. Der `Fertilizer` ist das Gerät oder die Komponente, die für die tatsächliche Düngung der Pflanze verantwortlich ist.
    - Wenn der Wert über dem Schwellenwert liegt und das Düngungsgerät bereits läuft, dann muss die Düngung gestoppt werden. Der `FertilizationController` ruft die Methode `stop_fertilizing()` des `Fertilizer` auf, um die Düngung zu beenden.
-- Der Schleifenablauf wird alle 5 Sekunden wiederholt, wodurch die Düngung der Pflanze periodisch überwacht und gesteuert wird.
+- Der Schleifenablauf wird alle 5 Sekunden wiederholt, wodurch die Düngung der Pflanzen periodisch überwacht und gesteuert wird.
 
 # 7 Verteilungssicht {#section-deployment-view}
 Aufgrund der Anforderungen an das Projekt wurden keine  Test, Development oder Produktivumgebung aufgesetzt.

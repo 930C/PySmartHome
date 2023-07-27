@@ -81,7 +81,7 @@ flowchart TB
 Dieses Flussdiagramm beschreibt den grundlegenden Ablauf innerhalb des Smart Home Controllers, der die konfigurierten Geräte und Sensoren in der jeweiligen Zone des Raumes erstellt und sie den passenden Controllern zuweist:
 - Die Konfigurationsdatei (YAML) wird geladen und die Daten werden an den "ConfigLoader" übergeben. Dieser Schritt ist der Ausgangspunkt für das gesamte System.
 
-- er `ConfigLoader` erstellt `Living Room`, `Couch and TV` und den `ControllerManager` der Zone. Er wird der Zone hinzugefügt, während die Zone ihren jeweiligen Raum zugewiesen wird. 
+- Der `ConfigLoader` erstellt den Raum `Living Room`, die Zone `Couch and TV` und den `ControllerManager` der Zone. Dieser wird der Zone hinzugefügt, während die Zone ihren jeweiligen Raum zugewiesen wird. 
 -  Der `ConfigLoader` nutzt die Metadaten in der `config.yaml` und löst eine Instanziierung von `Heater` und `Temperature Sensor` über die `DeviceFactory` aus, die für die Erstellung von Geräten und Sensoren verantwortlich ist.
 - Es wird überprüft, ob zu den erstellten Geräten und Sensoren der dazugehörende Controller (`ClimateController`) bereits existiert, der für die Steuerung dieser zuständig ist. Wenn kein `ClimateController` existiert, wird einer erstellt und den Geräten/Sensoren zugewiesen.
 Wenn bereits ein `ClimateController` vorhanden ist, werden die Geräte diesem zugewiesen. 

@@ -85,7 +85,7 @@ Dieses Flussdiagramm beschreibt den grundlegenden Ablauf innerhalb des Smart Hom
 -  Der `ConfigLoader` nutzt die Metadaten in der `config.yaml` und löst eine Instanziierung vom Gerät `Heater` und dem Sensor `Temperature Sensor` über die `DeviceFactory` aus, die für die Erstellung von Geräten und Sensoren verantwortlich ist.
 - Es wird überprüft, ob zu den erstellten Geräten und Sensoren der dazugehörende Controller (`ClimateController`) bereits existiert. Dieser ist für die Steuerung der Sensoren und Geräte zuständig. Wenn kein `ClimateController` existiert, wird einer erstellt und den Geräten/Sensoren zugewiesen.
 Wenn bereits ein `ClimateController` vorhanden ist, werden die Geräte diesem zugewiesen. 
-- Abschließen wird der `ClimateController` wird dem `ControllerManager` zugewiesen, und das Smart Home System ist nun vollständig aufgebaut
+- Abschließend wird der `ClimateController` dem `ControllerManager` zugewiesen, und das Smart Home System ist nun vollständig aufgebaut
 
 
 Zusammenfassend handelt es sich bei diesem Flussdiagramm um eine vereinfachte Darstellung des Smart Homes, mithilfe der Konfigurationsdatei lassen sich eine Vielzahl an Räumen, Zonen, Geräte und Sensoren erstellen und den richtigen Controllern zuweisen. Die Visualisierung sollte diesen Prozess in seinen Grundzügen veranschaulichen.

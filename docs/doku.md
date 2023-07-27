@@ -82,7 +82,7 @@ Dieses Flussdiagramm beschreibt den grundlegenden Ablauf innerhalb des Smart Hom
 - Die Konfigurationsdatei (YAML) wird geladen und die Daten werden an den "ConfigLoader" übergeben. Dieser Schritt ist der Ausgangspunkt für das gesamte System.
 
 - Der `ConfigLoader` erstellt den Raum `Living Room`, die Zone `Couch and TV` und den `ControllerManager` der Zone. Dieser wird der Zone hinzugefügt, während die Zone ihren jeweiligen Raum zugewiesen wird. 
--  Der `ConfigLoader` nutzt die Metadaten in der `config.yaml` und löst eine Instanziierung von `Heater` und `Temperature Sensor` über die `DeviceFactory` aus, die für die Erstellung von Geräten und Sensoren verantwortlich ist.
+-  Der `ConfigLoader` nutzt die Metadaten in der `config.yaml` und löst eine Instanziierung vom Gerät `Heater` und dem Sensor `Temperature Sensor` über die `DeviceFactory` aus, die für die Erstellung von Geräten und Sensoren verantwortlich ist.
 - Es wird überprüft, ob zu den erstellten Geräten und Sensoren der dazugehörende Controller (`ClimateController`) bereits existiert, der für die Steuerung dieser zuständig ist. Wenn kein `ClimateController` existiert, wird einer erstellt und den Geräten/Sensoren zugewiesen.
 Wenn bereits ein `ClimateController` vorhanden ist, werden die Geräte diesem zugewiesen. 
 - Abschließen wird der `ClimateController` wird dem `ControllerManager` zugewiesen, und das Smart Home System ist nun vollständig aufgebaut

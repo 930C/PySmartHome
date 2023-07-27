@@ -143,7 +143,7 @@ flowchart TD
         end
     end
 ```
-Da unser System die Veränderungern der Sensoren lediglich simuliert und nicht mit realen Events arbeitet, würde das aktuelle System nicht ohne Anpassungen in dieser Form darstellbar sein. Jedoch schafft diese Visualisierung ein gutes Bild, wohin die Architektur gehen kann 
+Da unser System die Veränderungern der Sensoren lediglich simuliert und nicht mit realen Events arbeitet, würde das aktuelle System nicht ohne Anpassungen in dieser Form darstellbar sein. Jedoch schafft diese Visualisierung ein gutes Bild, wohin die Architektur gehen könnte.
 # 8 Querschnittliche Konzepte {#section-concepts}
 ## Package-Struktur
 ## Domänenmodell

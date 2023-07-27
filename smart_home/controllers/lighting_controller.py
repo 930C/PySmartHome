@@ -11,6 +11,7 @@ class LightingController(Controller):
     def control_lighting(self, desired_brightness: float):
         self.logger.info(f'Controlling lighting with desired brightness {desired_brightness}')
         sensor_value = self.getStrategy().calculate_value(self.sensors)
+
         if sensor_value < desired_brightness:
             for device in self.devices:
                 device.switch_on()

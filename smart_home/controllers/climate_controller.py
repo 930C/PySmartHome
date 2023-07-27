@@ -12,6 +12,7 @@ class ClimateController(Controller):
     def control_climate(self, desired_temperature: float):
         self.logger.info(f'Controlling climate with desired temperature {desired_temperature}')
         sensor_value = self.getStrategy().calculate_value(self.sensors)
+
         if sensor_value < desired_temperature:
             for device in self.devices:
                 device.switch_on()

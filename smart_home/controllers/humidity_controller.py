@@ -13,18 +13,17 @@ class HumidityController(Controller):
         self.logger.info(f'Controlling humidity with desired moisture {self.desired_moisture}')
         sensor_value = self.getStrategy().calculate_value(self.sensors)
 
-        if sensor_value < self.desired_moisture:
-            for device in self.devices:
+        for device in self.devices:
+            if sensor_value < self.desired_moisture:
                 device.humidify()
-        elif sensor_value > self.desired_moisture:
-            for device in self.devices:
+            elif sensor_value > self.desired_moisture:
                 device.dehumidify()
-        else:
-            for device in self.devices:
+            else:
                 if device.get_state():
                     device.turn_off()
-        for sensor in self.sensors:
-            sensor.update(device)
+                    
+            for sensor in self.sensors:
+                sensor.update(device)
 
     def update(self):
         self.logger.info(f'Updating {self.name}..')

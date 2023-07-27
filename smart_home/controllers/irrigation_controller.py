@@ -1,5 +1,6 @@
 from smart_home.controllers.controller import Controller
 
+
 class IrrigationController(Controller):
     name = 'IrrigationController'
 
@@ -12,16 +13,15 @@ class IrrigationController(Controller):
         self.logger.info(f'Controlling irrigation with desired moisture {self.desired_moisture}')
         sensor_value = self.getStrategy().calculate_value(self.sensors)
 
-        if sensor_value < self.desired_moisture:
-            for device in self.devices:
+        for device in self.devices:
+            if sensor_value < self.desired_moisture:
                 if not device.get_state():
                     device.turn_on()
-        elif sensor_value >= self.desired_moisture:
-            for device in self.devices:
+            elif sensor_value >= self.desired_moisture:
                 if device.get_state():
                     device.turn_off()
-        for sensor in self.sensors:
-            sensor.update(device)
+            for sensor in self.sensors:
+                sensor.update(device)
 
     def update(self):
         self.logger.info(f'Updating {self.name}..')

@@ -14,15 +14,15 @@ class FertilizationController(Controller):
         self.logger.info(f"Controlling fertilization with desired nutrient content "
                          f"{self.desired_nutrient_content}")
         sensor_value = self.getStrategy().calculate_value(self.sensors)
-        if sensor_value < self.desired_nutrient_content:
-            for device in self.devices:
+
+        for device in self.devices:
+            if sensor_value < self.desired_nutrient_content:
                 device.fertilize(1)
-        elif sensor_value >= self.desired_nutrient_content:
-            for device in self.devices:
+            elif sensor_value >= self.desired_nutrient_content:
                 if device.get_state():
                     device.stop_fertilizing()
-        for sensor in self.sensors:
-            sensor.update(device)
+            for sensor in self.sensors:
+                sensor.update(device)
 
     def update(self):
         self.logger.info(f"Updating {self.name}..")

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class Strategy(ABC):
+class StrategyInterface(ABC):
     """
     The Strategy interface declares operations common to all supported versions
     of some algorithm.

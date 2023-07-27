@@ -77,7 +77,6 @@ class SmartHomeController:
                     for controller in zone.controllerManager.get_controllers():
                         self.logger.info('Updating controller: ' + controller.name)
                         controller.update()
-                    # TODO: care instruction
                     care_instruction: PlantCareCommand = self.adapter.getPlantCareInstructions("kein Bild")
                     care_instruction.execute(zone.controllerManager)
             self.logger.info('Updated SmartHomeController..')

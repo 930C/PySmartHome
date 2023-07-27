@@ -61,8 +61,6 @@ class DeviceFactory:
         RainwaterHarvestingSystem: IrrigationController,
     }
 
-    # TODO: Alarme hinzufügen
-
     # In dieser Methode wird die Klasse des Geräts für das jeweilige Gerät ermittelt.
     @classmethod
     def create_device(cls, device_info):

@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Any
 from smart_home.controllers.controller import Controller
 from smart_home.logging.logger import LoggerFactory
 
@@ -17,6 +17,13 @@ class ControllerManager:
     def get_controller(self, name: str) -> Controller:
         self.logger.info(f'Getting controller {name} from controller manager')
         return self.controllers[name]
+
+    def get_controller(self, controller_type: str) -> Any:
+        self.logger.info(f'Getting controller of type {controller_type} from controller manager')
+        for controller in self.controllers:
+            if type(controller) == controller_type:
+                return controller
+        return None
 
     def get_controllers(self) -> List[Controller]:
         self.logger.info(f'Getting controllers from controller manager')

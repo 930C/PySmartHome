@@ -5,25 +5,26 @@ from smart_home.interfaces.temperature_control_interface import TemperatureContr
 class ClimateController(Controller):
     name = 'ClimateController'
 
-    def __init__(self):
+    def __init__(self, desired_temperature: float = 21):
         super().__init__()
-        self.logger.info(f'ClimateController {self.name} created')
+        self.desired_temperature = desired_temperature
+        self.logger.info(f'ClimateController {self.name} with {self.desired_temperature} as desired temperature created')
 
-    def control_climate(self, desired_temperature: float):
-        self.logger.info(f'Controlling climate with desired temperature {desired_temperature}')
+    def control_climate(self):
+        self.logger.info(f'Controlling climate with desired temperature {self.desired_temperature}')
         sensor_value = self.getStrategy().calculate_value(self.sensors)
 
-        if sensor_value < desired_temperature:
-            for device in self.devices:
+        for device in self.devices:
+            if not device.get_state:
                 device.switch_on()
-                if isinstance(device, TemperatureControlInterface):
+            if isinstance(device, TemperatureControlInterface):
+                if sensor_value < self.desired_temperature:
                     device.heat()
-        elif sensor_value > desired_temperature:
-            for device in self.devices:
-                device.switch_on()  # TODO: Li muss überprüfen welche devices an oder aus gehen soll
-                if isinstance(device, TemperatureControlInterface):
+                elif sensor_value > self.desired_temperature:
                     device.cool()
+            for sensor in self.sensors:
+                sensor.update(device)
 
     def update(self):
         self.logger.info(f'Updating {self.name}..')
-        # TODO: muss befüllt werden mit Logik
+        self.control_climate()

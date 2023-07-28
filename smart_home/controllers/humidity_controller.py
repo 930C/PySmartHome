@@ -1,4 +1,5 @@
 from smart_home.controllers.controller import Controller
+from smart_home.interfaces.humidity_control_interface import HumidityControlInterface
 
 
 class HumidityController(Controller):
@@ -15,9 +16,11 @@ class HumidityController(Controller):
 
         for device in self.devices:
             if sensor_value < self.desired_moisture:
-                device.humidify()
+                if isinstance(device, HumidityControlInterface):
+                    device.humidify()
             elif sensor_value > self.desired_moisture:
-                device.dehumidify()
+                if isinstance(device, HumidityControlInterface):
+                    device.dehumidify()
             else:
                 if device.get_state():
                     device.turn_off()

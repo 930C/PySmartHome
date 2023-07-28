@@ -1,7 +1,8 @@
 from smart_home.devices.adjustable_device import AdjustableDevice
+from smart_home.interfaces.humidity_control_interface import HumidityControlInterface
 
 
-class Humidifier(AdjustableDevice):
+class Humidifier(AdjustableDevice, HumidityControlInterface):
     def __init__(self, name: str, initial_level: float = 1.0):
         super().__init__(name, initial_level, -1.0, 1.0)
         self.logger.info(f'Humidifier {name} created with initial level {initial_level}')

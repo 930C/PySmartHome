@@ -22,6 +22,7 @@ class ClimateController(Controller):
                     device.heat()
                 elif sensor_value > self.desired_temperature:
                     device.cool()
+
             for sensor in self.sensors:
                 sensor.update(device)
 

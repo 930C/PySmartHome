@@ -9,8 +9,12 @@ class RollerBlind(AdjustableDevice, TemperatureControlInterface):
 
     def cool(self):
         self.logger.info(f'Cooling {self.name} with step 0.1')
+        if not self.get_state():
+            self.turn_on()
         self.increase_level(0.1)
 
     def heat(self):
         self.logger.info(f'Heating {self.name} with step 0.1')
+        if not self.get_state():
+            self.turn_on()
         self.decrease_level(0.1)

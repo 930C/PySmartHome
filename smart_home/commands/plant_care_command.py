@@ -1,7 +1,7 @@
 from datetime import datetime
 
+from smart_home.controllers.climate_controller import ClimateController
 from smart_home.controllers.fertilization_controller import FertilizationController
-from smart_home.controllers.humidity_controller import HumidityController
 from smart_home.controllers.irrigation_controller import IrrigationController
 from smart_home.controllers.lighting_controller import LightingController
 from smart_home.devices.fertilization.fertilizer import Fertilizer
@@ -44,8 +44,8 @@ class PlantCareCommand(CommandInterface):
         "001": IrrigationController,
         "002": IrrigationController,
         "010": FertilizationController,
-        "020": HumidityController,
-        "021": HumidityController,
+        "020": ClimateController,
+        "021": ClimateController,
         "030": LightingController,
         "031": LightingController,
     }

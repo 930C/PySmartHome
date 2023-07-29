@@ -2,7 +2,6 @@ import yaml
 from smart_home.controllers.controller import Controller
 from smart_home.controllers.fertilization_controller import FertilizationController
 from smart_home.controllers.climate_controller import ClimateController
-from smart_home.controllers.humidity_controller import HumidityController
 from smart_home.controllers.irrigation_controller import IrrigationController
 from smart_home.controllers.lighting_controller import LightingController
 from smart_home.devices.climate.fan import Fan
@@ -46,7 +45,7 @@ class DeviceFactory:
     sensor_controller_classes = {
         TemperatureSensor: ClimateController,
         FertilizationSensor: FertilizationController,
-        HumiditySensor: HumidityController,
+        HumiditySensor: ClimateController,
         IrrigationSensor: IrrigationController,
     }
 
@@ -54,7 +53,7 @@ class DeviceFactory:
         Fan: ClimateController,
         LEDLight: LightingController,
         Heater: ClimateController,
-        Humidifier: HumidityController,
+        Humidifier: ClimateController,
         RollerBlind: ClimateController,
         Fertilizer: FertilizationController,
         IrrigationSystem: IrrigationController,

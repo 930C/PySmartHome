@@ -15,7 +15,6 @@ class Heater(AdjustableDevice, TemperatureControlInterface):
         self.increase_level(0.1)
 
     def cool(self):
-        self.logger.info(f'Cooling {self.name} with step 0.1')
-        if not self.get_state():
-            self.turn_on()
-        self.decrease_level(0.1)
+        self.logger.info(f'Heating {self.name} stopped')
+        if self.get_state():
+            self.turn_off()

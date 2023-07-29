@@ -9,7 +9,7 @@ from smart_home.strategies.minimal import Minimal
 class Controller(ABC):
     name = 'Controller'
 
-    def __init__(self, strategy: Average|Maximal|Minimal = Average() ):
+    def __init__(self, strategy: Average|Maximal|Minimal = Average()):
         self.devices = []
         self.sensors = []
         self.strategy = strategy
@@ -17,27 +17,27 @@ class Controller(ABC):
         self.logger.info(f'Created controller {self.name}')
 
     def get_devices(self):
-        self.logger.info(f'Getting devices of {self.name}..')
+        self.logger.debug(f'Getting devices of {self.name}..')
         return self.devices
 
     def get_sensors(self):
-        self.logger.info(f'Getting sensors of {self.name}..')
+        self.logger.debug(f'Getting sensors of {self.name}..')
         return self.sensors
 
     def add_device(self, device):
-        self.logger.info(f'Adding device: {device.name} to {self.name}')
+        self.logger.debug(f'Adding device: {device.name} to {self.name}')
         self.devices.append(device)
 
     def add_sensor(self, sensor):
-        self.logger.info(f'Adding sensor: {sensor.name} to {self.name}')
+        self.logger.debug(f'Adding sensor: {sensor.name} to {self.name}')
         self.sensors.append(sensor)
 
     def remove_device(self, device):
-        self.logger.info(f'Removing device: {device.name} from {self.name}')
+        self.logger.debug(f'Removing device: {device.name} from {self.name}')
         self.devices.remove(device)
 
     def remove_sensor(self, sensor):
-        self.logger.info(f'Removing sensor: {sensor.name} from {self.name}')
+        self.logger.debug(f'Removing sensor: {sensor.name} from {self.name}')
         self.sensors.remove(sensor)
 
     def getStrategy(self):

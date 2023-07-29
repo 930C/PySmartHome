@@ -14,17 +14,8 @@ class ControllerManager:
         self.controllers[controller.name] = controller
         self.logger.info(f'Added controller {controller.name} to controller manager')
 
-    def get_controller(self, name: str) -> Controller:
-        self.logger.info(f'Getting controller {name} from controller manager')
-        return self.controllers[name]
-
-    def get_controller(self, controller_type: str) -> Any:
-        self.logger.info(f'Getting controller of type {controller_type} from controller manager')
-        for controller in self.controllers:
-            if type(controller) == controller_type:
-                return controller
-        return None
+    def get_controller(self, controller_type: str) -> Controller:
+        return self.controllers.get(controller_type)
 
     def get_controllers(self) -> List[Controller]:
-        self.logger.info(f'Getting controllers from controller manager')
         return list(self.controllers.values())

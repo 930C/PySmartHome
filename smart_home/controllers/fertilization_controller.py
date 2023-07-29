@@ -1,4 +1,5 @@
 from smart_home.controllers.controller import Controller
+from smart_home.sensors.fertilization_sensor import FertilizationSensor
 
 
 class FertilizationController(Controller):
@@ -13,16 +14,15 @@ class FertilizationController(Controller):
     def control_fertilization(self):
         self.logger.info(f"Controlling fertilization with desired nutrient content "
                          f"{self.desired_nutrient_content}")
-        sensor_value = self.getStrategy().calculate_value(self.sensors)
-        if sensor_value < self.desired_nutrient_content:
+        if len(self.sensors) is not 0:
+            sensor_value = self.getStrategy().calculate_value(self.sensors, FertilizationSensor)
+
             for device in self.devices:
-                device.fertilize(1)
-                for sensor in self.sensors:
-                    sensor.update(device)
-        elif sensor_value >= self.desired_nutrient_content:
-            for device in self.devices:
-                if device.get_state():
-                    device.stop_fertilizing()
+                if sensor_value < self.desired_nutrient_content:
+                    device.fertilize(1)
+                elif sensor_value >= self.desired_nutrient_content:
+                    if device.get_state():
+                        device.stop_fertilizing()
                 for sensor in self.sensors:
                     sensor.update(device)
 

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class Strategy(ABC):
+class StrategyInterface(ABC):
     """
     The Strategy interface declares operations common to all supported versions
     of some algorithm.
@@ -11,5 +11,9 @@ class Strategy(ABC):
     """
 
     @abstractmethod
-    def calculate_value(self, data: []):
+    def calculate_value(self, data: [], sensor_type):
+        pass
+
+    @abstractmethod
+    def calculate_value_of_all_data(self, data: []):
         pass

@@ -13,6 +13,10 @@
   * [Ebene 2 {#_ebene_2}](#ebene-2-ebene2)
   * [Ebene 3 {#_ebene_3}](#ebene-3-ebene3)
 * [6 Laufzeitsicht {#section-runtime-view}](#6-laufzeitsicht-section-runtime-view)
+  * [Systemstart](#systemstart)
+    * [Ausschnitt der `config.yaml`](#ausschnitt-der-configyaml)
+    * [Instanziierungsprozess](#instanziierungsprozess)
+  * [Verhalten zur Laufzeit](#verhalten-zur-laufzeit)
 * [7 Verteilungssicht {#section-deployment-view}](#7-verteilungssicht-section-deployment-view)
 * [8 Querschnittliche Konzepte {#section-concepts}](#8-querschnittliche-konzepte-section-concepts)
   * [Package-Struktur](#package-struktur)
@@ -35,36 +39,26 @@
 <!-- TOC -->
 
 # 1 Einführung und Ziele {#section-introduction-and-goals}
-
 ## Aufgabenstellung {#_aufgabenstellung}
-
 ## Qualitätsziele {#_qualit_tsziele}
-
 ## Stakeholder {#_stakeholder}
-
 ++ Lisa
 
-# 2 Randbedingungen {#section-architecture-constraints}
 
+# 2 Randbedingungen {#section-architecture-constraints}
 OO-Design, Python
 O Lisa
 
 # 3 Kontextabgrenzung {#section-system-scope-and-context}
-
 Schnittstelle zu KI / Wetterstation / ...
-
 ## Fachlicher Kontext {#_fachlicher_kontext}
-
 ## Technischer Kontext {#_technischer_kontext}
-
-+
++ 
 
 # 4 Lösungsstrategie {#section-solution-strategy}
-
 ++ Luca
 
 # 5 Bausteinsicht {#section-building-block-view}
-
 ## Whitebox Gesamtsystem {#_whitebox_gesamtsystem}
 
 ## Ebene 2 {#_ebene_2}
@@ -74,19 +68,125 @@ Schnittstelle zu KI / Wetterstation / ...
 ++ Luca
 
 # 6 Laufzeitsicht {#section-runtime-view}
+## Systemstart
+Bevor das Smart Home System in der Lage ist seine Aufgabe zu erfüllen, 
+muss das System konfiguriert und initiiert werden. Mithilfe einer `config.yaml`
+ist es möglich das System, gemäß realer Anforderungen zu konfigurieren. 
+Diese Konfigurationen werden eingelesen und die Instanzen daraufhin erstellt. 
+Nachfolgend ein Beispiel, wie das System auf die Konfiguration reagiert: 
+### Ausschnitt der `config.yaml`
+```
+rooms:
+  - name: Living Room
+    type: liveable
+    zones:
+      - name: Couch and TV
+        devices:
+          - name: Heater
+            type: heater
+        sensors:
+          - name: Temperature Sensor
+            type: temperature_sensor
+```
+Diese YAML Datei wird mit folgender Logik ausgelesen, um das Smart Home zu initialisieren:
+### Instanziierungsprozess
+```mermaid
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryBorderColor': '#7C0000',
+      'lineColor': '#F8B229',
+      'tertiaryColor': '#fff'
+    }
+  }
+}%%
+flowchart TB
+    subgraph SmartHomeController
+          ConfigLoader --creates--> B[ROOM: Living Room]
+        ConfigLoader --creates--> C[ZONE: Couch and TV]
+        ConfigLoader -- "triggers instanciation" --> DeviceFactory
+        ConfigLoader --creates--> ControllerManager
+        B[ROOM: Living Room] --adds--> C[ZONE: Couch and TV]
+        C[ZONE: Couch and TV] --adds--> ControllerManager
+        ClimateController --assign--> ControllerManager
+        subgraph Factory
+            DeviceFactory -- creates --> D[DEVICE: Heater]
+            DeviceFactory -- creates --> E[SENSOR: Temperature Sensor]
+        end
+        D[DEVICE: Heater] ---> A{Controller exists?}
+        E[SENSOR: Temperature Sensor] ---> A{Controller exists?}
+        A --"NO: create + assign" --> ClimateController
+        A --"YES: assign" --> ClimateController
+    end
+        YAML[Config Datei yaml] -- loads config data --> ConfigLoader
+```
+Dieses Flussdiagramm beschreibt den grundlegenden Ablauf innerhalb des Smart Home Controllers, der die konfigurierten Geräte und Sensoren in der jeweiligen Zone des Raumes erstellt und sie den passenden Controllern zuweist:
+- Die Konfigurationsdatei (YAML) wird geladen und die Daten werden an den "ConfigLoader" übergeben. Dieser Schritt ist der Ausgangspunkt für das gesamte System.
 
-Bsp: Auslesen der Konfig
-Bsp: Reagieren auf Veränderungen der Sensoren
+- Der `ConfigLoader` erstellt den Raum `Living Room`, die Zone `Couch and TV` und den `ControllerManager` der Zone. Dieser wird der Zone hinzugefügt, während die Zone ihren jeweiligen Raum zugewiesen wird. 
+-  Der `ConfigLoader` nutzt die Metadaten in der `config.yaml` und löst eine Instanziierung vom Gerät `Heater` und dem Sensor `Temperature Sensor` über die `DeviceFactory` aus, die für die Erstellung von Geräten und Sensoren verantwortlich ist.
+- Es wird überprüft, ob zu den erstellten Geräten und Sensoren der dazugehörende Controller (`ClimateController`) bereits existiert. Dieser ist für die Steuerung der Sensoren und Geräte zuständig. Wenn kein `ClimateController` existiert, wird einer erstellt und den Geräten/Sensoren zugewiesen.
+Wenn bereits ein `ClimateController` vorhanden ist, werden die Geräte diesem zugewiesen. 
+- Abschließend wird der `ClimateController` dem `ControllerManager` zugewiesen, und das Smart Home System ist nun vollständig aufgebaut
 
-+ Aidan
+
+Zusammenfassend handelt es sich bei diesem Flussdiagramm um eine vereinfachte Darstellung des Smart Homes, mithilfe der Konfigurationsdatei lassen sich eine Vielzahl an Räumen, Zonen, Geräte und Sensoren erstellen und den richtigen Controllern zuweisen. Die Visualisierung soll diesen Prozess in seinen Grundzügen veranschaulichen.
+## Verhalten zur Laufzeit
+```mermaid
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryBorderColor': '#7C0000',
+      'lineColor': '#F8B229',
+      'tertiaryColor': '#fff'
+    }
+  }
+}%%
+sequenceDiagram
+    Main->>SmartHomeController: update()
+    loop every 5s
+        SmartHomeController->>FertilizationController: update()
+            FertilizationController->>FertilizationSensor: calculate_value()
+            FertilizationSensor->>FertilizationController: return sensor_value
+            alt value below constant
+                FertilizationController->>Fertilizer: fertilize(value: float)            
+            else value above constant and device running
+                FertilizationController->>Fertilizer: stop_fertilizing()
+            end
+        FertilizationController->>FertilizationSensor: update()
+    end
+```
+Das Sequenzdiagramm beschreibt beispielhaft den Prozess, wie sich der `FertilizationController` in unserem "smarten Gewächshaus" verhält, um die Düngung (Fertilization) steuern:
+- Der Prozess beginnt, wenn die Main-Funktion den `SmartHomeController` aufruft, um die Methode `update()` auszuführen. Der `SmartHomeController` ist verantwortlich für die Gesamtsteuerung und Verwaltung des Smart Home Systems.
+
+- In einem wiederholten Schleifenablauf, der alle 5 Sekunden stattfindet, iteriert der `SmartHomeController` über alle Räume, Zonen der Räume und Controller der Zonen und ruft somit auch den `FertilizationController` auf, um die Düngungssteuerung durchzuführen.
+Das Sequenzdiagramm beschreibt den Prozess, wie der "SmartHomeController" und der "FertilizationController" in regelmäßigen Abständen miteinander interagieren, um die Düngung (Fertilization) einer Pflanze zu steuern. Hier ist eine Beschreibung des Prozesses:
+
+- Der `FertilizationController` beginnt, indem er alle Sensorwerte aller `FertilizationSensor` abruft. Der Sensor ermittelt seinen eigenen Messwert und je nach Strategie wird der Mittel-, Maximal- oder Minimalwert aller Sensoren in der Zone berechnet und an den `FertilizationController` zurückgegeben.
+- Nachdem der Düngungswert ermittelt wurde, wird eine Bedingung geprüft, ob der aktuelle Wert unter einem vorgegebenen Schwellenwert liegt oder nicht.
+   - Wenn der Wert unter dem Schwellenwert liegt, ist es notwendig, zu düngen. Der `FertilizationController` ruft die Methode `fertilize(value: float)` des `Fertilizer` auf, um die Düngung mit dem berechneten Wert durchzuführen. Der `Fertilizer` ist das Gerät oder die Komponente, die für die tatsächliche Düngung der Pflanze verantwortlich ist.
+   - Wenn der Wert über dem Schwellenwert liegt und das Düngungsgerät bereits läuft, dann muss die Düngung gestoppt werden. Der `FertilizationController` ruft die Methode `stop_fertilizing()` des `Fertilizer` auf, um die Düngung zu beenden.
+- Der Schleifenablauf wird alle 5 Sekunden wiederholt, wodurch die Düngung der Pflanzen periodisch überwacht und gesteuert wird.
 
 # 7 Verteilungssicht {#section-deployment-view}
-
-Bsp: Sensoren als Mikrocontroller und eine zentrale Python-Controller-Umgebung (ist nicht so, aber so könnte man es dann
-mit echten Sensoren machen)
-
-+ Aidan
-
+Aufgrund der Anforderungen an das Projekt wurden keine  Test, Development oder Produktivumgebung aufgesetzt.
+Das Smart Home System ist zum jetztigen Stand ein lokal funktionierendes System, dass in Python geschrieben wurde und die Abläufe simuliert.
+Wenn das System produktiv eingesetzt werden würde, müsste man die Sensoren sowie die smarten Geräte als Akteure eines verteilten Systems betrachten, die Daten sammeln. In diesem Zusammenhang ist es erfolderlich diese Daten in einer Server Struktur zu konsolidieren, die das lauffähige System bereitstellt. Das könnte in dieser Form umzusetzen sein.
+```mermaid
+flowchart TD
+    subgraph Smart Home 
+        A[Smart Home System]<-->Heater
+        B[Temperature Sensor]-->A[Smart Home System]
+        A[Smart Home System]<-->Fan
+        A[Smart Home System]<-->C[Roller Blind]
+        subgraph ide1 [ServerCluster]
+            A[Smart Home System]-->id1[(Database)]
+        end
+    end
+```
+Da unser System die Veränderungern der Sensoren lediglich simuliert und nicht mit realen Events arbeitet, würde das aktuelle System nicht ohne Anpassungen in dieser Form darstellbar sein. Jedoch schafft diese Visualisierung ein gutes Bild, wohin die Architektur gehen könnte.
 # 8 Querschnittliche Konzepte {#section-concepts}
 
 ## Package-Struktur

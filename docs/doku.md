@@ -1,39 +1,37 @@
 <!-- TOC -->
-
 * [1 Einführung und Ziele {#section-introduction-and-goals}](#1-einführung-und-ziele-section-introduction-and-goals)
-    * [Aufgabenstellung {#_aufgabenstellung}](#aufgabenstellung-aufgabenstellung)
-    * [Qualitätsziele {#_qualit_tsziele}](#qualitätsziele-qualittsziele)
-    * [Stakeholder {#_stakeholder}](#stakeholder-stakeholder)
+  * [Aufgabenstellung {#_aufgabenstellung}](#aufgabenstellung-aufgabenstellung)
+  * [Qualitätsziele {#_qualit_tsziele}](#qualitätsziele-qualittsziele)
+  * [Stakeholder {#_stakeholder}](#stakeholder-stakeholder)
 * [2 Randbedingungen {#section-architecture-constraints}](#2-randbedingungen-section-architecture-constraints)
 * [3 Kontextabgrenzung {#section-system-scope-and-context}](#3-kontextabgrenzung-section-system-scope-and-context)
-    * [Fachlicher Kontext {#_fachlicher_kontext}](#fachlicher-kontext-fachlicherkontext)
-    * [Technischer Kontext {#_technischer_kontext}](#technischer-kontext-technischerkontext)
+  * [Fachlicher Kontext {#_fachlicher_kontext}](#fachlicher-kontext-fachlicherkontext)
+  * [Technischer Kontext {#_technischer_kontext}](#technischer-kontext-technischerkontext)
 * [4 Lösungsstrategie {#section-solution-strategy}](#4-lösungsstrategie-section-solution-strategy)
 * [5 Bausteinsicht {#section-building-block-view}](#5-bausteinsicht-section-building-block-view)
-    * [Whitebox Gesamtsystem {#_whitebox_gesamtsystem}](#whitebox-gesamtsystem-whiteboxgesamtsystem)
-    * [Ebene 2 {#_ebene_2}](#ebene-2-ebene2)
-    * [Ebene 3 {#_ebene_3}](#ebene-3-ebene3)
+  * [Whitebox Gesamtsystem {#_whitebox_gesamtsystem}](#whitebox-gesamtsystem-whiteboxgesamtsystem)
+  * [Ebene 2 {#_ebene_2}](#ebene-2-ebene2)
+  * [Ebene 3 {#_ebene_3}](#ebene-3-ebene3)
 * [6 Laufzeitsicht {#section-runtime-view}](#6-laufzeitsicht-section-runtime-view)
 * [7 Verteilungssicht {#section-deployment-view}](#7-verteilungssicht-section-deployment-view)
 * [8 Querschnittliche Konzepte {#section-concepts}](#8-querschnittliche-konzepte-section-concepts)
-    * [Package-Struktur](#package-struktur)
-    * [Domänenmodell](#domänenmodell)
-    * [Architektur-/ Entwurfsmuster](#architektur--entwurfsmuster)
-        * [Factory Pattern](#factory-pattern)
-        * [Template Method Pattern](#template-method-pattern)
-        * [Strategy Pattern](#strategy-pattern)
-        * [Adapter Pattern](#adapter-pattern)
-        * [Command Pattern](#command-pattern)
-    * [Logging](#logging)
-    * [Tests](#tests)
+  * [Package-Struktur](#package-struktur)
+  * [Domänenmodell](#domänenmodell)
+  * [Architektur-/ Entwurfsmuster](#architektur--entwurfsmuster)
+    * [Factory Pattern](#factory-pattern)
+    * [Template Method Pattern](#template-method-pattern)
+    * [Strategy Pattern](#strategy-pattern)
+    * [Adapter Pattern](#adapter-pattern)
+    * [Command Pattern](#command-pattern)
+  * [Logging](#logging)
+  * [Tests](#tests)
 * [9 Architekturentscheidungen {#section-design-decisions}](#9-architekturentscheidungen-section-design-decisions)
 * [10 Qualitätsanforderungen {#section-quality-scenarios}](#10-qualitätsanforderungen-section-quality-scenarios)
-    * [Qualitätsbaum {#_qualit_tsbaum}](#qualitätsbaum-qualittsbaum)
-    * [Qualitätsszenarien {#_qualit_tsszenarien}](#qualitätsszenarien-qualittsszenarien)
+  * [Qualitätsbaum {#_qualit_tsbaum}](#qualitätsbaum-qualittsbaum)
+  * [Qualitätsszenarien {#_qualit_tsszenarien}](#qualitätsszenarien-qualittsszenarien)
 * [11 Risiken und technische Schulden {#section-technical-risks}](#11-risiken-und-technische-schulden-section-technical-risks)
 * [12 Glossar {#section-glossary}](#12-glossar-section-glossary)
 * [Aufgabenverteilung](#aufgabenverteilung)
-
 <!-- TOC -->
 
 # 1 Einführung und Ziele {#section-introduction-and-goals}
@@ -363,8 +361,8 @@ Aufbau des Smart-Homes mit Räumen/Zonen/Controllern/etc -> Luca, Lisa, Johanna
 Konzept für Logik der Geräte, Controller, Sensoren im Zusammenspiel (Veränderung der Werte je nach Sensor-Wert und
 Stärke der Geräte) -> Aidan, Johanna
 Implementierung der Geräte, Controller, Sensoren -> Lisa, Johanna  
-Strategie-Pattern -> Johanna  
-KI-Anbindung -> Johanna  
+Strategie für Sensorwerte in den Zonen -> Johanna  
+Flora GPT -> Johanna  
 Logging -> Kevin, Luca  
 Tests -> Dennis
 

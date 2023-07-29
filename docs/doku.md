@@ -189,13 +189,6 @@ flowchart TD
 Da unser System die Veränderungern der Sensoren lediglich simuliert und nicht mit realen Events arbeitet, würde das aktuelle System nicht ohne Anpassungen in dieser Form darstellbar sein. Jedoch schafft diese Visualisierung ein gutes Bild, wohin die Architektur gehen könnte.
 # 8 Querschnittliche Konzepte {#section-concepts}
 
-## Package-Struktur
-
-## Domänenmodell
-
-![img.png](arc42Images/img.png)
-OO
-
 ## Architektur-/ Entwurfsmuster
 
 ### Factory Pattern
@@ -420,8 +413,6 @@ Das Testkonzept sorgt dafür, dass jede Komponente des Smart-Home-Systems zuverl
 dass das System frei von unerwarteten Fehlern ist und den gestellten Anforderungen entspricht. Durch die automatisierten
 Tests können auch Änderungen und Erweiterungen im Code effizient überprüft werden, um potenzielle Probleme frühzeitig zu
 erkennen und zu beheben. Das führt zu einer stabilen und verlässlichen Smart-Home-Anwendung.
-
-+ Johanna
 
 # 9 Architekturentscheidungen {#section-design-decisions}
 

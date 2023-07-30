@@ -89,6 +89,8 @@ und die ausgewählten Testmethoden erläutern.
 
 ## Qualitätsziele {#_qualit_tsziele}
 
+Die folgende Tabelle beschrieben die zentralen Qualitätsziele vom PySmartHome wobei die Reihenfolge eine grobe Orientierung bezüglich der Wichtigkeit vorgibt.
+
 |        Merkmal nach ISO 25010        | Erläuterung                                                                                                                                                                                                                                                                                                                                                                                   |
 |:------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |      Extensibility (Erweiterbarkeit) | Das Ziel der Erweiterbarkeit ist es, dass PySmartHome einfach um neue Funktionen und Module erweitert werden kann, um zukünftige Änderungen und technologische Entwicklungen im Smart-Home-Bereich zu berücksichtigen. Das System verfolgt eine modulare Architektur und verwendet Design Patterns, um die Integration neuer Funktionen ohne Beeinträchtigung des Kernsystems zu erleichtern. |

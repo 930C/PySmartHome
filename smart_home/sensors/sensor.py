@@ -41,22 +41,22 @@ class Sensor(SensorInterface, ABC):
             if self.naturally_decrease:
                 if isinstance(device, AdjustableDevice):
                     self.set_value(self.get_value() + device.get_level() * 5)
-                    self.logger.debug(f'Increasing {self.name} by {device.get_level() * 5} to {self.value}')
+                    self.logger.debug(f'Changing {self.name} by {device.get_level() * 5} to {self.value}')
                 else:
                     self.set_value(self.value + 5)
-                    self.logger.debug(f'Increasing {self.name} by 5 to {self.value}')
+                    self.logger.debug(f'Changing {self.name} by 5 to {self.value}')
             else:
                 if isinstance(device, AdjustableDevice):
                     self.set_value(self.get_value() - device.get_level() * 5)
-                    self.logger.debug(f'Decreasing {self.name} by {device.get_level() * 5} to {self.value}')
+                    self.logger.debug(f'Changing {self.name} by {device.get_level() * 5} to {self.value}')
                 else:
                     self.set_value(self.value - 5)
-                    self.logger.debug(f'Decreasing {self.name} by 5 to {self.value}')
+                    self.logger.debug(f'Changing {self.name} by 5 to {self.value}')
         elif self.naturally_decrease:
-            random_number = random.random() * 10
+            random_number = random.random() * 5
             self.set_value(self.value - random_number)
-            self.logger.debug(f'Decreasing {self.name} by {random_number} to {self.value}')
+            self.logger.debug(f'Changing {self.name} by {random_number} to {self.value}')
         else:
             random_number = random.random() * 10
             self.set_value(self.value + random_number)
-            self.logger.debug(f'Increasing {self.name} by {random_number} to {self.value}')
+            self.logger.debug(f'Changing {self.name} by {random_number} to {self.value}')

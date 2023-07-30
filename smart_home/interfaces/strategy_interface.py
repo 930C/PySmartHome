@@ -11,5 +11,9 @@ class StrategyInterface(ABC):
     """
 
     @abstractmethod
-    def calculate_value(self, data: []):
+    def calculate_value(self, data: [], sensor_type):
+        pass
+
+    @abstractmethod
+    def calculate_value_of_all_data(self, data: []):
         pass

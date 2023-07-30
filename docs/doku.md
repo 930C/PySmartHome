@@ -302,7 +302,7 @@ Geräte und Sensoren in der jeweiligen Zone des Raumes erstellt und sie den pass
   Wenn bereits ein `ClimateController` vorhanden ist, werden die Geräte diesem zugewiesen.
 - Abschließend wird der `ClimateController` dem `ControllerManager` zugewiesen, und das Smart Home System ist nun
   vollständig aufgebaut
-- Über eine JSON Datei ist es uns ebenfalls möglich Backup-Werte nach Laufzeitabbruch wiederherzustellen. Diese werden nachträglich den jeweiligen Sensoren der Zone zugewiesen
+- Über eine JSON Datei ist es uns ebenfalls möglich Backup-Werte nach Laufzeitabbruch wiederherzustellen. Diese werden nachträglich den jeweiligen Sensoren der Zone zugewiesen.
 
 Zusammenfassend handelt es sich bei diesem Flussdiagramm um eine vereinfachte Darstellung des Smart Homes, mithilfe der
 Konfigurationsdatei lassen sich eine Vielzahl an Räumen, Zonen, Geräte und Sensoren erstellen und den richtigen
@@ -368,7 +368,7 @@ Gewächshaus" verhält, um die Düngung (Fertilization) steuern:
 Neben der klassischen Steuerung ist es mithilfe des Systems möglich während der Laufzeit 
 Veränderungen des Systems in einer JSON zu speichern, auszulesen und darauf zu reagieren.
 Nach jedem Methodenaufruf `update()` wird der aktuelle Status des Gesamtsystems in `zone_data.json` persistiert. 
-Auch wird in dieser Methode überprüft, ob sich die `config.yaml` geändert hat. In diesem Fall wird dass System ein "Reboot" durchführen und aus `zone_data.json` die neue Systemlandschaft mit den alten Daten wiederherstellen.
+Auch wird in dieser Methode überprüft, ob sich die `config.yaml` geändert hat. In diesem Fall wird das System ein "Reboot" durchführen und aus `zone_data.json` die neue Systemlandschaft mit den alten Daten wiederherstellen.
 Dadurch ist das System flexibel an die Realität anpassbar.
 
 # 7 Verteilungssicht

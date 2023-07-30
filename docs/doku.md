@@ -89,16 +89,48 @@ und die ausgewählten Testmethoden erläutern.
 
 ## Qualitätsziele {#_qualit_tsziele}
 
+Die folgende Tabelle beschrieben die zentralen Qualitätsziele vom PySmartHome wobei die Reihenfolge eine grobe Orientierung bezüglich der Wichtigkeit vorgibt.
+
+|        Merkmal nach ISO 25010        | Erläuterung                                                                                                                                                                                                                                                                                                                                                                                   |
+|:------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|      Extensibility (Erweiterbarkeit) | Das Ziel der Erweiterbarkeit ist es, dass PySmartHome einfach um neue Funktionen und Module erweitert werden kann, um zukünftige Änderungen und technologische Entwicklungen im Smart-Home-Bereich zu berücksichtigen. Das System verfolgt eine modulare Architektur und verwendet Design Patterns, um die Integration neuer Funktionen ohne Beeinträchtigung des Kernsystems zu erleichtern. |
+| Interoperability (Interoperabilität) | Das PySmartHome-System wurde mit Fokus auf Interoperabilität entwickelt, um eine nahtlose Zusammenarbeit mit externen Komponenten wie einer Künstlichen Intelligenz (und einer Wetterstation) zu ermöglichen.                                                                                                                                                                                 |
+|        Maintainability (Wartbarkeit) | Das Ziel der Maintainability ist es sicherzustellen, dass das PySmartHome-System leicht zu warten und zu pflegen ist, indem es gut strukturierten, dokumentierten und getesteten Code verwendet, um Entwicklern eine effiziente Weiterentwicklung und Fehlerbehebung zu ermöglichen.                                                                                                          |
 
 
 ## Stakeholder {#_stakeholder}
 
-++ Lisa
+Die folgende Tabelle stellt die Stakeholder des PySmartHomes und ihre jeweilige Intentionen dar.
+
+|                 Rolle                | Erwartung, Interesse, Bezug                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|:------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|        Softwarearchitekt*innen       | <ul><li>streben danach, eine gut strukturierte und flexible Architektur für das PySmartHome-Projekt zu entwerfen</li><li>legen Wert auf klare Schnittstellen und eine hohe Interoperabilität, um die Integration externer Komponenten wie der KI und der Wetterstation zu ermöglichen</li><li>Ziel ist es, eine robuste Basis zu schaffen, die zukünftige Anforderungen und technologische Entwicklungen problemlos bewältigen kann</li></ul> |
+|           Entwickler*innen           | <ul><li>setzen die Vorgaben der Softwarearchitektinnen um und streben eine saubere Code-Basis und klare Architektur an, um effizient und produktiv arbeiten zu können</li><li>erwarten klare Aufgabenstellungen und gut dokumentierten Code, um ihre Arbeit erfolgreich umzusetzen und eine reibungslose Integration der externen Komponenten sicherzustellen</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Nutzer*innen/Kunde  (Michael Binzen) | <ul><li>hat das Interesse, dass die Studierenden die in der Vorlesung vermittelten Inhalte zum Software-Engineering und den Kernkonzepten erfolgreich umsetzen</li><li>erwartet eine sorgfältige Klassen- und Modellierung des PySmartHome-Systems, die Anwendung von Design Patterns und die Berücksichtigung der SOLID-Prinzipien</li><li>legt Wert darauf, dass die Studierenden die theoretischen Konzepte in der Praxis umsetzen und ein gut strukturiertes, erweiterbares Smart-Home-System entwickeln</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 # 2 Randbedingungen {#section-architecture-constraints}
 
-OO-Design, Python
-O Lisa
+## Technische Randbedingungen
+|          Randbedingung           | Erläuterung                                                                                                                                                     |
+|:--------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|        Programmiersprache        | Das Projekt wird in Python umgesetzt.                                                                                                                           |
+| Unterstützung von Schnittstellen | Die Interoperabilität mit externen Komponenten wie einer Künstlichen Intelligenz (KI) (und einer Wetterstation) erfordert die Unterstützung von Schnittstellen. |
+|        Objektorientierung        | Das PySmartHome-Projekt basiert auf dem Prinzip der Objektorientierung, bei dem die Funktionalität in Form von Klassen und Objekten organisiert ist.            |
+
+## Organisatorische Randbedingungen
+|          Randbedingung          | Erläuterung                                                                                                                                                                                                                                   |
+|:-------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|            Zeitplan             | Die Gruppen haben einen Zeitplan einzuhalten, der die Abgabe von Teilprojekten und die Präsentationen zu bestimmten Terminen vorsieht.                                                                                                        |
+|   Anforderungen des Dozenten    | Das PySmartHome-Projekt sollte die Anforderungen des Dozenten erfüllen, der Wert auf eine sorgfältige Klassen- und Modellierung des Smart Home-Systems, die Anwendung von Design Patterns und die Berücksichtigung der SOLID-Prinzipien legt. |
+|         Gruppenarbeit           | Das Projekt wird als Gruppenarbeit durchgeführt, daher ist eine klare Kommunikation und Zusammenarbeit innerhalb der Gruppen eine organisatorische Randbedingung.                                                                             |
+
+## Konventionen
+|         Randbedingung          | Erläuterung                                                                                                                                                                                                                                   |
+|:------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Einhaltung von Design Patterns | Die Verwendung bestimmter Design Patterns ist eine Konvention, um bewährte Entwurfsmuster anzuwenden und die Code-Qualität zu verbessern, insbesondere in Bezug auf die Erweiterbarkeit des Systems.                                                                                                        |
+|          Dokumenation          | Das PySmartHome-Projekt erfordert eine Dokumentation gemäß dem arc42-Template. |
+
+
 
 # 3 Kontextabgrenzung {#section-system-scope-and-context}
 

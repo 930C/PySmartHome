@@ -301,7 +301,7 @@ Geräte und Sensoren in der jeweiligen Zone des Raumes erstellt und sie den pass
   existiert, wird einer erstellt und den Geräten/Sensoren zugewiesen.
   Wenn bereits ein `ClimateController` vorhanden ist, werden die Geräte diesem zugewiesen.
 - Abschließend wird der `ClimateController` dem `ControllerManager` zugewiesen, und das Smart Home System ist nun
-  vollständig aufgebaut
+  vollständig aufgebaut.
 - Über eine JSON Datei ist es uns ebenfalls möglich Backup-Werte nach Laufzeitabbruch wiederherzustellen. Diese werden nachträglich den jeweiligen Sensoren der Zone zugewiesen.
 
 Zusammenfassend handelt es sich bei diesem Flussdiagramm um eine vereinfachte Darstellung des Smart Homes, mithilfe der

@@ -1,4 +1,7 @@
+from typing import List
+
 from smart_home.controllers.controller import Controller
+from smart_home.devices.fertilization.fertilizer import Fertilizer
 from smart_home.sensors.fertilization_sensor import FertilizationSensor
 
 
@@ -7,6 +10,8 @@ class FertilizationController(Controller):
 
     def __init__(self, desired_nutrient_content: float = 70):
         super().__init__()
+        self.devices: List[Fertilizer] = []
+        self.sensors: List[FertilizationSensor] = []
         self.desired_nutrient_content = desired_nutrient_content
         self.logger.info(f"Created controller {self.name} with desired nutrient content "
                          f"{self.desired_nutrient_content}")
@@ -14,8 +19,8 @@ class FertilizationController(Controller):
     def control_fertilization(self):
         self.logger.info(f"Controlling fertilization with desired nutrient content "
                          f"{self.desired_nutrient_content}")
-        if len(self.sensors) is not 0:
-            sensor_value = self.getStrategy().calculate_value(self.sensors, FertilizationSensor)
+        if len(self.sensors) != 0:
+            sensor_value = self.get_strategy().calculate_value(self.sensors, FertilizationSensor)
 
             for device in self.devices:
                 if sensor_value < self.desired_nutrient_content:

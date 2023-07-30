@@ -1,33 +1,40 @@
 import os.path
 import time
 import json
+from typing import List
 
 from smart_home.KI.floraGPT_adapter import PlantCareAdapter
 from smart_home.commands.plant_care_command import PlantCareCommand
 from smart_home.config.config_loader import ConfigLoader, DeviceFactory
-from smart_home.controllers.climate_controller import ClimateController
 from smart_home.controllers.controller import Controller
-from smart_home.controllers.fertilization_controller import FertilizationController
-from smart_home.controllers.humidity_controller import HumidityController
-from smart_home.controllers.irrigation_controller import IrrigationController
 from smart_home.logging.logger import LoggerFactory
 from smart_home.managers.controller_manager import ControllerManager
 from smart_home.rooms.room import Room
 from smart_home.rooms.zone import Zone
+from smart_home.sensors.fertilization_sensor import FertilizationSensor
+from smart_home.sensors.humidity_sensor import HumiditySensor
+from smart_home.sensors.irrigation_sensor import IrrigationSensor
+from smart_home.sensors.temperature_sensor import TemperatureSensor
 
 
 class SmartHomeController:
-    # Ein dictionary mit controller als key und was sie Steuern, z.B. ClimateController steuert "temperature"
+    sensor_measures = {
+        TemperatureSensor: 'temperature',
+        HumiditySensor: 'humidity',
+        FertilizationSensor: 'fertilization',
+        IrrigationSensor: 'irrigation',
+    }
+
     controller_influences = {
-        ClimateController: "temperature",
-        FertilizationController: "fertilization",
-        HumidityController: "humidity",
-        IrrigationController: "irrigation"
+        'temperature': "ClimateController",
+        'humidity': "ClimateController",
+        'fertilization': "FertilizationController",
+        'irrigation': "IrrigationController",
     }
 
     def __init__(self, config_file_path: str):
         self.adapter = None
-        self.rooms = []
+        self.rooms: List[Room] = []
         self.logger = LoggerFactory.setup_logger('SmartHomeController')
         self.config_file_path = config_file_path
         self.last_config_modification_time = os.path.getmtime(config_file_path)
@@ -91,7 +98,7 @@ class SmartHomeController:
 
     def reload_config(self):
         self.logger.debug(f'Reloading configuration from {self.config_file_path}')
-        self.rooms = [] # Verwerfen der alten Zimmer und Controller
+        self.rooms = []  # Verwerfen der alten Zimmer und Controller
         self.load_rooms(self.config_file_path)  # Laden der neuen Zimmer und Controller aus der Konfigurationsdatei
         self.load_zone_data_from_json()  # Laden der vorhandenen Zonendaten in die neuen Controller
         self.logger.debug(f'Reloaded configuration from {self.config_file_path}')
@@ -122,7 +129,7 @@ class SmartHomeController:
                         care_instruction.execute(zone.controllerManager)
                 self.logger.info('Updated SmartHomeController.')
 
-                self.save_zone_data_to_json() # Save zone data to json after every update
+                self.save_zone_data_to_json()  # Save zone data to json after every update
                 self.logger.info("Saved zone data to json.")
         except KeyboardInterrupt:
             self.logger.info('KeyboardInterrupt received. Exiting.')
@@ -144,11 +151,11 @@ class SmartHomeController:
                             zone_name = zone_data.get("zoneName")
                             if zone_name in zone_dict:
                                 zone = zone_dict.get(zone_name)
-                                for controller_class, attribute in self.controller_influences.items():
-                                    controller = zone.controllerManager.get_controller(controller_class.name)
-                                    if controller is not None:
-                                        controller.sensors[0].value = zone_data.get(attribute)
-                                        self.logger.info(f"Set {controller_class.name} value to {zone_data.get(attribute)}")
+                                for sensor in zone.controllerManager.get_sensors():
+                                    saved_sensor_value = zone_data.get(sensor.measures)
+                                    if saved_sensor_value is not None:
+                                        sensor.value = saved_sensor_value
+                                        self.logger.info(f"Set {sensor.name} value to {saved_sensor_value}")
 
             self.logger.info("Loaded zone data from json.")
         except FileNotFoundError:
@@ -161,10 +168,14 @@ class SmartHomeController:
             room_entry = {"roomName": room.name, "zones": []}
             for zone in room.zones:
                 zone_entry = {"zoneName": zone.name}
-                for controller_class, attribute in self.controller_influences.items():
-                    controller = zone.controllerManager.get_controller(controller_class.name)
-                    if controller is not None:
-                        zone_entry[attribute] = controller.sensors[0].value
+                for sensor_class, measure in self.sensor_measures.items():
+                    controller = zone.controllerManager.get_controller(self.controller_influences.get(measure))
+                    if controller is None:
+                        zone_entry[measure] = None
+                        continue
+                    sensor_value = controller.get_strategy().calculate_value(controller.get_sensors(), sensor_class)
+                    zone_entry[measure] = sensor_value
+                    self.logger.info(f"Saved zone data for zone {zone.name} and measure {measure} with value {sensor_value}")
                 room_entry["zones"].append(zone_entry)
             room_data.append(room_entry)
 

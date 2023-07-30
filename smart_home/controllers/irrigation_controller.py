@@ -13,7 +13,7 @@ class IrrigationController(Controller):
     def control_irrigation(self):
         self.logger.info(f'Controlling irrigation with desired moisture {self.desired_moisture}')
         if len(self.sensors) is not 0:
-            sensor_value = self.getStrategy().calculate_value(self.sensors, IrrigationSensor)
+            sensor_value = self.get_strategy().calculate_value(self.sensors, IrrigationSensor)
 
             for device in self.devices:
                 if sensor_value < self.desired_moisture:

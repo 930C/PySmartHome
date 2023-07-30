@@ -5,7 +5,7 @@ from smart_home.controllers.fertilization_controller import FertilizationControl
 from smart_home.controllers.irrigation_controller import IrrigationController
 from smart_home.controllers.lighting_controller import LightingController
 from smart_home.devices.fertilization.fertilizer import Fertilizer
-from smart_home.devices.humidity.humidifier import Humidifier
+from smart_home.devices.climate.humidifier import Humidifier
 from smart_home.devices.irrigation.irrigation_system import IrrigationSystem
 from smart_home.devices.lights.led_light import LEDLight
 from smart_home.interfaces.command_interface import CommandInterface
@@ -63,7 +63,7 @@ class PlantCareCommand(CommandInterface):
         self.logger.info(f'Executing PlantCareCommand with error code {self.error_code}')
         if self.controller_type or self.device_type or self.needs_device is None:
             return
-        controller = controllerManager.get_controller(self.controller_type)
+        controller = controllerManager.get_controller_by_class(self.controller_type)
         if controller is None:
             return
         for device in controller.devices:

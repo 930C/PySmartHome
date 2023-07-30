@@ -6,7 +6,7 @@ from smart_home.controllers.irrigation_controller import IrrigationController
 from smart_home.controllers.lighting_controller import LightingController
 from smart_home.devices.climate.fan import Fan
 from smart_home.devices.climate.heater import Heater
-from smart_home.devices.humidity.humidifier import Humidifier
+from smart_home.devices.climate.humidifier import Humidifier
 from smart_home.devices.climate.roller_blind import RollerBlind
 from smart_home.devices.fertilization.fertilizer import Fertilizer
 from smart_home.devices.irrigation.irrigation_system import IrrigationSystem

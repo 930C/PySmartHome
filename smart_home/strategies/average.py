@@ -6,8 +6,11 @@ class Average(Strategy):
     def __init__(self):
         super().__init__("Average")
 
-    def calculate_value(self, data: [], sensor_type) -> float:
+    def calculate_value(self, data: [], sensor_type) -> float | None:
         relevant_sensors = [sensor for sensor in data if isinstance(sensor, sensor_type)]
+        if len(relevant_sensors) == 0:
+            return None
+
         self.logger.info(f'Calculating average value from {len(relevant_sensors)} sensors')
         # iterate over list and return average value
         sum: float = 0

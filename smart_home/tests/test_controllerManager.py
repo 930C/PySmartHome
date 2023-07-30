@@ -23,7 +23,7 @@ def test_get_controller():
     controllerManager = ControllerManager({})
     controller = TestController()
     controllerManager.add_controller(controller)
-    assert controllerManager.get_controller("Controller") == controller
+    assert controllerManager.get_controller_by_class("Controller") == controller
 
 def test_get_controllers():
     controllerManager = ControllerManager({})

@@ -114,6 +114,71 @@ Schnittstelle zu KI / Wetterstation / ...
 
 ++ Luca
 
+In diesem Abschnitt wird die Strategie zur Lösung der Problemstellungen im Kontext unserer Smart Home Architektur
+dargestellt. Wir werden die zentralen Entscheidungen und Lösungsansätze aufzeigen, die sowohl das Design als auch die
+Implementierung des Systems prägen.
+
+## Auswahl von Python als Programmiersprache
+Python wurde bereits in den frühen Phasen unseres Projekts als bevorzugte Programmiersprache identifiziert. Diese
+Entscheidung war von Beginn an eine festgelegte Anforderung und basiert auf den vielfältigen Vorteilen, die Python für
+unser spezielles Anwendungsszenario bietet.
+
+Python ist bekannt für seine einfache Syntax, die Lesbarkeit und Verständlichkeit des Codes fördert. Darüber hinaus ist
+Python eine äußerst ausdrucksstarke Sprache, die es uns ermöglicht, komplexe Anforderungen mit weniger Codezeilen und
+daher weniger Fehlermöglichkeiten zu erfüllen. Diese Eigenschaften machen Python zu einer idealen Wahl für die
+Entwicklung von Smart Home Systemen, die eine breite Palette an Funktionen und eine hohe Benutzerfreundlichkeit
+erfordern.
+
+Ein weiterer Vorteil von Python liegt in seiner umfangreichen Bibliothekunterstützung, die für unsere Architektur von 
+entscheidender Bedeutung sind. So können wir effizient hochwertige Lösungen für unser Smart Home System entwickeln,
+ohne dabei das Rad neu erfinden zu müssen.
+
+## Verpflichtung zu Best Practices und hochwertiger Softwareentwicklung
+Unsere Lösungsstrategie leitet sich stark von den Prinzipien der Software-Engineering-Best-Practices ab. Wir haben uns
+auf die Verwendung von Design Pattern und die Einhaltung der SOLID-Prinzipien verpflichtet. Dies garantiert, dass unser
+System nicht nur funktional, sondern auch gut strukturiert, erweiterbar und wartbar ist.
+
+Beispielsweise findet das Kommando-Muster Anwendung in der "Commands" Komponente, um unterschiedliche Befehle, wie die
+Pflege der Pflanzen, abzubilden. Die Verwendung des Kommando-Musters ermöglicht eine lose Kopplung und erhöht die
+Flexibilität unseres Systems.
+
+Die SOLID-Prinzipien, welche eine Sammlung von fünf Prinzipien für die objektorientierte Programmierung und Design
+darstellen, haben uns dabei geholfen, den Code so zu strukturieren, dass er gut organisiert, erweiterbar und leicht
+verständlich ist. Dies erleichtert die langfristige Wartung und Weiterentwicklung des Systems.
+
+# Struktur und Modulare Architektur
+Um eine klare Trennung der Verantwortlichkeiten zu gewährleisten und die Wartbarkeit und Erweiterbarkeit zu verbessern,
+haben wir unser Smart Home System in verschiedene Module unterteilt. Jedes Modul repräsentiert einen spezifischen
+Aspekt des Gesamtsystems.
+
+Die modulare Struktur ermöglicht es uns, bei Bedarf neue Funktionen und Geräte einfach zu integrieren, ohne das gesamte
+System überarbeiten zu müssen. Sie unterstützt auch die Nachvollziehbarkeit und Verständlichkeit des Systems, da jeder
+Teil des Codes eine klar definierte Aufgabe hat.
+
+# Konfigurierbarkeit und Anpassungsfähigkeit
+Eine wichtige Anforderung unseres Smart Home Systems ist die Fähigkeit, sich an die Bedürfnisse und Vorlieben des
+Benutzers anzupassen. Um dies zu erreichen, haben wir die Konfigurierbarkeit und Anpassungsfähigkeit in das Herz
+unserer Architektur integriert.
+
+Durch die Verwendung von YAML und JSON für die Speicherung von Konfigurations- und Zonendaten bieten wir den Benutzern
+eine flexible und verständliche Möglichkeit, das System nach ihren Wünschen zu konfigurieren.
+Die Konfigurationsdaten in `config.yaml` können einfach geändert werden, um das Verhalten des Systems anzupassen, ohne
+dass Änderungen am Code erforderlich sind.
+
+# Systematisches Logging
+
+Um die Fehlersuche zu erleichtern und die Nachvollziehbarkeit des Systemzustands zu ermöglichen, haben wir ein
+systematisches Logging in unsere Architektur implementiert. Das Logging ist so konzipiert, dass es wertvolle
+Informationen über den Zustand und das Verhalten des Systems liefert, was es uns ermöglicht, mögliche Probleme schnell
+zu identifizieren und zu beheben.
+
+Unser Logging-Ansatz erfasst nicht nur Fehler, sondern auch wichtige Systemereignisse. Dadurch können wir nicht nur
+Probleme diagnostizieren, sondern auch das Systemverhalten im Laufe der Zeit analysieren und gezielte Verbesserungen
+vornehmen oder Geräte/Sensoren anpassen.
+
+Insgesamt repräsentiert unsere Lösungsstrategie einen bewussten und durchdachten Ansatz zur Entwicklung eines Smart-Home
+Systems, das sich durch seine Benutzerfreundlichkeit, Flexibilität, Erweiterbarkeit und Robustheit auszeichnet.
+
 # 5 Bausteinsicht {#section-building-block-view}
 
 ## Whitebox Gesamtsystem {#_whitebox_gesamtsystem}

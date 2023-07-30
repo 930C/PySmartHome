@@ -94,6 +94,7 @@ Die folgende Tabelle beschrieben die zentralen Qualitätsziele vom PySmartHome w
 |        Merkmal nach ISO 25010        | Erläuterung                                                                                                                                                                                                                                                                                                                                                                                   |
 |:------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |      Extensibility (Erweiterbarkeit) | Das Ziel der Erweiterbarkeit ist es, dass PySmartHome einfach um neue Funktionen und Module erweitert werden kann, um zukünftige Änderungen und technologische Entwicklungen im Smart-Home-Bereich zu berücksichtigen. Das System verfolgt eine modulare Architektur und verwendet Design Patterns, um die Integration neuer Funktionen ohne Beeinträchtigung des Kernsystems zu erleichtern. |
+
 | Interoperability (Interoperabilität) | Das PySmartHome-System wurde mit Fokus auf Interoperabilität entwickelt, um eine nahtlose Zusammenarbeit mit externen Komponenten wie einer Künstlichen Intelligenz (und einer Wetterstation) zu ermöglichen.                                                                                                                                                                                 |
 |        Maintainability (Wartbarkeit) | Das Ziel der Maintainability ist es sicherzustellen, dass das PySmartHome-System leicht zu warten und zu pflegen ist, indem es gut strukturierten, dokumentierten und getesteten Code verwendet, um Entwicklern eine effiziente Weiterentwicklung und Fehlerbehebung zu ermöglichen.                                                                                                          |
 
@@ -625,6 +626,21 @@ Am Ende: was wurde noch nicht beschrieben?
 ## Qualitätsbaum {#_qualit_tsbaum}
 
 ## Qualitätsszenarien {#_qualit_tsszenarien}
+
+E01 Es sollen Home Securtity Maßnahmen in PySmartHome integriert werden und es wird in wenigen Tagen umgesetzt.
+
+E02 Es werden zusätzliche Sensoren im Gewächshaus verwendet. Diese werden in kurzer Zeit in das System eingebunden.
+
+
+I01 Eine weitere Künstliche Intelligenz soll an das System angeschlossen werden. Dies wird in kurzer Zeit umgesetzt.
+
+I02 Ein Alarmsystem soll mit PySmartHome interagieren und das Projekt wird schnell abgeschlossen.
+
+
+M01 Eine Methode der Sensoren soll neu implementiert werden. Dank der Tests kann dies mit wenig Aufwand geschehen.
+
+M02 Im System taucht ein Bug auf doch durch gute Testabdeckung wird der Fehler schnell identifziert und behoben.
+
 
 ++
 

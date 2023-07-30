@@ -656,7 +656,7 @@ Es gibt keine weiteren Architekturentscheidungen, die einer Erklärung bedürfen
 
 ## Qualitätsbaum
 
-![Qualitätenbaum](docs/Qualitätenbaum2.jpg)
+![Qualitätenbaum](/Qualitätenbaum2.jpg)
 
 ## Qualitätsszenarien
 

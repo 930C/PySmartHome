@@ -1,48 +1,55 @@
 <!-- TOC -->
-
-* [1 Einführung und Ziele {#section-introduction-and-goals}](#1-einführung-und-ziele-section-introduction-and-goals)
-    * [Aufgabenstellung {#_aufgabenstellung}](#aufgabenstellung-aufgabenstellung)
-    * [Qualitätsziele {#_qualit_tsziele}](#qualitätsziele-qualittsziele)
-    * [Stakeholder {#_stakeholder}](#stakeholder-stakeholder)
-* [2 Randbedingungen {#section-architecture-constraints}](#2-randbedingungen-section-architecture-constraints)
+* [1 Einführung und Ziele](#1-einführung-und-ziele)
+  * [Aufgabenstellung](#aufgabenstellung)
+    * [Was ist das PySmartHome?](#was-ist-das-pysmarthome)
+    * [Wesentliche Features](#wesentliche-features)
+    * [Treibende Kräfte](#treibende-kräfte)
+  * [Qualitätsziele](#qualitätsziele)
+  * [Stakeholder](#stakeholder)
+* [2 Randbedingungen](#2-randbedingungen)
+  * [Technische Randbedingungen](#technische-randbedingungen)
+  * [Organisatorische Randbedingungen](#organisatorische-randbedingungen)
+  * [Konventionen](#konventionen)
 * [3 Kontextabgrenzung {#section-system-scope-and-context}](#3-kontextabgrenzung-section-system-scope-and-context)
-    * [Fachlicher Kontext {#_fachlicher_kontext}](#fachlicher-kontext-fachlicherkontext)
-    * [Technischer Kontext {#_technischer_kontext}](#technischer-kontext-technischerkontext)
-* [4 Lösungsstrategie {#section-solution-strategy}](#4-lösungsstrategie-section-solution-strategy)
+  * [Fachlicher Kontext {#_fachlicher_kontext}](#fachlicher-kontext-fachlicherkontext)
+  * [Technischer Kontext {#_technischer_kontext}](#technischer-kontext-technischerkontext)
+* [4 Lösungsstrategie](#4-lösungsstrategie)
+  * [Auswahl von Python als Programmiersprache](#auswahl-von-python-als-programmiersprache)
+  * [Verpflichtung zu Best Practices und hochwertiger Softwareentwicklung](#verpflichtung-zu-best-practices-und-hochwertiger-softwareentwicklung)
+* [Struktur und Modulare Architektur](#struktur-und-modulare-architektur)
+* [Konfigurierbarkeit und Anpassungsfähigkeit](#konfigurierbarkeit-und-anpassungsfähigkeit)
+* [Systematisches Logging](#systematisches-logging)
 * [5 Bausteinsicht {#section-building-block-view}](#5-bausteinsicht-section-building-block-view)
-    * [Whitebox Gesamtsystem {#_whitebox_gesamtsystem}](#whitebox-gesamtsystem-whiteboxgesamtsystem)
-    * [Ebene 2 {#_ebene_2}](#ebene-2-ebene2)
-    * [Ebene 3 {#_ebene_3}](#ebene-3-ebene3)
-* [6 Laufzeitsicht {#section-runtime-view}](#6-laufzeitsicht-section-runtime-view)
-    * [Systemstart](#systemstart)
-        * [Ausschnitt der `config.yaml`](#ausschnitt-der-configyaml)
-        * [Instanziierungsprozess](#instanziierungsprozess)
-    * [Verhalten zur Laufzeit](#verhalten-zur-laufzeit)
-* [7 Verteilungssicht {#section-deployment-view}](#7-verteilungssicht-section-deployment-view)
-* [8 Querschnittliche Konzepte {#section-concepts}](#8-querschnittliche-konzepte-section-concepts)
-    * [Package-Struktur](#package-struktur)
-    * [Domänenmodell](#domänenmodell)
-    * [Architektur-/ Entwurfsmuster](#architektur--entwurfsmuster)
-        * [Factory Pattern](#factory-pattern)
-        * [Template Method Pattern](#template-method-pattern)
-        * [Strategy Pattern](#strategy-pattern)
-        * [Adapter Pattern](#adapter-pattern)
-        * [Command Pattern](#command-pattern)
-    * [Logging](#logging)
-    * [Tests](#tests)
-* [9 Architekturentscheidungen {#section-design-decisions}](#9-architekturentscheidungen-section-design-decisions)
-* [10 Qualitätsanforderungen {#section-quality-scenarios}](#10-qualitätsanforderungen-section-quality-scenarios)
-    * [Qualitätsbaum {#_qualit_tsbaum}](#qualitätsbaum-qualittsbaum)
-    * [Qualitätsszenarien {#_qualit_tsszenarien}](#qualitätsszenarien-qualittsszenarien)
+  * [Whitebox Gesamtsystem {#_whitebox_gesamtsystem}](#whitebox-gesamtsystem-whiteboxgesamtsystem)
+  * [Ebene 2 {#_ebene_2}](#ebene-2-ebene2)
+  * [Ebene 3 {#_ebene_3}](#ebene-3-ebene3)
+* [6 Laufzeitsicht](#6-laufzeitsicht)
+  * [Systemstart](#systemstart)
+    * [Ausschnitt der `config.yaml`](#ausschnitt-der-configyaml)
+    * [Instanziierungsprozess](#instanziierungsprozess)
+  * [Verhalten zur Laufzeit](#verhalten-zur-laufzeit)
+* [7 Verteilungssicht](#7-verteilungssicht)
+* [8 Querschnittliche Konzepte](#8-querschnittliche-konzepte)
+  * [Architektur-/ Entwurfsmuster](#architektur--entwurfsmuster)
+    * [Factory Pattern](#factory-pattern)
+    * [Template Method Pattern](#template-method-pattern)
+    * [Strategy Pattern](#strategy-pattern)
+    * [Adapter Pattern](#adapter-pattern)
+    * [Command Pattern](#command-pattern)
+  * [Logging](#logging)
+  * [Tests](#tests)
+* [9 Architekturentscheidungen](#9-architekturentscheidungen)
+* [10 Qualitätsanforderungen](#10-qualitätsanforderungen)
+  * [Qualitätsbaum](#qualitätsbaum)
+  * [Qualitätsszenarien](#qualitätsszenarien)
 * [11 Risiken und technische Schulden {#section-technical-risks}](#11-risiken-und-technische-schulden-section-technical-risks)
-* [12 Glossar {#section-glossary}](#12-glossar-section-glossary)
+* [12 Glossar](#12-glossar)
 * [Aufgabenverteilung](#aufgabenverteilung)
-
 <!-- TOC -->
 
-# 1 Einführung und Ziele {#section-introduction-and-goals}
+# 1 Einführung und Ziele
 
-## Aufgabenstellung {#_aufgabenstellung}
+## Aufgabenstellung
 
 ### Was ist das PySmartHome?
 
@@ -87,19 +94,18 @@ und die ausgewählten Testmethoden erläutern.
 |     SIG     | Das System soll um ein Gewächshaus erweitert werden.  | [Foliensatz KW28](https://moodle.dhbw-mannheim.de/mod/resource/view.php?id=300001) |
 |     KI      |            Eine KI muss angebunden werden             | [Foliensatz KW28](https://moodle.dhbw-mannheim.de/mod/resource/view.php?id=300001) |
 
-## Qualitätsziele {#_qualit_tsziele}
+## Qualitätsziele
 
 Die folgende Tabelle beschrieben die zentralen Qualitätsziele vom PySmartHome wobei die Reihenfolge eine grobe Orientierung bezüglich der Wichtigkeit vorgibt.
 
 |        Merkmal nach ISO 25010        | Erläuterung                                                                                                                                                                                                                                                                                                                                                                                   |
 |:------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |      Extensibility (Erweiterbarkeit) | Das Ziel der Erweiterbarkeit ist es, dass PySmartHome einfach um neue Funktionen und Module erweitert werden kann, um zukünftige Änderungen und technologische Entwicklungen im Smart-Home-Bereich zu berücksichtigen. Das System verfolgt eine modulare Architektur und verwendet Design Patterns, um die Integration neuer Funktionen ohne Beeinträchtigung des Kernsystems zu erleichtern. |
-
 | Interoperability (Interoperabilität) | Das PySmartHome-System wurde mit Fokus auf Interoperabilität entwickelt, um eine nahtlose Zusammenarbeit mit externen Komponenten wie einer Künstlichen Intelligenz (und einer Wetterstation) zu ermöglichen.                                                                                                                                                                                 |
 |        Maintainability (Wartbarkeit) | Das Ziel der Maintainability ist es sicherzustellen, dass das PySmartHome-System leicht zu warten und zu pflegen ist, indem es gut strukturierten, dokumentierten und getesteten Code verwendet, um Entwicklern eine effiziente Weiterentwicklung und Fehlerbehebung zu ermöglichen.                                                                                                          |
 
 
-## Stakeholder {#_stakeholder}
+## Stakeholder
 
 Die folgende Tabelle stellt die Stakeholder des PySmartHomes und ihre jeweilige Intentionen dar.
 
@@ -109,7 +115,7 @@ Die folgende Tabelle stellt die Stakeholder des PySmartHomes und ihre jeweilige 
 |           Entwickler*innen           | <ul><li>setzen die Vorgaben der Softwarearchitektinnen um und streben eine saubere Code-Basis und klare Architektur an, um effizient und produktiv arbeiten zu können</li><li>erwarten klare Aufgabenstellungen und gut dokumentierten Code, um ihre Arbeit erfolgreich umzusetzen und eine reibungslose Integration der externen Komponenten sicherzustellen</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Nutzer*innen/Kunde  (Michael Binzen) | <ul><li>hat das Interesse, dass die Studierenden die in der Vorlesung vermittelten Inhalte zum Software-Engineering und den Kernkonzepten erfolgreich umsetzen</li><li>erwartet eine sorgfältige Klassen- und Modellierung des PySmartHome-Systems, die Anwendung von Design Patterns und die Berücksichtigung der SOLID-Prinzipien</li><li>legt Wert darauf, dass die Studierenden die theoretischen Konzepte in der Praxis umsetzen und ein gut strukturiertes, erweiterbares Smart-Home-System entwickeln</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
-# 2 Randbedingungen {#section-architecture-constraints}
+# 2 Randbedingungen
 
 ## Technische Randbedingungen
 |          Randbedingung           | Erläuterung                                                                                                                                                     |
@@ -143,9 +149,7 @@ Schnittstelle zu KI / Wetterstation / ...
 
 +
 
-# 4 Lösungsstrategie {#section-solution-strategy}
-
-++ Luca
+# 4 Lösungsstrategie
 
 In diesem Abschnitt wird die Strategie zur Lösung der Problemstellungen im Kontext unserer Smart Home Architektur
 dargestellt. Wir werden die zentralen Entscheidungen und Lösungsansätze aufzeigen, die sowohl das Design als auch die
@@ -634,17 +638,15 @@ dass das System frei von unerwarteten Fehlern ist und den gestellten Anforderung
 Tests können auch Änderungen und Erweiterungen im Code effizient überprüft werden, um potenzielle Probleme frühzeitig zu
 erkennen und zu beheben. Das führt zu einer stabilen und verlässlichen Smart-Home-Anwendung.
 
-# 9 Architekturentscheidungen {#section-design-decisions}
+# 9 Architekturentscheidungen
 
-Am Ende: was wurde noch nicht beschrieben?
+Es gibt keine weiteren Architekturentscheidungen, die einer Erklärung bedürfen.
 
-- Johanna
+# 10 Qualitätsanforderungen
 
-# 10 Qualitätsanforderungen {#section-quality-scenarios}
+## Qualitätsbaum
 
-## Qualitätsbaum {#_qualit_tsbaum}
-
-## Qualitätsszenarien {#_qualit_tsszenarien}
+## Qualitätsszenarien
 
 E01 Es sollen Home Securtity Maßnahmen in PySmartHome integriert werden und es wird in wenigen Tagen umgesetzt.
 
@@ -661,8 +663,6 @@ M01 Eine Methode der Sensoren soll neu implementiert werden. Dank der Tests kann
 M02 Im System taucht ein Bug auf doch durch gute Testabdeckung wird der Fehler schnell identifziert und behoben.
 
 
-++
-
 # 11 Risiken und technische Schulden {#section-technical-risks}
 
 Observer Pattern für Sensoren wäre besser gewesen -> unser System fragt die Sensoren nach Werten, da die Sensoren nicht
@@ -675,33 +675,43 @@ Bei FloraGPT-Anweisung kann es sein, dass die Luftfeutigkeit bspw. verändert we
 Luftbefeuchter hat
 O
 
-# 12 Glossar {#section-glossary}
+# 12 Glossar
 
-jeder ein bisschen wenn notwendig
+Es gibt keine Abkürzungen oder Begriffe, die einer Erklärung bedürfen.
 
 # Aufgabenverteilung
 
+Zuerst haben wir uns alle gemeinsam überlegt, wie wir das Smart-Home-System aufbauen wollen und welche Komponenten wir benötigen. 
+Dabei haben wir uns an den Anforderungen orientiert und die Komponenten entsprechend nach Verantwortlichkeiten aufgeteilt. 
+Allerdings haben wir uns auch dazu entschieden, die Aufgaben nicht strikt aufzuteilen, sondern uns gegenseitig zu unterstützen und gemeinsam an den Komponenten zu arbeiten.
+Dadurch konnten wir uns gegenseitig helfen und die Aufgaben schneller erledigen und eine bessere Qualität erreichen.
+Aus diesem Grund ist die folgende Aufgabenverteilung nicht als strikte Trennung zu verstehen, sondern als grobe Orientierung, wer an welchen Komponenten gearbeitet hat.
+
 **Implementierung und Architektur**  
-Config -> Luca
-Aufbau des Smart-Homes mit Räumen/Zonen/Controllern/etc -> Luca, Lisa, Johanna
-Konzept für Logik der Geräte, Controller, Sensoren im Zusammenspiel (Veränderung der Werte je nach Sensor-Wert und
-Stärke der Geräte) -> Aidan, Johanna
-Implementierung der Geräte, Controller, Sensoren -> Lisa, Johanna  
-Strategie für Sensorwerte in den Zonen -> Johanna  
-Flora GPT -> Johanna  
-Logging -> Kevin, Luca  
-Tests -> Dennis
+
+* Aufbau der Grundstruktur: Räume, Zonen, Controller, Geräte, Sensoren (3047210, 3798263, 4940972) 
+* Aufbau aus Config-File (3047210)
+* Einlesen des Config-Files zur Laufzeit (3047210)
+* Konzept für Logik der Geräte, Controller, Sensoren im Zusammenspiel ( 4803747, 4940972)
+* Implementierung der Geräte, Controller, Sensoren (3798263, 4940972)
+* Strategie(-Pattern) für Sensorwerte in den Zonen (4940972)
+* Flora GPT (4940972)
+* Logging (3047210, 8110106)
+* Tests (8043245)
 
 **Dokumentation**  
-1 -> Lisa  
-2 -> Lisa  
-3  
-4 -> Luca  
-5 -> Luca  
-6 -> Aidan  
-7 -> Aidan  
-8 -> Johanna  
-9 -> Johanna  
-10  
-11  
-12 -> Alle  
+1) 3798263  
+2) 3798263  
+3)  8110106  
+4)  3047210  
+5) 3047210  
+6)  4803747  
+7)  4803747  
+8)  4940972  
+9)  Alle  
+10)  8110106  
+11)  8043245  
+12)  Alle  
+
+**Alle beteiligten Personen**  
+4803747, 4940972, 3047210, 3798263, 8043245, 8110106

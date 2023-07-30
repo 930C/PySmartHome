@@ -7,6 +7,7 @@ from smart_home.sensors.temperature_sensor import TemperatureSensor
 
 class ClimateController(Controller):
     name = 'ClimateController'
+    temperature = None
 
     def __init__(self, desired_temperature: float = 21,desired_moisture: float = 60):
         super().__init__()
@@ -20,6 +21,7 @@ class ClimateController(Controller):
         relevant_sensors = [sensor for sensor in self.sensors if isinstance(sensor, TemperatureSensor)]
         if len(relevant_sensors) is not 0:
             sensor_value = self.getStrategy().calculate_value(self.sensors, TemperatureSensor)
+            self.temperature = sensor_value
 
             for device in self.devices:
                 if isinstance(device, TemperatureControlInterface):
@@ -57,5 +59,9 @@ class ClimateController(Controller):
 
     def update(self):
         self.logger.info(f'Updating {self.name}..')
+        self.control_climate()
         self.control_temperature()
         self.control_humidity()
+
+    def get_temperature(self):
+        return self.temperature  # Die Temperatur seit dem letzten Update

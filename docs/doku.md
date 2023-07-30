@@ -1,4 +1,6 @@
+# PySmartHome Dokumentation
 <!-- TOC -->
+* [PySmartHome Dokumentation](#pysmarthome-dokumentation)
 * [1 Einführung und Ziele](#1-einführung-und-ziele)
   * [Aufgabenstellung](#aufgabenstellung)
     * [Was ist das PySmartHome?](#was-ist-das-pysmarthome)
@@ -96,28 +98,29 @@ und die ausgewählten Testmethoden erläutern.
 
 ## Qualitätsziele
 
-Die folgende Tabelle beschrieben die zentralen Qualitätsziele vom PySmartHome wobei die Reihenfolge eine grobe Orientierung bezüglich der Wichtigkeit vorgibt.
+Die folgende Tabelle beschrieben die zentralen Qualitätsziele vom PySmartHome wobei die Reihenfolge eine grobe
+Orientierung bezüglich der Wichtigkeit vorgibt.
 
 |        Merkmal nach ISO 25010        | Erläuterung                                                                                                                                                                                                                                                                                                                                                                                   |
 |:------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|      Extensibility (Erweiterbarkeit) | Das Ziel der Erweiterbarkeit ist es, dass PySmartHome einfach um neue Funktionen und Module erweitert werden kann, um zukünftige Änderungen und technologische Entwicklungen im Smart-Home-Bereich zu berücksichtigen. Das System verfolgt eine modulare Architektur und verwendet Design Patterns, um die Integration neuer Funktionen ohne Beeinträchtigung des Kernsystems zu erleichtern. |
+|   Extensibility (Erweiterbarkeit)    | Das Ziel der Erweiterbarkeit ist es, dass PySmartHome einfach um neue Funktionen und Module erweitert werden kann, um zukünftige Änderungen und technologische Entwicklungen im Smart-Home-Bereich zu berücksichtigen. Das System verfolgt eine modulare Architektur und verwendet Design Patterns, um die Integration neuer Funktionen ohne Beeinträchtigung des Kernsystems zu erleichtern. |
 | Interoperability (Interoperabilität) | Das PySmartHome-System wurde mit Fokus auf Interoperabilität entwickelt, um eine nahtlose Zusammenarbeit mit externen Komponenten wie einer Künstlichen Intelligenz (und einer Wetterstation) zu ermöglichen.                                                                                                                                                                                 |
-|        Maintainability (Wartbarkeit) | Das Ziel der Maintainability ist es sicherzustellen, dass das PySmartHome-System leicht zu warten und zu pflegen ist, indem es gut strukturierten, dokumentierten und getesteten Code verwendet, um Entwicklern eine effiziente Weiterentwicklung und Fehlerbehebung zu ermöglichen.                                                                                                          |
-
+|    Maintainability (Wartbarkeit)     | Das Ziel der Maintainability ist es sicherzustellen, dass das PySmartHome-System leicht zu warten und zu pflegen ist, indem es gut strukturierten, dokumentierten und getesteten Code verwendet, um Entwicklern eine effiziente Weiterentwicklung und Fehlerbehebung zu ermöglichen.                                                                                                          |
 
 ## Stakeholder
 
 Die folgende Tabelle stellt die Stakeholder des PySmartHomes und ihre jeweilige Intentionen dar.
 
-|                 Rolle                | Erwartung, Interesse, Bezug                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|:------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|        Softwarearchitekt*innen       | <ul><li>streben danach, eine gut strukturierte und flexible Architektur für das PySmartHome-Projekt zu entwerfen</li><li>legen Wert auf klare Schnittstellen und eine hohe Interoperabilität, um die Integration externer Komponenten wie der KI und der Wetterstation zu ermöglichen</li><li>Ziel ist es, eine robuste Basis zu schaffen, die zukünftige Anforderungen und technologische Entwicklungen problemlos bewältigen kann</li></ul> |
-|           Entwickler*innen           | <ul><li>setzen die Vorgaben der Softwarearchitektinnen um und streben eine saubere Code-Basis und klare Architektur an, um effizient und produktiv arbeiten zu können</li><li>erwarten klare Aufgabenstellungen und gut dokumentierten Code, um ihre Arbeit erfolgreich umzusetzen und eine reibungslose Integration der externen Komponenten sicherzustellen</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Nutzer*innen/Kunde  (Michael Binzen) | <ul><li>hat das Interesse, dass die Studierenden die in der Vorlesung vermittelten Inhalte zum Software-Engineering und den Kernkonzepten erfolgreich umsetzen</li><li>erwartet eine sorgfältige Klassen- und Modellierung des PySmartHome-Systems, die Anwendung von Design Patterns und die Berücksichtigung der SOLID-Prinzipien</li><li>legt Wert darauf, dass die Studierenden die theoretischen Konzepte in der Praxis umsetzen und ein gut strukturiertes, erweiterbares Smart-Home-System entwickeln</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|                Rolle                 | Erwartung, Interesse, Bezug                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|:------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|       Softwarearchitekt*innen        | <ul><li>streben danach, eine gut strukturierte und flexible Architektur für das PySmartHome-Projekt zu entwerfen</li><li>legen Wert auf klare Schnittstellen und eine hohe Interoperabilität, um die Integration externer Komponenten wie der KI und der Wetterstation zu ermöglichen</li><li>Ziel ist es, eine robuste Basis zu schaffen, die zukünftige Anforderungen und technologische Entwicklungen problemlos bewältigen kann</li></ul>                                                                          |
+|           Entwickler*innen           | <ul><li>setzen die Vorgaben der Softwarearchitektinnen um und streben eine saubere Code-Basis und klare Architektur an, um effizient und produktiv arbeiten zu können</li><li>erwarten klare Aufgabenstellungen und gut dokumentierten Code, um ihre Arbeit erfolgreich umzusetzen und eine reibungslose Integration der externen Komponenten sicherzustellen</li></ul>                                                                                                                                                |
+| Nutzer*innen/Kunde  (Michael Binzen) | <ul><li>hat das Interesse, dass die Studierenden die in der Vorlesung vermittelten Inhalte zum Software-Engineering und den Kernkonzepten erfolgreich umsetzen</li><li>erwartet eine sorgfältige Klassen- und Modellierung des PySmartHome-Systems, die Anwendung von Design Patterns und die Berücksichtigung der SOLID-Prinzipien</li><li>legt Wert darauf, dass die Studierenden die theoretischen Konzepte in der Praxis umsetzen und ein gut strukturiertes, erweiterbares Smart-Home-System entwickeln</li></ul> |
 
 # 2 Randbedingungen
 
 ## Technische Randbedingungen
+
 |          Randbedingung           | Erläuterung                                                                                                                                                     |
 |:--------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |        Programmiersprache        | Das Projekt wird in Python umgesetzt.                                                                                                                           |
@@ -125,19 +128,19 @@ Die folgende Tabelle stellt die Stakeholder des PySmartHomes und ihre jeweilige 
 |        Objektorientierung        | Das PySmartHome-Projekt basiert auf dem Prinzip der Objektorientierung, bei dem die Funktionalität in Form von Klassen und Objekten organisiert ist.            |
 
 ## Organisatorische Randbedingungen
-|          Randbedingung          | Erläuterung                                                                                                                                                                                                                                   |
-|:-------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|            Zeitplan             | Die Gruppen haben einen Zeitplan einzuhalten, der die Abgabe von Teilprojekten und die Präsentationen zu bestimmten Terminen vorsieht.                                                                                                        |
-|   Anforderungen des Dozenten    | Das PySmartHome-Projekt sollte die Anforderungen des Dozenten erfüllen, der Wert auf eine sorgfältige Klassen- und Modellierung des Smart Home-Systems, die Anwendung von Design Patterns und die Berücksichtigung der SOLID-Prinzipien legt. |
-|         Gruppenarbeit           | Das Projekt wird als Gruppenarbeit durchgeführt, daher ist eine klare Kommunikation und Zusammenarbeit innerhalb der Gruppen eine organisatorische Randbedingung.                                                                             |
+
+|       Randbedingung        | Erläuterung                                                                                                                                                                                                                                   |
+|:--------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|          Zeitplan          | Die Gruppen haben einen Zeitplan einzuhalten, der die Abgabe von Teilprojekten und die Präsentationen zu bestimmten Terminen vorsieht.                                                                                                        |
+| Anforderungen des Dozenten | Das PySmartHome-Projekt sollte die Anforderungen des Dozenten erfüllen, der Wert auf eine sorgfältige Klassen- und Modellierung des Smart Home-Systems, die Anwendung von Design Patterns und die Berücksichtigung der SOLID-Prinzipien legt. |
+|       Gruppenarbeit        | Das Projekt wird als Gruppenarbeit durchgeführt, daher ist eine klare Kommunikation und Zusammenarbeit innerhalb der Gruppen eine organisatorische Randbedingung.                                                                             |
 
 ## Konventionen
-|         Randbedingung          | Erläuterung                                                                                                                                                                                                                                   |
-|:------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Einhaltung von Design Patterns | Die Verwendung bestimmter Design Patterns ist eine Konvention, um bewährte Entwurfsmuster anzuwenden und die Code-Qualität zu verbessern, insbesondere in Bezug auf die Erweiterbarkeit des Systems.                                                                                                        |
-|          Dokumenation          | Das PySmartHome-Projekt erfordert eine Dokumentation gemäß dem arc42-Template. |
 
-
+|         Randbedingung          | Erläuterung                                                                                                                                                                                          |
+|:------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Einhaltung von Design Patterns | Die Verwendung bestimmter Design Patterns ist eine Konvention, um bewährte Entwurfsmuster anzuwenden und die Code-Qualität zu verbessern, insbesondere in Bezug auf die Erweiterbarkeit des Systems. |
+|          Dokumenation          | Das PySmartHome-Projekt erfordert eine Dokumentation gemäß dem arc42-Template.                                                                                                                       |
 
 # 3 Kontextabgrenzung {#section-system-scope-and-context}
 
@@ -156,6 +159,7 @@ dargestellt. Wir werden die zentralen Entscheidungen und Lösungsansätze aufzei
 Implementierung des Systems prägen.
 
 ## Auswahl von Python als Programmiersprache
+
 Python wurde bereits in den frühen Phasen unseres Projekts als bevorzugte Programmiersprache identifiziert. Diese
 Entscheidung war von Beginn an eine festgelegte Anforderung und basiert auf den vielfältigen Vorteilen, die Python für
 unser spezielles Anwendungsszenario bietet.
@@ -166,11 +170,12 @@ daher weniger Fehlermöglichkeiten zu erfüllen. Diese Eigenschaften machen Pyth
 Entwicklung von Smart Home Systemen, die eine breite Palette an Funktionen und eine hohe Benutzerfreundlichkeit
 erfordern.
 
-Ein weiterer Vorteil von Python liegt in seiner umfangreichen Bibliothekunterstützung, die für unsere Architektur von 
+Ein weiterer Vorteil von Python liegt in seiner umfangreichen Bibliothekunterstützung, die für unsere Architektur von
 entscheidender Bedeutung sind. So können wir effizient hochwertige Lösungen für unser Smart Home System entwickeln,
 ohne dabei das Rad neu erfinden zu müssen.
 
 ## Verpflichtung zu Best Practices und hochwertiger Softwareentwicklung
+
 Unsere Lösungsstrategie leitet sich stark von den Prinzipien der Software-Engineering-Best-Practices ab. Wir haben uns
 auf die Verwendung von Design Pattern und die Einhaltung der SOLID-Prinzipien verpflichtet. Dies garantiert, dass unser
 System nicht nur funktional, sondern auch gut strukturiert, erweiterbar und wartbar ist.
@@ -184,6 +189,7 @@ darstellen, haben uns dabei geholfen, den Code so zu strukturieren, dass er gut 
 verständlich ist. Dies erleichtert die langfristige Wartung und Weiterentwicklung des Systems.
 
 # Struktur und Modulare Architektur
+
 Um eine klare Trennung der Verantwortlichkeiten zu gewährleisten und die Wartbarkeit und Erweiterbarkeit zu verbessern,
 haben wir unser Smart Home System in verschiedene Module unterteilt. Jedes Modul repräsentiert einen spezifischen
 Aspekt des Gesamtsystems.
@@ -193,6 +199,7 @@ System überarbeiten zu müssen. Sie unterstützt auch die Nachvollziehbarkeit u
 Teil des Codes eine klar definierte Aufgabe hat.
 
 # Konfigurierbarkeit und Anpassungsfähigkeit
+
 Eine wichtige Anforderung unseres Smart Home Systems ist die Fähigkeit, sich an die Bedürfnisse und Vorlieben des
 Benutzers anzupassen. Um dies zu erreichen, haben wir die Konfigurierbarkeit und Anpassungsfähigkeit in das Herz
 unserer Architektur integriert.
@@ -258,35 +265,35 @@ Diese YAML Datei wird mit folgender Logik ausgelesen, um das Smart Home zu initi
 
 ```mermaid
 %%{
-  init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryBorderColor': '#7C0000',
-      'lineColor': '#F8B229',
-      'tertiaryColor': '#fff'
-    }
-  }
+init: {
+'theme': 'base',
+'themeVariables': {
+'primaryBorderColor': '#7C0000',
+'lineColor': '#F8B229',
+'tertiaryColor': '#fff'
+}
+}
 }%%
 flowchart TB
     subgraph SmartHomeController
-        ConfigLoader --creates--> B[ROOM: Living Room]
-        ConfigLoader --creates--> C[ZONE: Couch and TV]
+        ConfigLoader -- creates --> B[ROOM: Living Room]
+        ConfigLoader -- creates --> C[ZONE: Couch and TV]
         ConfigLoader -- "triggers instanciation" --> DeviceFactory
-        ConfigLoader --creates--> ControllerManager
-        B[ROOM: Living Room] --adds--> C[ZONE: Couch and TV]
-        C[ZONE: Couch and TV] --adds--> ControllerManager
-        ClimateController --assign--> ControllerManager
+        ConfigLoader -- creates --> ControllerManager
+        B[ROOM: Living Room] -- adds --> C[ZONE: Couch and TV]
+        C[ZONE: Couch and TV] -- adds --> ControllerManager
+        ClimateController -- assign --> ControllerManager
         subgraph Factory
             DeviceFactory -- creates --> D[DEVICE: Heater]
             DeviceFactory -- creates --> E[SENSOR: Temperature Sensor]
         end
         D[DEVICE: Heater] ---> A{Controller exists?}
         E[SENSOR: Temperature Sensor] ---> A{Controller exists?}
-        A --"NO: create + assign" --> ClimateController
-        A --"YES: assign" --> ClimateController
+        A -- "NO: create + assign" --> ClimateController
+        A -- "YES: assign" --> ClimateController
     end
-        YAML[Config Datei yaml] -- loads config data --> ConfigLoader
-        F[Zone Data JSON]--backup data restoration--> E[SENSOR: Temperature Sensor]
+    YAML[Config Datei yaml] -- loads config data --> ConfigLoader
+    F[Zone Data JSON] -- backup data restoration --> E[SENSOR: Temperature Sensor]
 ```
 
 Dieses Flussdiagramm beschreibt den grundlegenden Ablauf innerhalb des Smart Home Controllers, der die konfigurierten
@@ -306,38 +313,40 @@ Geräte und Sensoren in der jeweiligen Zone des Raumes erstellt und sie den pass
   Wenn bereits ein `ClimateController` vorhanden ist, werden die Geräte diesem zugewiesen.
 - Abschließend wird der `ClimateController` dem `ControllerManager` zugewiesen, und das Smart Home System ist nun
   vollständig aufgebaut.
-- Über eine JSON Datei ist es uns ebenfalls möglich Backup-Werte nach Laufzeitabbruch wiederherzustellen. Diese werden nachträglich den jeweiligen Sensoren der Zone zugewiesen.
+- Über eine JSON Datei ist es uns ebenfalls möglich Backup-Werte nach Laufzeitabbruch wiederherzustellen. Diese werden
+  nachträglich den jeweiligen Sensoren der Zone zugewiesen.
 
 Zusammenfassend handelt es sich bei diesem Flussdiagramm um eine vereinfachte Darstellung des Smart Homes, mithilfe der
 Konfigurationsdatei lassen sich eine Vielzahl an Räumen, Zonen, Geräte und Sensoren erstellen und den richtigen
 Controllern zuweisen. Die Visualisierung soll diesen Prozess in seinen Grundzügen veranschaulichen.
 
 ## Verhalten zur Laufzeit
+
 Während der Laufzeit koordiniert und steuert sich das Smart Home über seine Sensoren selbst:
 
 ```mermaid
 %%{
-  init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryBorderColor': '#7C0000',
-      'lineColor': '#F8B229',
-      'tertiaryColor': '#fff'
-    }
-  }
+init: {
+'theme': 'base',
+'themeVariables': {
+'primaryBorderColor': '#7C0000',
+'lineColor': '#F8B229',
+'tertiaryColor': '#fff'
+}
+}
 }%%
 sequenceDiagram
-    Main->>SmartHomeController: start()
+    Main ->> SmartHomeController: start()
     loop every 5s
-        SmartHomeController->>FertilizationController: update()
-            FertilizationController->>FertilizationSensor: calculate_value()
-            FertilizationSensor->>FertilizationController: return sensor_value
-            alt value below constant
-                FertilizationController->>Fertilizer: fertilize(value: float)            
-            else value above constant and device running
-                FertilizationController->>Fertilizer: stop_fertilizing()
-            end
-        FertilizationController->>FertilizationSensor: update()
+        SmartHomeController ->> FertilizationController: update()
+        FertilizationController ->> FertilizationSensor: calculate_value()
+        FertilizationSensor ->> FertilizationController: return sensor_value
+        alt value below constant
+            FertilizationController ->> Fertilizer: fertilize(value: float)
+        else value above constant and device running
+            FertilizationController ->> Fertilizer: stop_fertilizing()
+        end
+        FertilizationController ->> FertilizationSensor: update()
     end
 ```
 
@@ -369,10 +378,11 @@ Gewächshaus" verhält, um die Düngung (Fertilization) steuern:
 - Der Schleifenablauf wird alle 5 Sekunden wiederholt, wodurch die Düngung der Pflanzen periodisch überwacht und
   gesteuert wird.
 
-Neben der klassischen Steuerung ist es mithilfe des Systems möglich während der Laufzeit 
+Neben der klassischen Steuerung ist es mithilfe des Systems möglich während der Laufzeit
 Veränderungen des Systems in einer JSON zu speichern, auszulesen und darauf zu reagieren.
-Nach jedem Methodenaufruf `update()` wird der aktuelle Status des Gesamtsystems in `zone_data.json` persistiert. 
-Auch wird in dieser Methode überprüft, ob sich die `config.yaml` geändert hat. In diesem Fall wird das System ein "Reboot" durchführen und aus `zone_data.json` die neue Systemlandschaft mit den alten Daten wiederherstellen.
+Nach jedem Methodenaufruf `update()` wird der aktuelle Status des Gesamtsystems in `zone_data.json` persistiert.
+Auch wird in dieser Methode überprüft, ob sich die `config.yaml` geändert hat. In diesem Fall wird das System ein "
+Reboot" durchführen und aus `zone_data.json` die neue Systemlandschaft mit den alten Daten wiederherstellen.
 Dadurch ist das System flexibel an die Realität anpassbar.
 
 # 7 Verteilungssicht
@@ -386,23 +396,23 @@ Struktur zu konsolidieren, die das lauffähige System bereitstellt. Das könnte 
 
 ```mermaid
 %%{
-  init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryBorderColor': '#7C0000',
-      'lineColor': '#F8B229',
-      'tertiaryColor': '#fff'
-    }
-  }
+init: {
+'theme': 'base',
+'themeVariables': {
+'primaryBorderColor': '#7C0000',
+'lineColor': '#F8B229',
+'tertiaryColor': '#fff'
+}
+}
 }%%
 flowchart TD
-    subgraph Smart Home 
-        A[Smart Home System]<-->Heater
-        B[Temperature Sensor]-->A[Smart Home System]
-        A[Smart Home System]<-->Fan
-        A[Smart Home System]<-->C[Roller Blind]
+    subgraph Smart Home
+        A[Smart Home System] <--> Heater
+        B[Temperature Sensor] --> A[Smart Home System]
+        A[Smart Home System] <--> Fan
+        A[Smart Home System] <--> C[Roller Blind]
         subgraph ide1 [ServerCluster]
-            A[Smart Home System]-->id1[(Database)]
+            A[Smart Home System] --> id1[(Database)]
         end
     end
 ```
@@ -652,16 +662,13 @@ E01 Es sollen Home Securtity Maßnahmen in PySmartHome integriert werden und es 
 
 E02 Es werden zusätzliche Sensoren im Gewächshaus verwendet. Diese werden in kurzer Zeit in das System eingebunden.
 
-
 I01 Eine weitere Künstliche Intelligenz soll an das System angeschlossen werden. Dies wird in kurzer Zeit umgesetzt.
 
 I02 Ein Alarmsystem soll mit PySmartHome interagieren und das Projekt wird schnell abgeschlossen.
 
-
 M01 Eine Methode der Sensoren soll neu implementiert werden. Dank der Tests kann dies mit wenig Aufwand geschehen.
 
 M02 Im System taucht ein Bug auf doch durch gute Testabdeckung wird der Fehler schnell identifziert und behoben.
-
 
 # 11 Risiken und technische Schulden {#section-technical-risks}
 
@@ -681,15 +688,19 @@ Es gibt keine Abkürzungen oder Begriffe, die einer Erklärung bedürfen.
 
 # Aufgabenverteilung
 
-Zuerst haben wir uns alle gemeinsam überlegt, wie wir das Smart-Home-System aufbauen wollen und welche Komponenten wir benötigen. 
-Dabei haben wir uns an den Anforderungen orientiert und die Komponenten entsprechend nach Verantwortlichkeiten aufgeteilt. 
-Allerdings haben wir uns auch dazu entschieden, die Aufgaben nicht strikt aufzuteilen, sondern uns gegenseitig zu unterstützen und gemeinsam an den Komponenten zu arbeiten.
+Zuerst haben wir uns alle gemeinsam überlegt, wie wir das Smart-Home-System aufbauen wollen und welche Komponenten wir
+benötigen.
+Dabei haben wir uns an den Anforderungen orientiert und die Komponenten entsprechend nach Verantwortlichkeiten
+aufgeteilt.
+Allerdings haben wir uns auch dazu entschieden, die Aufgaben nicht strikt aufzuteilen, sondern uns gegenseitig zu
+unterstützen und gemeinsam an den Komponenten zu arbeiten.
 Dadurch konnten wir uns gegenseitig helfen und die Aufgaben schneller erledigen und eine bessere Qualität erreichen.
-Aus diesem Grund ist die folgende Aufgabenverteilung nicht als strikte Trennung zu verstehen, sondern als grobe Orientierung, wer an welchen Komponenten gearbeitet hat.
+Aus diesem Grund ist die folgende Aufgabenverteilung nicht als strikte Trennung zu verstehen, sondern als grobe
+Orientierung, wer an welchen Komponenten gearbeitet hat.
 
-**Implementierung und Architektur**  
+**Implementierung und Architektur**
 
-* Aufbau der Grundstruktur: Räume, Zonen, Controller, Geräte, Sensoren (3047210, 3798263, 4940972) 
+* Aufbau der Grundstruktur: Räume, Zonen, Controller, Geräte, Sensoren (3047210, 3798263, 4940972)
 * Aufbau aus Config-File (3047210)
 * Einlesen des Config-Files zur Laufzeit (3047210)
 * Konzept für Logik der Geräte, Controller, Sensoren im Zusammenspiel ( 4803747, 4940972)
@@ -699,19 +710,20 @@ Aus diesem Grund ist die folgende Aufgabenverteilung nicht als strikte Trennung 
 * Logging (3047210, 8110106)
 * Tests (8043245)
 
-**Dokumentation**  
-1) 3798263  
-2) 3798263  
-3)  8110106  
-4)  3047210  
-5) 3047210  
-6)  4803747  
-7)  4803747  
-8)  4940972  
-9)  Alle  
-10)  8110106  
-11)  8043245  
-12)  Alle  
+**Dokumentation**
+
+1) 3798263
+2) 3798263
+3) 8110106
+4) 3047210
+5) 3047210
+6) 4803747
+7) 4803747
+8) 4940972
+9) Alle
+10) 8043245
+11) 8110106
+12) Alle
 
 **Alle beteiligten Personen**  
 4803747, 4940972, 3047210, 3798263, 8043245, 8110106

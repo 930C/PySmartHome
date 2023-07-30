@@ -222,7 +222,7 @@ Systems, das sich durch seine Benutzerfreundlichkeit, Flexibilität, Erweiterbar
 
 ++ Luca
 
-# 6 Laufzeitsicht {#section-runtime-view}
+# 6 Laufzeitsicht
 
 ## Systemstart
 
@@ -265,7 +265,7 @@ Diese YAML Datei wird mit folgender Logik ausgelesen, um das Smart Home zu initi
 }%%
 flowchart TB
     subgraph SmartHomeController
-          ConfigLoader --creates--> B[ROOM: Living Room]
+        ConfigLoader --creates--> B[ROOM: Living Room]
         ConfigLoader --creates--> C[ZONE: Couch and TV]
         ConfigLoader -- "triggers instanciation" --> DeviceFactory
         ConfigLoader --creates--> ControllerManager
@@ -282,6 +282,7 @@ flowchart TB
         A --"YES: assign" --> ClimateController
     end
         YAML[Config Datei yaml] -- loads config data --> ConfigLoader
+        F[Zone Data JSON]--backup data restoration--> E[SENSOR: Temperature Sensor]
 ```
 
 Dieses Flussdiagramm beschreibt den grundlegenden Ablauf innerhalb des Smart Home Controllers, der die konfigurierten
@@ -300,13 +301,15 @@ Geräte und Sensoren in der jeweiligen Zone des Raumes erstellt und sie den pass
   existiert, wird einer erstellt und den Geräten/Sensoren zugewiesen.
   Wenn bereits ein `ClimateController` vorhanden ist, werden die Geräte diesem zugewiesen.
 - Abschließend wird der `ClimateController` dem `ControllerManager` zugewiesen, und das Smart Home System ist nun
-  vollständig aufgebaut
+  vollständig aufgebaut.
+- Über eine JSON Datei ist es uns ebenfalls möglich Backup-Werte nach Laufzeitabbruch wiederherzustellen. Diese werden nachträglich den jeweiligen Sensoren der Zone zugewiesen.
 
 Zusammenfassend handelt es sich bei diesem Flussdiagramm um eine vereinfachte Darstellung des Smart Homes, mithilfe der
 Konfigurationsdatei lassen sich eine Vielzahl an Räumen, Zonen, Geräte und Sensoren erstellen und den richtigen
 Controllern zuweisen. Die Visualisierung soll diesen Prozess in seinen Grundzügen veranschaulichen.
 
 ## Verhalten zur Laufzeit
+Während der Laufzeit koordiniert und steuert sich das Smart Home über seine Sensoren selbst:
 
 ```mermaid
 %%{
@@ -320,7 +323,7 @@ Controllern zuweisen. Die Visualisierung soll diesen Prozess in seinen Grundzüg
   }
 }%%
 sequenceDiagram
-    Main->>SmartHomeController: update()
+    Main->>SmartHomeController: start()
     loop every 5s
         SmartHomeController->>FertilizationController: update()
             FertilizationController->>FertilizationSensor: calculate_value()
@@ -337,7 +340,7 @@ sequenceDiagram
 Das Sequenzdiagramm beschreibt beispielhaft den Prozess, wie sich der `FertilizationController` in unserem "smarten
 Gewächshaus" verhält, um die Düngung (Fertilization) steuern:
 
-- Der Prozess beginnt, wenn die Main-Funktion den `SmartHomeController` aufruft, um die Methode `update()` auszuführen.
+- Der Prozess beginnt, wenn die Main-Funktion den `SmartHomeController` aufruft, um die Methode `start()` auszuführen.
   Der `SmartHomeController` ist verantwortlich für die Gesamtsteuerung und Verwaltung des Smart Home Systems.
 
 - In einem wiederholten Schleifenablauf, der alle 5 Sekunden stattfindet, iteriert der `SmartHomeController` über alle
@@ -362,7 +365,13 @@ Gewächshaus" verhält, um die Düngung (Fertilization) steuern:
 - Der Schleifenablauf wird alle 5 Sekunden wiederholt, wodurch die Düngung der Pflanzen periodisch überwacht und
   gesteuert wird.
 
-# 7 Verteilungssicht {#section-deployment-view}
+Neben der klassischen Steuerung ist es mithilfe des Systems möglich während der Laufzeit 
+Veränderungen des Systems in einer JSON zu speichern, auszulesen und darauf zu reagieren.
+Nach jedem Methodenaufruf `update()` wird der aktuelle Status des Gesamtsystems in `zone_data.json` persistiert. 
+Auch wird in dieser Methode überprüft, ob sich die `config.yaml` geändert hat. In diesem Fall wird das System ein "Reboot" durchführen und aus `zone_data.json` die neue Systemlandschaft mit den alten Daten wiederherstellen.
+Dadurch ist das System flexibel an die Realität anpassbar.
+
+# 7 Verteilungssicht
 
 Aufgrund der Anforderungen an das Projekt wurden keine Test, Development oder Produktivumgebung aufgesetzt.
 Das Smart Home System ist zum jetztigen Stand ein lokal funktionierendes System, dass in Python geschrieben wurde und
@@ -372,6 +381,16 @@ verteilten Systems betrachten, die Daten sammeln. In diesem Zusammenhang ist es 
 Struktur zu konsolidieren, die das lauffähige System bereitstellt. Das könnte in dieser Form umzusetzen sein.
 
 ```mermaid
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryBorderColor': '#7C0000',
+      'lineColor': '#F8B229',
+      'tertiaryColor': '#fff'
+    }
+  }
+}%%
 flowchart TD
     subgraph Smart Home 
         A[Smart Home System]<-->Heater
@@ -384,11 +403,11 @@ flowchart TD
     end
 ```
 
-Da unser System die Veränderungern der Sensoren lediglich simuliert und nicht mit realen Events arbeitet, würde das
+Da unser System die Veränderungen der Sensoren lediglich simuliert und nicht mit realen Events arbeitet, würde das
 aktuelle System nicht ohne Anpassungen in dieser Form darstellbar sein. Jedoch schafft diese Visualisierung ein gutes
 Bild, wohin die Architektur gehen könnte.
 
-# 8 Querschnittliche Konzepte {#section-concepts}
+# 8 Querschnittliche Konzepte
 
 ## Architektur-/ Entwurfsmuster
 

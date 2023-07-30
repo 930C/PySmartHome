@@ -656,6 +656,8 @@ Es gibt keine weiteren Architekturentscheidungen, die einer Erklärung bedürfen
 
 ## Qualitätsbaum
 
+![Qualitätenbaum](docs/Qualitätenbaum2.jpg)
+
 ## Qualitätsszenarien
 
 E01 Es sollen Home Securtity Maßnahmen in PySmartHome integriert werden und es wird in wenigen Tagen umgesetzt.

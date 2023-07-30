@@ -110,8 +110,27 @@ Die folgende Tabelle stellt die Stakeholder des PySmartHomes und ihre jeweilige 
 
 # 2 Randbedingungen {#section-architecture-constraints}
 
-OO-Design, Python
-O Lisa
+## Technische Randbedingungen
+|          Randbedingung           | Erläuterung                                                                                                                                                     |
+|:--------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|        Programmiersprache        | Das Projekt wird in Python umgesetzt.                                                                                                                           |
+| Unterstützung von Schnittstellen | Die Interoperabilität mit externen Komponenten wie einer Künstlichen Intelligenz (KI) (und einer Wetterstation) erfordert die Unterstützung von Schnittstellen. |
+|        Objektorientierung        | Das PySmartHome-Projekt basiert auf dem Prinzip der Objektorientierung, bei dem die Funktionalität in Form von Klassen und Objekten organisiert ist.            |
+
+## Organisatorische Randbedingungen
+|          Randbedingung          | Erläuterung                                                                                                                                                                                                                                   |
+|:-------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|            Zeitplan             | Die Gruppen haben einen Zeitplan einzuhalten, der die Abgabe von Teilprojekten und die Präsentationen zu bestimmten Terminen vorsieht.                                                                                                        |
+|   Anforderungen des Dozenten    | Das PySmartHome-Projekt sollte die Anforderungen des Dozenten erfüllen, der Wert auf eine sorgfältige Klassen- und Modellierung des Smart Home-Systems, die Anwendung von Design Patterns und die Berücksichtigung der SOLID-Prinzipien legt. |
+|         Gruppenarbeit           | Das Projekt wird als Gruppenarbeit durchgeführt, daher ist eine klare Kommunikation und Zusammenarbeit innerhalb der Gruppen eine organisatorische Randbedingung.                                                                             |
+
+## Konventionen
+|         Randbedingung          | Erläuterung                                                                                                                                                                                                                                   |
+|:------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Einhaltung von Design Patterns | Die Verwendung bestimmter Design Patterns ist eine Konvention, um bewährte Entwurfsmuster anzuwenden und die Code-Qualität zu verbessern, insbesondere in Bezug auf die Erweiterbarkeit des Systems.                                                                                                        |
+|          Dokumenation          | Das PySmartHome-Projekt erfordert eine Dokumentation gemäß dem arc42-Template. |
+
+
 
 # 3 Kontextabgrenzung {#section-system-scope-and-context}
 

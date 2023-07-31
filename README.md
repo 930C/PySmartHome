@@ -1,4 +1,4 @@
-# PySmartHome
+# PySmartHome (Gruppe 5)
 Smart Home Automation Python App
 
 https://github.com/930C/PySmartHome

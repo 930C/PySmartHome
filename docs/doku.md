@@ -19,9 +19,9 @@
 * [4 Lösungsstrategie](#4-lösungsstrategie)
   * [Auswahl von Python als Programmiersprache](#auswahl-von-python-als-programmiersprache)
   * [Verpflichtung zu Best Practices und hochwertiger Softwareentwicklung](#verpflichtung-zu-best-practices-und-hochwertiger-softwareentwicklung)
-* [Struktur und Modulare Architektur](#struktur-und-modulare-architektur)
-* [Konfigurierbarkeit und Anpassungsfähigkeit](#konfigurierbarkeit-und-anpassungsfähigkeit)
-* [Systematisches Logging](#systematisches-logging)
+  * [Struktur und Modulare Architektur](#struktur-und-modulare-architektur)
+  * [Konfigurierbarkeit und Anpassungsfähigkeit](#konfigurierbarkeit-und-anpassungsfähigkeit)
+  * [Systematisches Logging](#systematisches-logging)
 * [5 Bausteinsicht](#5-bausteinsicht)
   * [Ebene 1 - Whitebox Gesamtsystem](#ebene-1---whitebox-gesamtsystem)
   * [Ebene 2](#ebene-2)
@@ -220,7 +220,7 @@ Die SOLID-Prinzipien, welche eine Sammlung von fünf Prinzipien für die objekto
 darstellen, haben uns dabei geholfen, den Code so zu strukturieren, dass er gut organisiert, erweiterbar und leicht
 verständlich ist. Dies erleichtert die langfristige Wartung und Weiterentwicklung des Systems.
 
-# Struktur und Modulare Architektur
+## Struktur und Modulare Architektur
 
 Um eine klare Trennung der Verantwortlichkeiten zu gewährleisten und die Wartbarkeit und Erweiterbarkeit zu verbessern,
 haben wir unser Smart Home System in verschiedene Module unterteilt. Jedes Modul repräsentiert einen spezifischen
@@ -230,7 +230,7 @@ Die modulare Struktur ermöglicht es uns, bei Bedarf neue Funktionen und Geräte
 System überarbeiten zu müssen. Sie unterstützt auch die Nachvollziehbarkeit und Verständlichkeit des Systems, da jeder
 Teil des Codes eine klar definierte Aufgabe hat.
 
-# Konfigurierbarkeit und Anpassungsfähigkeit
+## Konfigurierbarkeit und Anpassungsfähigkeit
 
 Eine wichtige Anforderung unseres Smart Home Systems ist die Fähigkeit, sich an die Bedürfnisse und Vorlieben des
 Benutzers anzupassen. Um dies zu erreichen, haben wir die Konfigurierbarkeit und Anpassungsfähigkeit in das Herz
@@ -241,7 +241,7 @@ eine flexible und verständliche Möglichkeit, das System nach ihren Wünschen z
 Die Konfigurationsdaten in `config.yaml` können einfach geändert werden, um das Verhalten des Systems anzupassen, ohne
 dass Änderungen am Code erforderlich sind.
 
-# Systematisches Logging
+## Systematisches Logging
 
 Um die Fehlersuche zu erleichtern und die Nachvollziehbarkeit des Systemzustands zu ermöglichen, haben wir ein
 systematisches Logging in unsere Architektur implementiert. Das Logging ist so konzipiert, dass es wertvolle
@@ -659,22 +659,22 @@ Smart-Home-Systems erheblich und bietet eine solide Grundlage für zukünftige E
 
 ### Template Method Pattern
 
-Das Template Method Pattern wird hier verwendet, um eine abstrakte Struktur für die Implementierung von SwitchableDevice
-und AdjustableDevice-Klassen bereitzustellen. Das Ziel ist es, den Code für das Schalten von Geräten zu standardisieren,
+Das Template Method Pattern wird hier verwendet, um eine abstrakte Struktur für die Implementierung von `SwitchableDevice`
+und `AdjustableDevice`-Klassen bereitzustellen. Das Ziel ist es, den Code für das Schalten von Geräten zu standardisieren,
 während gleichzeitig spezifische Implementierungsdetails für die Anpassung der Geräte ermöglicht werden.
 
-Die Klasse "SwitchableDevice" enthält die grundlegende Logik für das Ein- und Ausschalten von Geräten. Sie definiert
+Die Klasse `SwitchableDevice` enthält die grundlegende Logik für das Ein- und Ausschalten von Geräten. Sie definiert
 eine Template-Methode (eine Methode, die den allgemeinen Ablauf festlegt, aber einige Schritte den Unterklassen
 überlässt), die die Abfolge der Aktionen zum Ein- und Ausschalten eines Geräts beschreibt.
 
-Die Klasse "AdjustableDevice" erbt von "SwitchableDevice" und fügt die Funktionalität hinzu, um den Gerätepegel
+Die Klasse `AdjustableDevice` erbt von `SwitchableDevice` und fügt die Funktionalität hinzu, um den Gerätepegel
 anzupassen. Auch hier wird das Template Method Pattern verwendet, um den allgemeinen Ablauf des Pegelsetzungsprozesses (
 bspw. Ober- und Untergenzen der Intensität) vorzugeben, aber die spezifische Implementierung des Pegelsetzens wird den
 Unterklassen überlassen.
 
-Die Geräte-Klasse "Humidifier" ist beispielsweise eine Unterklassen-Implementierung von "AdjustableDevice". Sie erbt den
-Mechanismus zum Ein- und Ausschalten von Geräten und das Grundgerüst zum Setzen des Pegels. "Humidifier" implementiert
-dann die spezifischen Methoden "humidify" und "dehumidify", um den Feuchtigkeitspegel des Luftbefeuchters anzupassen. So
+Die Geräte-Klasse `Humidifier` ist beispielsweise eine Unterklassen-Implementierung von `AdjustableDevice`. Sie erbt den
+Mechanismus zum Ein- und Ausschalten von Geräten und das Grundgerüst zum Setzen des Pegels. `Humidifier` implementiert
+dann die spezifischen Methoden `humidify` und `dehumidify`, um den Feuchtigkeitspegel des Luftbefeuchters anzupassen. So
 hat jede Unterklasse eine gewisse Basisfunktionalität und kann eigene Methoden und Logik ergänzen.
 
 Durch die Verwendung des Template Method Patterns werden also die allgemeinen Schritte zum Ein- und Ausschalten von
@@ -857,8 +857,18 @@ Es gibt keine weiteren Architekturentscheidungen, die einer Erklärung bedürfen
 
 ## Qualitätsbaum
 
-![Qualitätenbaum](Qualitätenbaum2.jpg)
-
+```mermaid
+flowchart TD
+    Qualität-->Extensibility    
+    Qualität-->Interoperability
+    Qualität-->Maintainability
+    Extensibility-->E01    
+    Interoperability-->I01
+    Maintainability-->M01
+     Extensibility-->E02    
+    Interoperability-->I02
+    Maintainability-->M02
+```
 ## Qualitätsszenarien
 
 E01 Es sollen Home Securtity Maßnahmen in PySmartHome integriert werden und es wird in wenigen Tagen umgesetzt.

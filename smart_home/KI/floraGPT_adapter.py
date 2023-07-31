@@ -1,6 +1,5 @@
 from smart_home.KI.floraGPT import ermittlePflegehinweis
 from smart_home.commands.plant_care_command import PlantCareCommand
-from smart_home.interfaces.command_interface import CommandInterface
 from smart_home.logging.logger import LoggerFactory
 
 

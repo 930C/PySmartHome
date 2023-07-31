@@ -44,7 +44,7 @@
 * [10 Qualitätsanforderungen](#10-qualitätsanforderungen)
   * [Qualitätsbaum](#qualitätsbaum)
   * [Qualitätsszenarien](#qualitätsszenarien)
-* [11 Risiken und technische Schulden {#section-technical-risks}](#11-risiken-und-technische-schulden-section-technical-risks)
+* [11 Risiken und technische Schulden](#11-risiken-und-technische-schulden)
   * [Observer Pattern für Sensoren](#observer-pattern-für-sensoren)
   * [Fehlendes Sicherheitskonzept](#fehlendes-sicherheitskonzept)
   * [Input Validation für Config File und error handling](#input-validation-für-config-file-und-error-handling)

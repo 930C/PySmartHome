@@ -945,7 +945,7 @@ Orientierung, wer an welchen Komponenten gearbeitet hat.
 * Aufbau der Grundstruktur: Räume, Zonen, Controller, Geräte, Sensoren (3047210, 3798263, 4940972)
 * Aufbau aus Config-File (3047210)
 * Einlesen des Config-Files zur Laufzeit (3047210)
-* Konzept für Logik der Geräte, Controller, Sensoren im Zusammenspiel ( 4803747, 4940972)
+* Konzept für Logik der Geräte, Controller, Sensoren im Zusammenspiel (4803747, 4940972)
 * Implementierung der Geräte, Controller, Sensoren (3798263, 4940972)
 * Strategie(-Pattern) für Sensorwerte in den Zonen (4940972)
 * Flora GPT (4940972)

@@ -10,7 +10,6 @@ from smart_home.devices.climate.humidifier import Humidifier
 from smart_home.devices.climate.roller_blind import RollerBlind
 from smart_home.devices.fertilization.fertilizer import Fertilizer
 from smart_home.devices.irrigation.irrigation_system import IrrigationSystem
-from smart_home.devices.irrigation.rainwater_harvesting_system import RainwaterHarvestingSystem
 from smart_home.devices.lights.led_light import LEDLight
 from smart_home.logging.logger import LoggerFactory
 from smart_home.sensors.fertilization_sensor import FertilizationSensor
@@ -31,8 +30,7 @@ class DeviceFactory:
         'humidifier': Humidifier,
         'roller_blind': RollerBlind,
         'fertilizer': Fertilizer,
-        'irrigation_system': IrrigationSystem,
-        'rainwater_harvesting_system': RainwaterHarvestingSystem
+        'irrigation_system': IrrigationSystem
     }
 
     sensor_classes = {
@@ -57,7 +55,6 @@ class DeviceFactory:
         RollerBlind: ClimateController,
         Fertilizer: FertilizationController,
         IrrigationSystem: IrrigationController,
-        RainwaterHarvestingSystem: IrrigationController,
     }
 
     # In dieser Methode wird die Klasse des Geräts für das jeweilige Gerät ermittelt.

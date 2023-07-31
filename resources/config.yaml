@@ -6,11 +6,27 @@ rooms:
         devices:
           - name: Heater 1
             type: heater
-          - name: Heater 2
-            type: heater
+          - name: Fertinand
+            type: fertilizer
+          - name: Siegrid
+            type: irrigation_system
+          - name: Number 1
+            type: fan
+          - name: hummi
+            type: humidifier
+          - name: rolli
+            type: roller_blind
+          - name: LEDdy
+            type: led_light
         sensors:
           - name: Temperature Sensor 1
             type: temperature_sensor
+          - name: Humidity Sensor 1
+            type: humidity_sensor
+          - name: Fertilization Sensor 1
+            type: fertilization_sensor
+          - name: Irrigation Sensor 1
+            type: irrigation_sensor
       - name: Zone 2
         devices:
           - name: LED Light 1

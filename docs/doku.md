@@ -140,7 +140,7 @@ Die folgende Tabelle stellt die Stakeholder des PySmartHomes und ihre jeweilige 
 |         Randbedingung          | Erläuterung                                                                                                                                                                                          |
 |:------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Einhaltung von Design Patterns | Die Verwendung bestimmter Design Patterns ist eine Konvention, um bewährte Entwurfsmuster anzuwenden und die Code-Qualität zu verbessern, insbesondere in Bezug auf die Erweiterbarkeit des Systems. |
-|          Dokumenation          | Das PySmartHome-Projekt erfordert eine Dokumentation gemäß dem arc42-Template.                                                                                                                       |
+|         Dokumentation          | Das PySmartHome-Projekt erfordert eine Dokumentation gemäß dem arc42-Template.                                                                                                                       |
 
 # 3 Kontextabgrenzung {#section-system-scope-and-context}
 
@@ -160,12 +160,11 @@ Implementierung des Systems prägen.
 
 ## Auswahl von Python als Programmiersprache
 
-Python wurde bereits in den frühen Phasen unseres Projekts als bevorzugte Programmiersprache identifiziert. Diese
-Entscheidung war von Beginn an eine festgelegte Anforderung und basiert auf den vielfältigen Vorteilen, die Python für
-unser spezielles Anwendungsszenario bietet.
+Python war von Beginn an eine festgelegte Anforderung und basiert auf den vielfältigen Vorteilen, die Python für unser
+spezielles Anwendungsszenario bietet.
 
 Python ist bekannt für seine einfache Syntax, die Lesbarkeit und Verständlichkeit des Codes fördert. Darüber hinaus ist
-Python eine äußerst ausdrucksstarke Sprache, die es uns ermöglicht, komplexe Anforderungen mit weniger Codezeilen und
+es eine äußerst ausdrucksstarke Sprache, die es uns ermöglicht, komplexe Anforderungen mit weniger Codezeilen und
 daher weniger Fehlermöglichkeiten zu erfüllen. Diese Eigenschaften machen Python zu einer idealen Wahl für die
 Entwicklung von Smart Home Systemen, die eine breite Palette an Funktionen und eine hohe Benutzerfreundlichkeit
 erfordern.
@@ -176,9 +175,9 @@ ohne dabei das Rad neu erfinden zu müssen.
 
 ## Verpflichtung zu Best Practices und hochwertiger Softwareentwicklung
 
-Unsere Lösungsstrategie leitet sich stark von den Prinzipien der Software-Engineering-Best-Practices ab. Wir haben uns
-auf die Verwendung von Design Pattern und die Einhaltung der SOLID-Prinzipien verpflichtet. Dies garantiert, dass unser
-System nicht nur funktional, sondern auch gut strukturiert, erweiterbar und wartbar ist.
+Unsere Lösungsstrategie leitet sich stark von den Prinzipien den Best-Practices des Software-Engineerings ab. Wir haben
+uns auf die Verwendung von Design Pattern und die Einhaltung der SOLID-Prinzipien verpflichtet. Dies garantiert, dass
+unser System nicht nur funktional, sondern auch gut strukturiert, erweiterbar und wartbar ist.
 
 Beispielsweise findet das Kommando-Muster Anwendung in der "Commands" Komponente, um unterschiedliche Befehle, wie die
 Pflege der Pflanzen, abzubilden. Die Verwendung des Kommando-Musters ermöglicht eine lose Kopplung und erhöht die
@@ -223,15 +222,149 @@ vornehmen oder Geräte/Sensoren anpassen.
 Insgesamt repräsentiert unsere Lösungsstrategie einen bewussten und durchdachten Ansatz zur Entwicklung eines Smart-Home
 Systems, das sich durch seine Benutzerfreundlichkeit, Flexibilität, Erweiterbarkeit und Robustheit auszeichnet.
 
-# 5 Bausteinsicht {#section-building-block-view}
+# 5 Bausteinsicht
 
-## Whitebox Gesamtsystem {#_whitebox_gesamtsystem}
+## Ebene 1 - Whitebox Gesamtsystem
 
-## Ebene 2 {#_ebene_2}
+Unser Smart-Home-System ist in verschiedene Hauptmodule unterteilt, die jeweils spezifische Aspekte des Gesamtsystems
+behandeln. Dies stellt sicher, dass jede Komponente klar definiert ist und ihre eigene Verantwortlichkeit innerhalb des
+Gesamtsystems hat.
 
-## Ebene 3 {#_ebene_3}
+| Hauptmodul   | Beschreibung                                                                                                                                                                         |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `smart_home` | Dies ist das Hauptverzeichnis, das den Code für das gesamte Smart-Home-System enthält. Es besteht aus mehreren Untermodulen, die in den folgenden Abschnitten erläutert werden.      |
+| `resources`  | Dieses Verzeichnis enthält die Konfigurationsdateien und zwischengespeicherte Zonendaten für das System. Die Konfigurationsdatei ist in YAML und die Zonendaten in JSON gespeichert. |
+| `main.py`    | Dies ist die Hauptdatei, die das System startet. Es lädt die Konfigurationsdaten und initialisiert die Komponenten des Systems.                                                      |
+| `logs`       | Dieses Verzeichnis speichert die Log-Dateien des Systems, die für die Fehlerbehebung und Überwachung des Systems unerlässlich sind.                                                  |
 
-++ Luca
+```mermaid
+graph TD
+    u[User] --executes--> main[main.py]
+    u --edits config--> r[resources]
+    subgraph System
+        main --starts--> sh[smart_home]
+        sh -- reads from --> r[resources]
+        sh --saves data to--> r
+        sh --creates--> l[logs]
+    end
+    u --reads--> l
+```
+
+Das gegebene Diagramm illustriert die Interaktionen zwischen dem Benutzer und den Hauptkomponenten des Smart-Home-Systems auf der obersten Ebene.
+
+Zunächst initiiert der Benutzer die Hauptanwendung `main.py`. Gleichzeitig hat der Benutzer die Möglichkeit, 
+die Konfigurationsdateien im resources Verzeichnis zu bearbeiten, um die Systemeinstellungen anzupassen.
+
+Im System-Untergraphen beginnt `main.py` das `smart_home` Modul, das das Herzstück unserer Anwendung ist. Dieses Modul liest von den `resources` für die Konfigurationsdaten und speichert auch Daten zurück in das `resources` Verzeichnis. Es erstellt auch logs für die Systemüberwachung und Fehlerbehebung.
+
+Schließlich hat der Benutzer Zugriff auf die logs, um den Betrieb des Systems zu überwachen und zu verwalten.
+
+## Ebene 2
+
+Das `smart_home` ist das Herzstück unseres Systems und beinhaltet mehrere Pakete, die für den Betrieb und die
+Steuerung der Smart Home Infrastruktur verantwortlich sind. Jedes Paket wurde so konzipiert, dass es eine bestimmte
+Funktionalität abdeckt, was zu einer hohen Kohäsion und geringen Kopplung zwischen den Modulen führt. Die Module in
+diesem Verzeichnis werden in der Tabelle unten aufgeführt:
+
+| Modul         | Beschreibung                                                                                                                                                                                                                                                                                                                                                            |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `commands`    | Dieses Modul enthält die spezifischen Befehle, die für die Pflanzen vom Smart Home ausgeführt werden.                                                                                                                                                                                                                                                                   |
+| `config`      | Hier werden die Konfigurationslader des Systems definiert.                                                                                                                                                                                                                                                                                                              |
+| `controllers` | Die `controllers` Komponente ist für die Steuerung der Geräte und Sensoren verantwortlich. Sie enthält die Logik, die die Geräte und Sensoren steuert und die Daten verarbeitet. Nach einer Änderung in den Anforderungen wurde dieses Modul angepasst, um mehr Automatisierung in das System zu integrieren und die Notwendigkeit für Benutzereingriffe zu minimieren. |
+| `devices`     | Beinhaltet die verschiedenen Geräte, die im Smart-Home-System verwendet werden. Jedes Gerät hat seine spezifischen Funktionen und Interaktionen innerhalb des Systems.                                                                                                                                                                                                  |
+| `interfaces`  | Definiert eine Reihe von Schnittstellen, die eine standardisierte Methode für die Interaktion und Kommunikation zwischen den verschiedenen Komponenten des Systems bieten.                                                                                                                                                                                              |
+| `KI`          | Enthält die Logik und Algorithmen für die automatisierte Steuerung und Anpassung des Systems basierend auf Eingaben und Sensordaten.                                                                                                                                                                                                                                    |
+| `logging`     | Dieses Python-Package enthält den Code für das Logging-System, das für die Fehlerbehebung und Überwachung des Systems verwendet wird.                                                                                                                                                                                                                                   |
+| `managers`    | Vertretet durch das alleinige Python-Modul `ControllerManager` stellt es eine flexible und dynamische Zusammenarbeit zwischen Zonen und Controllern her um eine klare Trennung in der Controller-Logik als auch in Verwaltung der Devices zu gewährleisten.                                                                                                             |
+| `rooms`       | Repräsentiert die räumliche Strukturen des Hauses und dient mit den Zonen als Basis für die Platzierung und Verwaltung der Geräte.                                                                                                                                                                                                                                      |
+| `sensors`     | Repräsentiert die verschiedenen Sensoren, die zur Erfassung von Daten und zur Anpassung des Verhaltens des Systems verwendet werden.                                                                                                                                                                                                                                    |
+| `strategies`  | Definiert verschiedene Strategien zur Berechnung der Sensorwerten basierend auf verschiedenen Zuständen.                                                                                                                                                                                                                                                                |
+| `tests`       | Enthält Tests für die verschiedenen Komponenten und Funktionen des Systems.                                                                                                                                                                                                                                                                                             |
+
+```mermaid
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryBorderColor': '#7C0000',
+      'lineColor': '#F8B229',
+      'tertiaryColor': '#fff'
+    }
+  }
+}%%
+mindmap
+    root(smart_home)
+        commands
+        config
+        controllers
+        devices
+        interfaces
+        KI
+        logging
+        managers
+        rooms
+        sensors
+        strategies
+        tests
+```
+
+```mermaid
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryBorderColor': '#7C0000',
+      'lineColor': '#F8B229',
+      'tertiaryColor': '#fff'
+    }
+  }
+}%%
+graph v
+    subgraph smart_home 
+        commands["commands"]
+        config["config"]
+        controllers["controllers"]
+        devices["devices"]
+        interfaces["interfaces"]
+        ki["KI"]
+        logging["logging"]
+        managers["managers"]
+        rooms["rooms"]
+        sensors["sensors"]
+        strategies["strategies"]
+        tests["tests"]
+        controllers -->|manage| devices
+        controllers -->|controls| sensors
+        controllers -->|uses| ki
+        controllers -->|logs to| logging
+        controllers -->|uses| strategies
+        controllers -->|updates| controllers
+        managers -->|manage| controllers
+        rooms -->|contain| managers
+        strategies -->|influence| sensors
+        ki -->|returns| commands
+        commands -->|manages| devices
+        config -->|creates| controllers
+        config -->|creates| devices
+        config -->|creates| sensors
+        config -->|creates| managers
+        tests --> controllers
+        tests --> devices
+        tests --> sensors
+        interfaces --> controllers
+        interfaces --> devices
+        interfaces --> sensors
+        interfaces --> strategies
+        interfaces -->commands
+        sensors --> logging
+        devices --> logging
+        config --> logging
+    end
+    logging --> logs
+    config -->|reads from| resources
+    controllers -->|saves data to| resources
+    
+```
 
 # 6 Laufzeitsicht
 
@@ -265,14 +398,14 @@ Diese YAML Datei wird mit folgender Logik ausgelesen, um das Smart Home zu initi
 
 ```mermaid
 %%{
-init: {
-'theme': 'base',
-'themeVariables': {
-'primaryBorderColor': '#7C0000',
-'lineColor': '#F8B229',
-'tertiaryColor': '#fff'
-}
-}
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryBorderColor': '#7C0000',
+      'lineColor': '#F8B229',
+      'tertiaryColor': '#fff'
+    }
+  }
 }%%
 flowchart TB
     subgraph SmartHomeController
@@ -326,14 +459,14 @@ Während der Laufzeit koordiniert und steuert sich das Smart Home über seine Se
 
 ```mermaid
 %%{
-init: {
-'theme': 'base',
-'themeVariables': {
-'primaryBorderColor': '#7C0000',
-'lineColor': '#F8B229',
-'tertiaryColor': '#fff'
-}
-}
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryBorderColor': '#7C0000',
+      'lineColor': '#F8B229',
+      'tertiaryColor': '#fff'
+    }
+  }
 }%%
 sequenceDiagram
     Main ->> SmartHomeController: start()
@@ -396,14 +529,14 @@ Struktur zu konsolidieren, die das lauffähige System bereitstellt. Das könnte 
 
 ```mermaid
 %%{
-init: {
-'theme': 'base',
-'themeVariables': {
-'primaryBorderColor': '#7C0000',
-'lineColor': '#F8B229',
-'tertiaryColor': '#fff'
-}
-}
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryBorderColor': '#7C0000',
+      'lineColor': '#F8B229',
+      'tertiaryColor': '#fff'
+    }
+  }
 }%%
 flowchart TD
     subgraph Smart Home

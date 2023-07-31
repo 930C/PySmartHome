@@ -1,23 +1,25 @@
 # PySmartHome Dokumentation
+
 <!-- TOC -->
+
 * [PySmartHome Dokumentation](#pysmarthome-dokumentation)
 * [1 Einführung und Ziele](#1-einführung-und-ziele)
-  * [Aufgabenstellung](#aufgabenstellung)
-    * [Was ist das PySmartHome?](#was-ist-das-pysmarthome)
-    * [Wesentliche Features](#wesentliche-features)
-    * [Treibende Kräfte](#treibende-kräfte)
-  * [Qualitätsziele](#qualitätsziele)
-  * [Stakeholder](#stakeholder)
+    * [Aufgabenstellung](#aufgabenstellung)
+        * [Was ist das PySmartHome?](#was-ist-das-pysmarthome)
+        * [Wesentliche Features](#wesentliche-features)
+        * [Treibende Kräfte](#treibende-kräfte)
+    * [Qualitätsziele](#qualitätsziele)
+    * [Stakeholder](#stakeholder)
 * [2 Randbedingungen](#2-randbedingungen)
-  * [Technische Randbedingungen](#technische-randbedingungen)
-  * [Organisatorische Randbedingungen](#organisatorische-randbedingungen)
-  * [Konventionen](#konventionen)
+    * [Technische Randbedingungen](#technische-randbedingungen)
+    * [Organisatorische Randbedingungen](#organisatorische-randbedingungen)
+    * [Konventionen](#konventionen)
 * [3 Kontextabgrenzung {#section-system-scope-and-context}](#3-kontextabgrenzung-section-system-scope-and-context)
-  * [Fachlicher Kontext {#_fachlicher_kontext}](#fachlicher-kontext-fachlicherkontext)
-  * [Technischer Kontext {#_technischer_kontext}](#technischer-kontext-technischerkontext)
+    * [Fachlicher Kontext {#_fachlicher_kontext}](#fachlicher-kontext-fachlicherkontext)
+    * [Technischer Kontext {#_technischer_kontext}](#technischer-kontext-technischerkontext)
 * [4 Lösungsstrategie](#4-lösungsstrategie)
-  * [Auswahl von Python als Programmiersprache](#auswahl-von-python-als-programmiersprache)
-  * [Verpflichtung zu Best Practices und hochwertiger Softwareentwicklung](#verpflichtung-zu-best-practices-und-hochwertiger-softwareentwicklung)
+    * [Auswahl von Python als Programmiersprache](#auswahl-von-python-als-programmiersprache)
+    * [Verpflichtung zu Best Practices und hochwertiger Softwareentwicklung](#verpflichtung-zu-best-practices-und-hochwertiger-softwareentwicklung)
 * [Struktur und Modulare Architektur](#struktur-und-modulare-architektur)
 * [Konfigurierbarkeit und Anpassungsfähigkeit](#konfigurierbarkeit-und-anpassungsfähigkeit)
 * [Systematisches Logging](#systematisches-logging)
@@ -25,27 +27,28 @@
   * [Ebene 1 - Whitebox Gesamtsystem](#ebene-1---whitebox-gesamtsystem)
   * [Ebene 2](#ebene-2)
 * [6 Laufzeitsicht](#6-laufzeitsicht)
-  * [Systemstart](#systemstart)
-    * [Ausschnitt der `config.yaml`](#ausschnitt-der-configyaml)
-    * [Instanziierungsprozess](#instanziierungsprozess)
-  * [Verhalten zur Laufzeit](#verhalten-zur-laufzeit)
+    * [Systemstart](#systemstart)
+        * [Ausschnitt der `config.yaml`](#ausschnitt-der-configyaml)
+        * [Instanziierungsprozess](#instanziierungsprozess)
+    * [Verhalten zur Laufzeit](#verhalten-zur-laufzeit)
 * [7 Verteilungssicht](#7-verteilungssicht)
 * [8 Querschnittliche Konzepte](#8-querschnittliche-konzepte)
-  * [Architektur-/ Entwurfsmuster](#architektur--entwurfsmuster)
-    * [Factory Pattern](#factory-pattern)
-    * [Template Method Pattern](#template-method-pattern)
-    * [Strategy Pattern](#strategy-pattern)
-    * [Adapter Pattern](#adapter-pattern)
-    * [Command Pattern](#command-pattern)
-  * [Logging](#logging)
-  * [Tests](#tests)
+    * [Architektur-/ Entwurfsmuster](#architektur--entwurfsmuster)
+        * [Factory Pattern](#factory-pattern)
+        * [Template Method Pattern](#template-method-pattern)
+        * [Strategy Pattern](#strategy-pattern)
+        * [Adapter Pattern](#adapter-pattern)
+        * [Command Pattern](#command-pattern)
+    * [Logging](#logging)
+    * [Tests](#tests)
 * [9 Architekturentscheidungen](#9-architekturentscheidungen)
 * [10 Qualitätsanforderungen](#10-qualitätsanforderungen)
-  * [Qualitätsbaum](#qualitätsbaum)
-  * [Qualitätsszenarien](#qualitätsszenarien)
+    * [Qualitätsbaum](#qualitätsbaum)
+    * [Qualitätsszenarien](#qualitätsszenarien)
 * [11 Risiken und technische Schulden {#section-technical-risks}](#11-risiken-und-technische-schulden-section-technical-risks)
 * [12 Glossar](#12-glossar)
 * [Aufgabenverteilung](#aufgabenverteilung)
+
 <!-- TOC -->
 
 # 1 Einführung und Ziele
@@ -143,13 +146,41 @@ Die folgende Tabelle stellt die Stakeholder des PySmartHomes und ihre jeweilige 
 
 # 3 Kontextabgrenzung {#section-system-scope-and-context}
 
-Schnittstelle zu KI / Wetterstation / ...
-
 ## Fachlicher Kontext {#_fachlicher_kontext}
+
+Im fachlichen Kontext soll kurz definiert werden welche fachlichen Schnittstellen unser System zu der funktionalen
+Umgebung hat.
+
+```mermaid
+graph LR
+    A(PySmartHome) --- B(Benutzer)
+    A --- C(Sensoren)
+```
+
+| Name     | Beschreibung                                                                                                    |
+|----------|-----------------------------------------------------------------------------------------------------------------|
+| Benutzer | Der Benutzer des Systems, typischerweise Haus- oder/und Gartenbesitzer, der seine Anlagen automatisieren möchte |
+| Sensoren | Sensoren, die Daten an das Smart Home System senden und somit das Verhalten der Geräte beeinflussen             |
 
 ## Technischer Kontext {#_technischer_kontext}
 
-+
+Im technischen Kontext soll kurz definiert werden welche technischen Schnittstellen unser System zu der funktionalen
+Umgebung hat.
+
+```mermaid
+graph LR
+    A(PySmartHome) --- B(FloraGPT / / Fremdsystem)
+    A --- C(Command Line Interface)
+    A --- D(SmartHome-Controller)
+    A --- E(Protokolldateien und `zone_data.json` Datei)
+```
+
+| Name                   | Beschreibung                                                                                    |
+|------------------------|-------------------------------------------------------------------------------------------------|
+| FloraGPT               | KI, die aus Bildern von Pflanzen die Art der Pflanze erkennt und Vorschläge zur Behandlung gibt |
+| Command Line Interface | CLI, die es dem Benutzer ermöglicht das System zu konfigurieren und zu steuern                  |
+| SmartHome-Controller   | Über die Controller kommuniziert unser System mit den unterliegenden Geräten                    |
+| Protokolldateien       | Protokolldateien, die Informationen über das System und dessen Verhalten enthalten              |
 
 # 4 Lösungsstrategie
 
@@ -238,23 +269,26 @@ Gesamtsystems hat.
 
 ```mermaid
 graph TD
-    u[User] --executes--> main[main.py]
-    u --edits config--> r[resources]
+    u[User] -- executes --> main[main.py]
+    u -- edits config --> r[resources]
     subgraph System
-        main --starts--> sh[smart_home]
+        main -- starts --> sh[smart_home]
         sh -- reads from --> r[resources]
-        sh --saves data to--> r
-        sh --creates--> l[logs]
+        sh -- saves data to --> r
+        sh -- creates --> l[logs]
     end
-    u --reads--> l
+    u -- reads --> l
 ```
 
-Das gegebene Diagramm illustriert die Interaktionen zwischen dem Benutzer und den Hauptkomponenten des Smart-Home-Systems auf der obersten Ebene.
+Das gegebene Diagramm illustriert die Interaktionen zwischen dem Benutzer und den Hauptkomponenten des
+Smart-Home-Systems auf der obersten Ebene.
 
-Zunächst initiiert der Benutzer die Hauptanwendung `main.py`. Gleichzeitig hat der Benutzer die Möglichkeit, 
+Zunächst initiiert der Benutzer die Hauptanwendung `main.py`. Gleichzeitig hat der Benutzer die Möglichkeit,
 die Konfigurationsdateien im resources Verzeichnis zu bearbeiten, um die Systemeinstellungen anzupassen.
 
-Im System-Untergraphen beginnt `main.py` das `smart_home` Modul, das das Herzstück unserer Anwendung ist. Dieses Modul liest von den `resources` für die Konfigurationsdaten und speichert auch Daten zurück in das `resources` Verzeichnis. Es erstellt auch logs für die Systemüberwachung und Fehlerbehebung.
+Im System-Untergraphen beginnt `main.py` das `smart_home` Modul, das das Herzstück unserer Anwendung ist. Dieses Modul
+liest von den `resources` für die Konfigurationsdaten und speichert auch Daten zurück in das `resources` Verzeichnis. Es
+erstellt auch logs für die Systemüberwachung und Fehlerbehebung.
 
 Schließlich hat der Benutzer Zugriff auf die logs, um den Betrieb des Systems zu überwachen und zu verwalten.
 
@@ -282,14 +316,14 @@ diesem Verzeichnis werden in der Tabelle unten aufgeführt:
 
 ```mermaid
 %%{
-  init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryBorderColor': '#7C0000',
-      'lineColor': '#F8B229',
-      'tertiaryColor': '#fff'
-    }
-  }
+init: {
+'theme': 'base',
+'themeVariables': {
+'primaryBorderColor': '#7C0000',
+'lineColor': '#F8B229',
+'tertiaryColor': '#fff'
+}
+}
 }%%
 mindmap
     root(smart_home)
@@ -309,17 +343,17 @@ mindmap
 
 ```mermaid
 %%{
-  init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryBorderColor': '#7C0000',
-      'lineColor': '#F8B229',
-      'tertiaryColor': '#fff'
-    }
-  }
+init: {
+'theme': 'base',
+'themeVariables': {
+'primaryBorderColor': '#7C0000',
+'lineColor': '#F8B229',
+'tertiaryColor': '#fff'
+}
+}
 }%%
 graph v
-    subgraph smart_home 
+    subgraph smart_home
         commands["commands"]
         config["config"]
         controllers["controllers"]
@@ -366,7 +400,7 @@ graph v
     logging --> logs
     config -->|reads from| resources
     controllers -->|saves data to| resources
-    
+
 ```
 
 Im Zentrum der Raumstruktur steht das Modul `rooms`, das für die Räumlichkeiten und ihre Unterteilung in Zonen zuständig
@@ -429,14 +463,14 @@ Diese YAML Datei wird mit folgender Logik ausgelesen, um das Smart Home zu initi
 
 ```mermaid
 %%{
-  init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryBorderColor': '#7C0000',
-      'lineColor': '#F8B229',
-      'tertiaryColor': '#fff'
-    }
-  }
+init: {
+'theme': 'base',
+'themeVariables': {
+'primaryBorderColor': '#7C0000',
+'lineColor': '#F8B229',
+'tertiaryColor': '#fff'
+}
+}
 }%%
 flowchart TB
     subgraph SmartHomeController
@@ -490,14 +524,14 @@ Während der Laufzeit koordiniert und steuert sich das Smart Home über seine Se
 
 ```mermaid
 %%{
-  init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryBorderColor': '#7C0000',
-      'lineColor': '#F8B229',
-      'tertiaryColor': '#fff'
-    }
-  }
+init: {
+'theme': 'base',
+'themeVariables': {
+'primaryBorderColor': '#7C0000',
+'lineColor': '#F8B229',
+'tertiaryColor': '#fff'
+}
+}
 }%%
 sequenceDiagram
     Main ->> SmartHomeController: start()
@@ -560,14 +594,14 @@ Struktur zu konsolidieren, die das lauffähige System bereitstellt. Das könnte 
 
 ```mermaid
 %%{
-  init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryBorderColor': '#7C0000',
-      'lineColor': '#F8B229',
-      'tertiaryColor': '#fff'
-    }
-  }
+init: {
+'theme': 'base',
+'themeVariables': {
+'primaryBorderColor': '#7C0000',
+'lineColor': '#F8B229',
+'tertiaryColor': '#fff'
+}
+}
 }%%
 flowchart TD
     subgraph Smart Home
@@ -838,15 +872,44 @@ M02 Im System taucht ein Bug auf doch durch gute Testabdeckung wird der Fehler s
 
 # 11 Risiken und technische Schulden {#section-technical-risks}
 
-Observer Pattern für Sensoren wäre besser gewesen -> unser System fragt die Sensoren nach Werten, da die Sensoren nicht
-physisch vorhanden sind und daher keine Werte liefern können
-Sicherheitskonzept fehlend
-Input Validation für Config File und error handling -> Beim Einlesen wird davon ausgegangen, dass die Config-File
-richtig ist
-Kapselung der turn_on-/turn_off-/...-Befehle in ein Objekt
-Bei FloraGPT-Anweisung kann es sein, dass die Luftfeutigkeit bspw. verändert werden soll, aber die Zone gar kein
-Luftbefeuchter hat
-O
+## Observer Pattern für Sensoren
+
+Aktuell fragt unser System die Sensoren regelmäßig nach ihren Werten ab. Dieses "Polling"-Verhalten könnte dazu
+führen, dass unnötiger Netzwerkverkehr generiert wird und könnte bei einer großen Anzahl von Sensoren zu
+Performance-Problemen führen. Ein besserer Ansatz wäre das Observer-Pattern gewesen, bei dem die Sensoren unsere
+Anwendung selbstständig über Änderungen informieren. Die Implementierung dieses Patterns war jedoch aufgrund der
+Tatsache, dass unsere Sensoren nicht physisch vorhanden sind und daher keine Änderungen melden können, nicht möglich.
+Dies stellt ein technisches Risiko dar, das in einer realen Implementierung behoben werden muss.
+
+## Fehlendes Sicherheitskonzept
+
+Bislang haben wir kein dediziertes Sicherheitskonzept für unsere Anwendung implementiert. Dies ist ein bedeutendes
+Risiko, da ungeschützte IoT-Geräte und Applikationen Angriffsvektoren für potenzielle Bedrohungen darstellen können.
+In einer produktiven Umgebung würde es zwingend erforderlich sein, sowohl eine sichere Kommunikation (z.B. durch
+Verschlüsselung) als auch Zugriffskontrollen (z.B. Authentifizierung und Autorisierung) zu implementieren.
+
+## Input Validation für Config File und error handling
+
+Wir gehen derzeit davon aus, dass die Config-Datei, die von unserer Anwendung gelesen wird, korrekt formatiert ist und
+gültige Daten enthält. Dies stellt ein Risiko dar, da fehlerhafte oder ungültige Daten zu unerwarteten Problemen oder
+Abstürzen führen können. Eine robustere Lösung wäre die Implementierung einer Input Validation und eines Error
+Handlings, um die Config-Datei zu überprüfen und gegebenenfalls entsprechende Fehlermeldungen auszugeben.
+
+## Kapselung der turn_on-/turn_off-/-Befehle in ein Objekt
+
+Die Befehle zum Ein- und Ausschalten von Geräten sind derzeit nicht gekapselt, was zu einer gewissen Unordnung in
+unserem Code führt und seine Wiederverwendbarkeit einschränkt. Die Kapselung dieser Befehle in ein separates Objekt
+würde dazu beitragen, den Code sauberer und wartungsfreundlicher zu gestalten. Dies ist eine technische Schuld, die
+wir in Zukunft angehen sollten.
+
+## FloraGPT-Anweisungen und Geräteverfügbarkeit
+
+In unserem aktuellen System kann es vorkommen, dass `FloraGPT` eine Anweisung gibt, zum Beispiel die Luftfeuchtigkeit zu
+ändern, obwohl die betreffende Zone gar keinen Luftbefeuchter hat. Dies könnte zu Fehlern in unserem System führen oder
+die Benutzererfahrung beeinträchtigen. Eine mögliche Lösung für dieses Problem wäre die Implementierung einer
+Überprüfung der Geräteverfügbarkeit vor der Ausführung von `FloraGPT`-Anweisungen. Dies stellt ein technisches Risiko
+dar,
+das wir in zukünftigen Versionen unserer Anwendung beheben müssen.
 
 # 12 Glossar
 

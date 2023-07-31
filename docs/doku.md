@@ -1,25 +1,24 @@
 # PySmartHome Dokumentation
 
 <!-- TOC -->
-
 * [PySmartHome Dokumentation](#pysmarthome-dokumentation)
 * [1 Einführung und Ziele](#1-einführung-und-ziele)
-    * [Aufgabenstellung](#aufgabenstellung)
-        * [Was ist das PySmartHome?](#was-ist-das-pysmarthome)
-        * [Wesentliche Features](#wesentliche-features)
-        * [Treibende Kräfte](#treibende-kräfte)
-    * [Qualitätsziele](#qualitätsziele)
-    * [Stakeholder](#stakeholder)
+  * [Aufgabenstellung](#aufgabenstellung)
+    * [Was ist das PySmartHome?](#was-ist-das-pysmarthome)
+    * [Wesentliche Features](#wesentliche-features)
+    * [Treibende Kräfte](#treibende-kräfte)
+  * [Qualitätsziele](#qualitätsziele)
+  * [Stakeholder](#stakeholder)
 * [2 Randbedingungen](#2-randbedingungen)
-    * [Technische Randbedingungen](#technische-randbedingungen)
-    * [Organisatorische Randbedingungen](#organisatorische-randbedingungen)
-    * [Konventionen](#konventionen)
-* [3 Kontextabgrenzung {#section-system-scope-and-context}](#3-kontextabgrenzung-section-system-scope-and-context)
-    * [Fachlicher Kontext {#_fachlicher_kontext}](#fachlicher-kontext-fachlicherkontext)
-    * [Technischer Kontext {#_technischer_kontext}](#technischer-kontext-technischerkontext)
+  * [Technische Randbedingungen](#technische-randbedingungen)
+  * [Organisatorische Randbedingungen](#organisatorische-randbedingungen)
+  * [Konventionen](#konventionen)
+* [3 Kontextabgrenzung](#3-kontextabgrenzung)
+  * [Fachlicher Kontext](#fachlicher-kontext)
+  * [Technischer Kontext](#technischer-kontext)
 * [4 Lösungsstrategie](#4-lösungsstrategie)
-    * [Auswahl von Python als Programmiersprache](#auswahl-von-python-als-programmiersprache)
-    * [Verpflichtung zu Best Practices und hochwertiger Softwareentwicklung](#verpflichtung-zu-best-practices-und-hochwertiger-softwareentwicklung)
+  * [Auswahl von Python als Programmiersprache](#auswahl-von-python-als-programmiersprache)
+  * [Verpflichtung zu Best Practices und hochwertiger Softwareentwicklung](#verpflichtung-zu-best-practices-und-hochwertiger-softwareentwicklung)
 * [Struktur und Modulare Architektur](#struktur-und-modulare-architektur)
 * [Konfigurierbarkeit und Anpassungsfähigkeit](#konfigurierbarkeit-und-anpassungsfähigkeit)
 * [Systematisches Logging](#systematisches-logging)
@@ -27,28 +26,32 @@
   * [Ebene 1 - Whitebox Gesamtsystem](#ebene-1---whitebox-gesamtsystem)
   * [Ebene 2](#ebene-2)
 * [6 Laufzeitsicht](#6-laufzeitsicht)
-    * [Systemstart](#systemstart)
-        * [Ausschnitt der `config.yaml`](#ausschnitt-der-configyaml)
-        * [Instanziierungsprozess](#instanziierungsprozess)
-    * [Verhalten zur Laufzeit](#verhalten-zur-laufzeit)
+  * [Systemstart](#systemstart)
+    * [Ausschnitt der `config.yaml`](#ausschnitt-der-configyaml)
+    * [Instanziierungsprozess](#instanziierungsprozess)
+  * [Verhalten zur Laufzeit](#verhalten-zur-laufzeit)
 * [7 Verteilungssicht](#7-verteilungssicht)
 * [8 Querschnittliche Konzepte](#8-querschnittliche-konzepte)
-    * [Architektur-/ Entwurfsmuster](#architektur--entwurfsmuster)
-        * [Factory Pattern](#factory-pattern)
-        * [Template Method Pattern](#template-method-pattern)
-        * [Strategy Pattern](#strategy-pattern)
-        * [Adapter Pattern](#adapter-pattern)
-        * [Command Pattern](#command-pattern)
-    * [Logging](#logging)
-    * [Tests](#tests)
+  * [Architektur-/ Entwurfsmuster](#architektur--entwurfsmuster)
+    * [Factory Pattern](#factory-pattern)
+    * [Template Method Pattern](#template-method-pattern)
+    * [Strategy Pattern](#strategy-pattern)
+    * [Adapter Pattern](#adapter-pattern)
+    * [Command Pattern](#command-pattern)
+  * [Logging](#logging)
+  * [Tests](#tests)
 * [9 Architekturentscheidungen](#9-architekturentscheidungen)
 * [10 Qualitätsanforderungen](#10-qualitätsanforderungen)
-    * [Qualitätsbaum](#qualitätsbaum)
-    * [Qualitätsszenarien](#qualitätsszenarien)
+  * [Qualitätsbaum](#qualitätsbaum)
+  * [Qualitätsszenarien](#qualitätsszenarien)
 * [11 Risiken und technische Schulden {#section-technical-risks}](#11-risiken-und-technische-schulden-section-technical-risks)
+  * [Observer Pattern für Sensoren](#observer-pattern-für-sensoren)
+  * [Fehlendes Sicherheitskonzept](#fehlendes-sicherheitskonzept)
+  * [Input Validation für Config File und error handling](#input-validation-für-config-file-und-error-handling)
+  * [Kapselung der turn_on-/turn_off-/-Befehle in ein Objekt](#kapselung-der-turnon-turnoff--befehle-in-ein-objekt)
+  * [FloraGPT-Anweisungen und Geräteverfügbarkeit](#floragpt-anweisungen-und-geräteverfügbarkeit)
 * [12 Glossar](#12-glossar)
 * [Aufgabenverteilung](#aufgabenverteilung)
-
 <!-- TOC -->
 
 # 1 Einführung und Ziele
@@ -144,9 +147,9 @@ Die folgende Tabelle stellt die Stakeholder des PySmartHomes und ihre jeweilige 
 | Einhaltung von Design Patterns | Die Verwendung bestimmter Design Patterns ist eine Konvention, um bewährte Entwurfsmuster anzuwenden und die Code-Qualität zu verbessern, insbesondere in Bezug auf die Erweiterbarkeit des Systems. |
 |         Dokumentation          | Das PySmartHome-Projekt erfordert eine Dokumentation gemäß dem arc42-Template.                                                                                                                       |
 
-# 3 Kontextabgrenzung {#section-system-scope-and-context}
+# 3 Kontextabgrenzung
 
-## Fachlicher Kontext {#_fachlicher_kontext}
+## Fachlicher Kontext
 
 Im fachlichen Kontext soll kurz definiert werden welche fachlichen Schnittstellen unser System zu der funktionalen
 Umgebung hat.
@@ -162,7 +165,7 @@ graph LR
 | Benutzer | Der Benutzer des Systems, typischerweise Haus- oder/und Gartenbesitzer, der seine Anlagen automatisieren möchte |
 | Sensoren | Sensoren, die Daten an das Smart Home System senden und somit das Verhalten der Geräte beeinflussen             |
 
-## Technischer Kontext {#_technischer_kontext}
+## Technischer Kontext
 
 Im technischen Kontext soll kurz definiert werden welche technischen Schnittstellen unser System zu der funktionalen
 Umgebung hat.
@@ -870,7 +873,7 @@ M01 Eine Methode der Sensoren soll neu implementiert werden. Dank der Tests kann
 
 M02 Im System taucht ein Bug auf doch durch gute Testabdeckung wird der Fehler schnell identifziert und behoben.
 
-# 11 Risiken und technische Schulden {#section-technical-risks}
+# 11 Risiken und technische Schulden
 
 ## Observer Pattern für Sensoren
 

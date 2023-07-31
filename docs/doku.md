@@ -23,10 +23,9 @@
 * [Struktur und Modulare Architektur](#struktur-und-modulare-architektur)
 * [Konfigurierbarkeit und Anpassungsfähigkeit](#konfigurierbarkeit-und-anpassungsfähigkeit)
 * [Systematisches Logging](#systematisches-logging)
-* [5 Bausteinsicht {#section-building-block-view}](#5-bausteinsicht-section-building-block-view)
-    * [Whitebox Gesamtsystem {#_whitebox_gesamtsystem}](#whitebox-gesamtsystem-whiteboxgesamtsystem)
-    * [Ebene 2 {#_ebene_2}](#ebene-2-ebene2)
-    * [Ebene 3 {#_ebene_3}](#ebene-3-ebene3)
+* [5 Bausteinsicht](#5-bausteinsicht)
+  * [Ebene 1 - Whitebox Gesamtsystem](#ebene-1---whitebox-gesamtsystem)
+  * [Ebene 2](#ebene-2)
 * [6 Laufzeitsicht](#6-laufzeitsicht)
     * [Systemstart](#systemstart)
         * [Ausschnitt der `config.yaml`](#ausschnitt-der-configyaml)
@@ -367,6 +366,16 @@ graph v
         sensors["sensors"]
         strategies["strategies"]
         tests["tests"]
+        interfaces --> controllers
+        interfaces --> devices
+        interfaces --> sensors
+        interfaces --> strategies
+        interfaces -->commands
+        config -->|creates| controllers
+        config -->|creates| devices
+        config -->|creates| sensors
+        config -->|creates| managers
+        config --> logging
         controllers -->|manage| devices
         controllers -->|controls| sensors
         controllers -->|uses| ki
@@ -374,31 +383,53 @@ graph v
         controllers -->|uses| strategies
         controllers -->|updates| controllers
         managers -->|manage| controllers
+        commands -->|uses| managers
         rooms -->|contain| managers
-        strategies -->|influence| sensors
+        sensors --> strategies
         ki -->|returns| commands
         commands -->|manages| devices
-        config -->|creates| controllers
-        config -->|creates| devices
-        config -->|creates| sensors
-        config -->|creates| managers
         tests --> controllers
         tests --> devices
         tests --> sensors
-        interfaces --> controllers
-        interfaces --> devices
-        interfaces --> sensors
-        interfaces --> strategies
-        interfaces --> commands
         sensors --> logging
         devices --> logging
-        config --> logging
+        commands --> logging
+        ki --> logging
+        strategies --> logging
     end
     logging --> logs
     config -->|reads from| resources
     controllers -->|saves data to| resources
 
 ```
+
+Im Zentrum der Raumstruktur steht das Modul `rooms`, das für die Räumlichkeiten und ihre Unterteilung in Zonen zuständig
+ist.
+
+Die Verwaltung und Steuerung dieser Geräte wird durch das `controllers` Modul übernommen. Jeder Controller hat die
+Aufgabe, die ihm zugeordneten Geräte und Sensoren zu überwachen und zu steuern. Um eine klar definierte Trennung der
+Verantwortlichkeiten und eine effiziente Verwaltung der Controller sicherzustellen, haben wir das `managers` Modul
+eingeführt. Manager übernehmen die Rolle der Verwaltung mehrerer Controller, wodurch eine organisierte und strukturierte
+Verteilung von Aufgaben ermöglicht wird.
+
+Zusätzlich zu ihrer Kontrollfunktion können Controller auch mit einer bestimmten Strategie aus `strategies` versehen
+werden. Dies ermöglicht eine spezifische und anpassbare Verarbeitung der Daten, die von den Sensoren erfasst werden. Um
+die Kontinuität und den Zustand des Systems zu gewährleisten, speichern die Controller ihre Daten in den Ressourcen als
+JSON-Dateien, welche nach einem Neustart des Systems wiederhergestellt werden können.
+
+Für eine fortschrittlichere und optimierte Steuerung der Geräte kann das `KI` Modul integriert werden, insbesondere in
+einem Smart Garden Szenario. Die KI verarbeitet Daten und gibt darauf basierend Befehle aus dem `commands` Modul aus.
+Diese Befehle werden dann über die Manager an die entsprechenden Geräte weitergeleitet.
+
+Einige grundlegende und essenzielle Module in unserem System sind `config`, `interfaces`, `logging` und `tests`. Das
+`config` Modul liest eine YAML-Konfigurationsdatei aus den Ressourcen und initialisiert die Instanzen für Manager,
+Controller, Geräte und Sensoren. Für eine reibungslose und flexible Kommunikation zwischen diesen Komponenten haben wir
+das `interfaces` Modul
+verwendet. Dieses hilft uns dabei, eine starke Kopplung und mehrfache Vererbungen zu vermeiden. Es wird von den Modulen
+`devices`, `sensors`, `controllers`, `strategies` und `commands` verwendet. Schließlich übernimmt das `logging` Modul die wichtige
+Aufgabe des Loggings. Es wird von den Modulen, wie in der Grafik dargestellt, genutzt, um alle wichtigen Ereignisse,
+Zustände und Fehler im System zu protokollieren. Zuletzt werden noch die Tests aus `tests` aufgeführt, die
+die Funktionalität der einzelnen Module überprüfen, wie in der Abbildung dargestellt.
 
 # 6 Laufzeitsicht
 
